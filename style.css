@@ -1,0 +1,105 @@
+header, section, footer, aside, nav, article, figure, figcaption {
+				display: block;}
+			body {
+				color: #666666;
+				background-color: #54606D;
+				background-image: url("images/dark-wood.jpg");
+				background-position: center;
+				font-family: Georgia, Times, serif;
+				line-height: 1.4em;
+				margin: 0px;}
+			.wrapper {
+				width: 940px;
+				margin: 20px auto 20px auto;
+				border: 2px solid #000000;
+				background-color: #142539;
+				color:#DCDCDC;}
+			header {
+				height: 160px;
+				background-color: #2C3642;
+				font-color: #54606D;
+				}
+			h1 {
+				text-indent: -9999px;
+				width: 940px;
+				height: 130px;
+				margin: 0px;
+				color: #A78C7D;}
+			nav, footer {
+				clear: both;
+				color: #ffffff;
+				background-color: #2e2e2d;
+				height: 30px;
+				list-style: none;
+				text-align: center;}
+			nav ul {
+				margin: 0px;
+				padding: 0px;
+				width: 100%;}
+			nav li {
+				display:inline;
+				font-color: #A79E7D;
+				}
+			nav li a{
+				display: inline-block;
+				width: 120px;
+				background-color: #665D40;
+				padding: 4px;
+				text-align: center;
+				color: #A79E7D;}
+			nav li a:hover, nav li a.current {
+				display: inline-block;
+				background-color: #A79E7D;
+				color: #665D40}
+			section.main {
+				float: left;
+				width: 80%;}
+			article {
+				clear: both;
+				overflow: auto;
+				width: 80%;
+				margin-left: 2.5%;
+				margin-right: 2.5%;
+				margin-top: 1%;
+				margin-bottom: 1%;}
+			article a {
+				color: #A79E7D;}
+			hgroup {
+				margin-top: 40px;}
+			figure {
+				float: left;
+				width: 290px;
+				height: 300px;
+				padding: 5px;
+				margin: 20px;
+				border: 1px solid #582F19;}
+			figcaption {
+				font-size: 90%;
+				text-align: left;}
+			aside {
+				width: 230px;
+				float: left;
+				padding: 0px 0px 0px 20px;}
+			aside section a {
+				display: block;
+				padding: 10px;
+				border-bottom: 1px solid #eeeeee;}
+			aside section a:hover {
+				color: #985d6a;
+				background-color: #efefef;}
+			a {
+				color: #de6581;
+				text-decoration: none;}
+			h1, h2, h3 {
+				font-weight: normal;}
+			h2 {
+				margin: 10px;
+				color: #A78C7D;}
+			h3 {
+				margin: 10px;
+				color: #de6581;
+				color: #8B6E5F}
+
+			footer {
+				font-size: 80%;
+				padding: 7px 0px 0px 20px;}
