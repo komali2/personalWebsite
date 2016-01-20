@@ -10,13 +10,13 @@ function openCalculator(){
 }
 
 
-
 function calculateTrianglePerimeter(form){
   var side1 = parseInt(form.side1.value);
   var side2 = parseInt(form.side2.value);
   var side3 = parseInt(form.side3.value);
   var perimeter = (side1 + side2 + side3);
-  alert(perimeter);
+  document.getElementById("triangle").innerHTML =
+  'Your triangle perimeter is ' + perimeter + '.';
 }
 
 
