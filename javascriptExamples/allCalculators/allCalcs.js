@@ -15,8 +15,7 @@ window.onclick = function(event){
     }
   }
 }
-
-function doThing(){
-  alert("hello");
-
+//this should make something appear below the dropdown menu
+function show(){
+  document.getElementById("content").src="test.html";
 }
