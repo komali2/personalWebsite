@@ -9,7 +9,9 @@ function openCalculator(){
   + '<br><input type="button" name="button" value="Click" onClick="calculateTrianglePerimeter(this.form)"></form>'
 }
 
-
+//ideally, onclick would call a function that took care of calculating
+//the sides and pass some form of that calculation, be it the value of the perimeter
+//or maybe a triangle object or something
 function calculateTrianglePerimeter(form){
   var side1 = parseInt(form.side1.value);
   var side2 = parseInt(form.side2.value);
