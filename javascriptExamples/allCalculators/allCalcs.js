@@ -15,7 +15,11 @@ window.onclick = function(event){
     }
   }
 }
+
 //this should make something appear below the dropdown menu
-function show(){
-  document.getElementById("content").src="test.html";
+function showCalc(){
+  iFrameName = document.getElementById("newContent");
+  iFrameContent = iFrameName.contentDocument.body.innerHTML;
+  //iFrameName.style.display="block";
+  document.getElementById("originalContent").innerHTML= iFrameContent;
 }

@@ -8,9 +8,14 @@
       <div class="dropdown">
         <button onclick="myFunction()" class="dropbtn">Dropdown</button>
           <div id="myDropdown" class="dropdown-content">
-            <a href="#" id="Home" onclick="show()">Home</a>
+            <a href="#" id="Home" onclick="showCalc()">Home</a>
           </div>
         </div>
-        <iframe id="content"></iframe>
+        <div id="originalContent">currently unchanged</div>
+
+
+        <div id="content-wrapper">
+          <iframe src="test.html" id="newContent" class="hidden">content inside the iframe</iframe>
+        </div>
   </body>
 </html>
