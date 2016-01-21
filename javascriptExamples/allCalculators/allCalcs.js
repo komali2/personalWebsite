@@ -1,5 +1,5 @@
-function myFunction(){
-  document.getElementById("myDropdown").classList.toggle("show");
+function showDropdown(){
+  document.getElementById("calcChooser").classList.toggle("show");
 }
 
 window.onclick = function(event){
@@ -17,9 +17,11 @@ window.onclick = function(event){
 }
 
 //this should make something appear below the dropdown menu
-function showCalc(){
+function showCalc(element){
+  alert(element.id);
   iFrameName = document.getElementById("newContent");
   iFrameContent = iFrameName.contentDocument.body.innerHTML;
   //iFrameName.style.display="block";
   document.getElementById("originalContent").innerHTML= iFrameContent;
+
 }
