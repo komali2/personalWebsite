@@ -10,13 +10,16 @@
           <button onclick="showDropdown()" class="dropbtn">Dropdown</button>
             <div id="calcChooser" class="dropdown-content">
               <a href="#" id="trianglePerimeter" onclick="showCalc(this)">Triangle Perimeter</a>
+              <a href="#" id="squareArea" onclick="showCalc(this)">Square Area</a>
             </div>
           </div>
           <div id="originalContent">The calculator will appear here.</div>
 
 
           <div id="content-wrapper">
-            <iframe src="trianglePerimeterCalc.html" id="trianglePerimeterCalculator" class="hidden">content inside the iframe</iframe>
+            <iframe src="trianglePerimeterCalc.html" id="trianglePerimeterCalculator" class="hidden"></iframe>
+            <iframe src="squareAreaCalc.html" id="squareAreaCalculator"
+            class="hidden"></iframe>
           </div>
         </div>
   </body>
