@@ -24,6 +24,13 @@
 						<ul>
 							<li><a href='/javascriptExamples/calculateTriangle/measureTriange.html'>
 								A perimeter measurer, using HTML forms and simple Javascript functions.</a>
+							<a href='https://github.com/komali2/personalWebsite/tree/master/javascriptExamples/calculateTriangle'>
+							| Github link</a></li>
+							<li><a href='/javascriptExamples/calculateEverything/allCalcs.html'>
+								A more advanced interface, allowing calculators to be chosen using a simple dropdown
+								menu. Uses an invisible iframe trick to pull external HTML file content without using
+								ajax or jquery.</a><a href='https://github.com/komali2/personalWebsite/tree/master/javascriptExamples/allCalculators'>
+								| Github link</a></li>
 						</ul>
 					</p>
 					<p>
