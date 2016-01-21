@@ -5,17 +5,19 @@
   </head>
   <body>
       <script src="allCalcs.js"></script>
-      <div class="dropdown">
-        <button onclick="showDropdown()" class="dropbtn">Dropdown</button>
-          <div id="calcChooser" class="dropdown-content">
-            <a href="#" id="trianglePerimeter" onclick="showCalc(this)">Triangle Perimeter</a>
+      <div class ="bodywrapper">
+        <div class="dropdown">
+          <button onclick="showDropdown()" class="dropbtn">Dropdown</button>
+            <div id="calcChooser" class="dropdown-content">
+              <a href="#" id="trianglePerimeter" onclick="showCalc(this)">Triangle Perimeter</a>
+            </div>
           </div>
-        </div>
-        <div id="originalContent">The calculator will appear here.</div>
+          <div id="originalContent">The calculator will appear here.</div>
 
 
-        <div id="content-wrapper">
-          <iframe src="trianglePerimeterCalc.html" id="trianglePerimeterCalculator" class="hidden">content inside the iframe</iframe>
+          <div id="content-wrapper">
+            <iframe src="trianglePerimeterCalc.html" id="trianglePerimeterCalculator" class="hidden">content inside the iframe</iframe>
+          </div>
         </div>
   </body>
 </html>

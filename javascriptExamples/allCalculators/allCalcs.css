@@ -37,3 +37,15 @@
 .show {display:block;}
 
 .hidden{display:none;}
+
+.bodywrapper{
+  width: 940px;
+  margin: 20px auto 20px auto;
+  padding: 20%;
+
+}
+
+body{
+  background-color: #54606D;
+  color: white;
+}
