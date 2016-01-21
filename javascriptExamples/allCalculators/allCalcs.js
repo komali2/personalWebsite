@@ -18,10 +18,16 @@ window.onclick = function(event){
 
 //this should make something appear below the dropdown menu
 function showCalc(element){
-  alert(element.id);
-  iFrameName = document.getElementById("newContent");
+  iFrameName = document.getElementById(String(element.id) + "Calculator");
   iFrameContent = iFrameName.contentDocument.body.innerHTML;
-  //iFrameName.style.display="block";
   document.getElementById("originalContent").innerHTML= iFrameContent;
+}
+
+function calculateTrianglePerimeter(form){
+  var side1 = parseInt(form.side1.value);
+  var side2 = parseInt(form.side2.value);
+  var side3 = parseInt(form.side3.value);
+  var perimeter = (side1 + side2 + side3);
+  document.getElementById("originalContent").innerHTML = 'Your triangle perimeter is ' + perimeter + '.';
 
 }
