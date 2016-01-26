@@ -56,5 +56,8 @@ function showDateTime(){
   week = weekList[week];
 
   document.getElementById("originalContent").innerHTML = "The date is " + month + " the " + day + ", " + year + ". The time is " + hour + ":" + minute + ".";
+}
 
+function printScreen(){
+  window.print();
 }
