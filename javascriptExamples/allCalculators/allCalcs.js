@@ -41,3 +41,20 @@ function calculateSquareArea(form){
 
   document.getElementById("originalContent").innerHTML = 'Your square area is ' + area + '.';
 }
+
+function showDateTime(){
+  var date = new Date();
+  var day = date.getDate();
+  var month = date.getMonth();
+  var hour = date.getHours();
+  var minute = date.getMinutes();
+  var week = date.getDay();
+  var year = date.getFullYear();
+  var weekList = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  var monthList = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  month = monthList[month];
+  week = weekList[week];
+
+  document.getElementById("originalContent").innerHTML = "The date is " + month + " the " + day + ", " + year + ". The time is " + hour + ":" + minute + ".";
+
+}
