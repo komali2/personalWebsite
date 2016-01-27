@@ -61,3 +61,14 @@ function showDateTime(){
 function printScreen(){
   window.print();
 }
+
+function reverseString(form){
+  reverseMe = form.stringIn.value;
+  var reversed= "";
+
+  for(var i = reverseMe.length - 1; i >= 0; i--){
+    reversed += reverseMe[i];
+  }
+
+  document.getElementById("originalContent").innerHTML = reversed;
+}
