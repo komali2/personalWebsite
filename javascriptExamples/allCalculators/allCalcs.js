@@ -72,3 +72,17 @@ function reverseString(form){
 
   document.getElementById("originalContent").innerHTML = reversed;
 }
+
+function guessRandom(form){
+  var guess = parseInt(form.guessRandomBox.value);
+  var computerGuess = Math.floor(Math.random() * 6) + 1;
+  var output = "";
+  if(guess === computerGuess){
+    output = "You guessed right!";
+  }
+  else{
+    output = "You guessed wrong! Correct answer was " + computerGuess+ ".";
+  }
+
+  document.getElementById("originalContent").innerHTML = output;
+}
