@@ -86,3 +86,87 @@ function guessRandom(form){
 
   document.getElementById("originalContent").innerHTML = output;
 }
+
+function holidayCalc(form){
+  var date = new Date();
+  var currDay = date.getDate();
+  var currMonth = date.getMonth();
+  var holidayIn = form.holidayName.value.toUpperCase();
+  var monthDayCount = [31,28,31,30,31,30,31,31,30,31,30,31];
+  var modifier = 0;
+  var holidayList = [
+    {
+      name: "CHRISTMAS",
+      month: 11,
+      day: 5
+    },
+    {
+      name:"NEW YEARS",
+      month: 0,
+      day: 1
+    },
+    {
+      name:"MLK DAY",
+      month: 0,
+      day: 18
+    },
+    {
+      name:"CHINESE NEW YEAR",
+      month: 1,
+      day: 8
+    },
+    {
+      name:"VALENTINES DAY",
+      month: 1,
+      day: 14
+    },
+    {
+      name:"THANKSGIVING",
+      month: 10,
+      day: 24
+    },
+    {
+      name:"PEARL HARBOR DAY",
+      month: 11,
+      day: 7
+    },
+  ];
+  var dayOfYear = 0;
+  var dayOfHoliday = 0;
+  var difference = 0;
+  var output = "";
+
+  var toDoHoliday = holidayList.filter(function(x){
+    return x.name === holidayIn;
+    });
+  var toDoHoliday = toDoHoliday[0];
+
+  function calculateDaysIntoYear(monthArray,month,dayModifier){
+      var daysInYear = 0;
+      daysInYear = monthArray.reduce(function(prev,curr,index){
+        if(month === 0)
+        	return 0;
+        if(month > index)
+          return prev += curr;
+        else if(month = index)
+          return prev;
+      });
+      return daysInYear + dayModifier;
+    }
+
+    function getDifference(yearday,holidayday){
+      if(yearday <= holidayday)
+        return holidayday-yearday;
+      else{
+        return (365 - yearday) + holidayday;
+      }
+    }
+
+    dayOfYear = calculateDaysIntoYear(monthDayCount,currMonth,currDay);
+    dayOfHoliday = calculateDaysIntoYear(monthDayCount,toDoHoliday.month,toDoHoliday.day);
+    difference = getDifference(dayOfYear, dayOfHoliday);
+    output = "You entered " + toDoHoliday.name + ", which is " + difference + " days away!";
+
+
+    document.getElementById("originalContent").innerHTML = output;
+}

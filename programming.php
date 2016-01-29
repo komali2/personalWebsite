@@ -12,23 +12,16 @@
 					<p>My interest in programming stems from an early childhood nerdiness. I started out editing .dat
 					files for my favorite videogames, moved on to building invisionfree boards in middle school, and then on to doing heinous
 					things to my smartphones in highschool. In college, I took the field a bit more seriously, and have
-					participated in several MOOCs and other online resources in order to self-educate. </p>
-					<p>In the interest of self-promotion, I welcome you to take a look at <a href="https://github.com/komali2">my
-					github profile</a> where I am currently featuring primarily my C code projects for the Hardvard CS50x MOOC
-					on edx.org. In addition to C, I am comfortable in HTML, CSS, and PHP, and I further invite you to take a peek
-					at the source of this website. I've also hosted on a frankenstein arch linux box running apache, although to avoid
-					providing possible employers with broken links or inciting the wrath of my ISP, this website is
-					hosted remotely. </p>
+					participated in several MOOCs and other online resources in order to self-educate. Currently, I am attending a
+				 	coding bootcamp in San Francisco, where I am learning Javascript, JQuery, MongoDB, and other web development tools.</p>
+					<p>I welcome you to take a look at <a href="https://github.com/komali2">my
+					github profile</a> I am currently comfortable in C, HTML, CSS, and compiling in a Unix environment.</p>
 					<p>
 						You may find example pages below:<br>
 						<ul>
-							<li><a href='/javascriptExamples/calculateTriangle/measureTriange.html'>
-								A perimeter measurer, using HTML forms and simple Javascript functions.</a>
-							<a href='https://github.com/komali2/personalWebsite/tree/master/javascriptExamples/calculateTriangle'>
-							| Github link</a></li>
 							<li><a href='/javascriptExamples/calculateEverything/allCalcs.html'>
-								A more advanced interface, allowing calculators to be chosen using a simple dropdown
-								menu. Uses an invisible iframe trick to pull external HTML file content without using
+								A series of basic javascript exercises organized with a dropdown menu.
+								Uses an invisible iframe trick to pull external HTML file content without using
 								ajax or jquery.</a><a href='https://github.com/komali2/personalWebsite/tree/master/javascriptExamples/allCalculators'>
 								| Github link</a></li>
 						</ul>
