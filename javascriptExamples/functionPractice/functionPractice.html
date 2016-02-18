@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+  <head>
+    <link rel="stylesheet" type="text/css" href="allCalcs.css">
+    <title>Basic Javascript Functions</title>
+  </head>
+  <body>
+    <script src="functionPractice.js"></script>
+    <div class="bodywrapper">
+    <h1>Click below to see examples of basic Javascript functions, based on exercises available at <a href='http://www.w3resource.com/javascript-exercises/javascript-functions-exercises.php'>
+      W3Schools</a></h1>
+      <div class="dropdown">
+        <button  onclick="showDropdown()" class="dropbtn">Dropdown</button>
+          <div id="functionChooser" class="dropdown-content">
+            <a href="#" id="reverseInput" onclick="showFunction(this)">Input Reverse</a>
+          </div>
+      </div>
+      <div id="originalContent">The program will appear here.</div>
+
+      <div id="content-wrapper">
+        <iframe src="reverseInput.html" id="reverseInputiFrame" class="hidden"></iframe>
+    </div>
+  </body>
+</html>
