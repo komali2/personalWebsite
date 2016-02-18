@@ -8,10 +8,10 @@ var draw = function(){
   context.save();
   context.clearRect(0,0,width,height);
   context.translate(width/2,height/2);
-  //context.rotate(-Math.PI/2);
+  context.rotate(-Math.PI/2);
   var seconds = date.getSeconds();
   context.fillStyle = 'orange';
-  context.fillRect(150, 150 ,100,100);
+  context.fillRect(0, 0 ,-250,-250);
 
   window.requestAnimationFrame(draw);
   context.restore();
