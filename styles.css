@@ -8,7 +8,10 @@ body {
 
 .pageIntro{
   color:#DCDCDC;
+  /*float: left;*/
+  display: inline-block;
 }
+
 
 .wrapper {
   width: 700px;
@@ -62,13 +65,38 @@ nav li a:hover, nav li a.current {
 	background-color: #A79E7D;
 	color: #665D40}
 
-.main{
+
+.intro{
   margin: 4px;
+  width: 80%;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
 
+.intro-image{
+  float:right;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+.main{
+  margin: 4px;
+  float: left;
+  width: 80%;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
 .main a{
   color: #A79E7D;
 }
+
+
+
 h2 {
   margin: 10px;
   color: #A78C7D;}
