@@ -22,8 +22,9 @@ body{
 }
 
 nav{
-  /*display:flex;
-  flex-direction: row;*/
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 nav ul{
@@ -33,4 +34,5 @@ nav ul{
 
 nav li{
   list-style-position: inside;
+  list-style-type: none;
 }
