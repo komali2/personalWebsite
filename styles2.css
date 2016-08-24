@@ -19,6 +19,9 @@ body{
 .banner{
   background-color: #ADB5C7;
   flex-basis: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 nav{
