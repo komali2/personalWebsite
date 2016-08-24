@@ -1,22 +1,36 @@
 body{
-    background-color: #D6D8DD;
-    /*background-color: red;*/
+  background-color: #D6D8DD;
+  /*background-color: red;*/
 }
 
 .container{
-    display: flex;
-    flex-direction: column;
-    align-content: flex-start;
-    /*width: 900px;*/
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  /*width: 900px;*/
 }
 .container img{
-    width: 100%;
-    height: auto;
-    opacity: .6;
-    flex-shrink: 1;
+  width: 100%;
+  height: auto;
+  opacity: .6;
+  flex-shrink: 1;
 }
 
 .banner{
-    background-color: #ADB5C7;
-    flex-basis: 100px;
+  background-color: #ADB5C7;
+  flex-basis: 100px;
+}
+
+nav{
+  /*display:flex;
+  flex-direction: row;*/
+}
+
+nav ul{
+  display: flex;
+  flex-direction: row;
+}
+
+nav li{
+  list-style-position: inside;
 }
