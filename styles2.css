@@ -35,4 +35,5 @@ nav ul{
 nav li{
   list-style-position: inside;
   list-style-type: none;
+  margin: 2px 5px;
 }
