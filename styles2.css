@@ -22,6 +22,7 @@ body{
   font-size: 45px;
   font-family: 'Palatino Linotype', 'Book Antiqua', 'Palatino', serif;
   
+  
 }
 
 .intro img{
@@ -59,6 +60,20 @@ nav a{
 nav .current{
   border-left: 2px solid grey;
   border-right: 2px solid grey;
+}
+
+.small{
+  animation-duration: 3s;
+  animation-name: smallify;
+}
+
+@keyframes smallify{
+  from{
+    flex-basis: 400px;
+  }
+  to{
+    flex-basis: 100px;
+  }
 }
 
 .whenBig{}
