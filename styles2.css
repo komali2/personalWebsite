@@ -9,24 +9,27 @@ body{
   flex-direction: column;
   align-content: flex-start;
 }
-.container img{
+
+
+
+.banner{
+  background-color: #D6D8DD;
+  flex-basis: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid black;
+  font-size: 45px;
+  font-family: 'Palatino Linotype', 'Book Antiqua', 'Palatino', serif;
+  
+}
+
+.intro img{
   width: 100%;
   height: auto;
   opacity: .6;
   flex-shrink: 1;
 }
-
-
-
-.banner{
-  background-color: #ADB5C7;
-  flex-basis: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-bottom: 1px solid black;
-}
-
 nav{
   display:flex;
   flex-direction: row;
