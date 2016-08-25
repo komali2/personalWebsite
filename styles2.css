@@ -8,7 +8,6 @@ body{
   display: flex;
   flex-direction: column;
   align-content: flex-start;
-  /*width: 900px;*/
 }
 .container img{
   width: 100%;
@@ -16,6 +15,8 @@ body{
   opacity: .6;
   flex-shrink: 1;
 }
+
+
 
 .banner{
   background-color: #ADB5C7;
