@@ -60,6 +60,12 @@ nav .current{
   border-left: 2px solid grey;
   border-right: 2px solid grey;
 }
+
+.whenBig{}
+.whenSmall{
+  display:none;
+  font-size: 35px;
+}
 /* CSS - Cascading Style Sheet */
 /* Palette color codes */
 /* Palette URL: http://paletton.com/#uid=13L0u0k18O17rzm4NFO2nx-35tf */
