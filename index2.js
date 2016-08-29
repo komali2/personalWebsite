@@ -14,6 +14,13 @@ $(document).ready(()=>{
             // $('.banner').css('flex-basis', '400px');
         }
     })
+
+    $('.tech img').on('click', function(event){
+        $('.tech img').toggle();
+        $(this).toggle();
+        $(this).addClass('full');
+
+    })
 });
 
 //one "scroll" is 100px

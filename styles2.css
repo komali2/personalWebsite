@@ -91,6 +91,8 @@ nav .current{
 }
 
 
+
+
 .left img{
   width: 100%;
   height: auto;
@@ -99,6 +101,11 @@ nav .current{
 .tech img{
   width: 130px;
   height: 130px;
+}
+
+.full {
+  width: 100%;
+  height: auto;
 }
 
 .right{
