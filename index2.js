@@ -16,8 +16,9 @@ $(document).ready(()=>{
     })
 
     $('.tech img').on('click', function(event){
-        $('.tech img').toggle();
-        $(this).toggle();
+        // $('.tech img').toggle();
+        // $(this).toggle();
+        $(this).siblings().toggle();
         if($(this).hasClass('full')){
             $(this).removeClass('full');
         }else{
