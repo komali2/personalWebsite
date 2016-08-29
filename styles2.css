@@ -1,5 +1,5 @@
 body{
-  background-color: #D6D8DD;
+  background-color: #E1E3E8;
   /*background-color: red;*/
   margin: 0 auto;
 }
@@ -10,10 +10,15 @@ body{
   align-content: flex-start;
 }
 
+/*.top{
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+}*/
+
 
 
 .banner{
-  background-color: #D6D8DD;
   flex-basis: 400px;
   display: flex;
   justify-content: center;
@@ -62,25 +67,37 @@ nav .current{
   border-right: 2px solid grey;
 }
 
-.small{
-  animation-duration: 3s;
-  animation-name: smallify;
+.main section{
+  display: flex;
+  flex-direction: row;
+  align-content: center;
 }
 
-@keyframes smallify{
-  from{
-    flex-basis: 400px;
-  }
-  to{
-    flex-basis: 100px;
+.left{
+  border: 2px solid black;
+  width: 400px;
+  height: 382px;
+}
+
+.left img{
+  width: 100%;
+  height: auto;
+}
+
+
+.right{
+border: 2px solid black;
+width: 400px;
+height: 382px;
+/*flex-basis: 50%;*/
+}
+
+@media all and (max-width: 780px) {
+  .main section {
+    flex-direction: column;
   }
 }
 
-.whenBig{}
-.whenSmall{
-  display:none;
-  font-size: 35px;
-}
 /* CSS - Cascading Style Sheet */
 /* Palette color codes */
 /* Palette URL: http://paletton.com/#uid=13L0u0k18O17rzm4NFO2nx-35tf */
