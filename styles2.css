@@ -10,14 +10,6 @@ body{
   align-content: flex-start;
 }
 
-/*.top{
-  display: flex;
-  flex-direction: column;
-  align-content: flex-start;
-}*/
-
-
-
 .banner{
   flex-basis: 400px;
   display: flex;
@@ -105,7 +97,7 @@ nav .current{
 
 .full {
   width: 100% !important;
-  height: auto !important;
+  height: 100% !important;
 }
 
 .right{
@@ -114,6 +106,45 @@ width: 400px;
 height: 382px;
 /*flex-basis: 50%;*/
 }
+
+.selectMe{
+
+}
+
+.comeHere{
+  animation-duration: .5s;
+  animation-name: appear;
+  animation-fill-mode: forwards;
+}
+.goAway{
+  animation-duration: .5s;
+  animation-name: disappear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes appear{
+  from{
+    width: 130px;
+    height: 130px;
+  }
+  to{
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@keyframes disappear{
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: .000000000001;
+    display: none;
+  }
+}
+
+
+
 
 @media all and (max-width: 780px) {
   .main section {
