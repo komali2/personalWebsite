@@ -71,7 +71,9 @@ nav .current{
   display: flex;
   flex-direction: row;
   align-content: center;
+  justify-content: center;
 }
+
 
 .left{
   border: 2px solid black;
@@ -79,11 +81,25 @@ nav .current{
   height: 382px;
 }
 
+.main section .tech{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  
+}
+
+
 .left img{
   width: 100%;
   height: auto;
 }
 
+.tech img{
+  width: 130px;
+  height: 130px;
+}
 
 .right{
 border: 2px solid black;
