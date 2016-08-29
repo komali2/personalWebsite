@@ -18,9 +18,14 @@ $(document).ready(()=>{
     $('.tech img').on('click', function(event){
         $('.tech img').toggle();
         $(this).toggle();
-        $(this).addClass('full');
+        if($(this).hasClass('full')){
+            $(this).removeClass('full');
+        }else{
+            $(this).addClass('full');
 
-    })
+        }
+        
+    });
 });
 
 //one "scroll" is 100px
