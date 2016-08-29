@@ -103,16 +103,20 @@ nav .current{
   height: 130px;
 }
 
+.content {
+  display: none;
+}
+
 .full {
   width: 100% !important;
   height: auto !important;
 }
 
 .right{
-border: 2px solid black;
-width: 400px;
-height: 382px;
-/*flex-basis: 50%;*/
+  border: 2px solid black;
+  width: 400px;
+  height: 382px;
+  /*flex-basis: 50%;*/
 }
 
 @media all and (max-width: 780px) {
