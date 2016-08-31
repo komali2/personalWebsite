@@ -170,7 +170,11 @@ nav .current{
   /*border-bottom: 1px solid grey;*/
   width: 200px;
   box-shadow: 2px 2px 5px 0px rgba(156,156,156,1);
+}
 
+.projects .info li{
+  width: auto;
+  box-shadow: none;
 }
 
 
