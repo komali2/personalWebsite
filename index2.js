@@ -28,6 +28,7 @@ $(document).ready(()=>{
 
     $('.projects li').on('click', function(event){
         $(`#${$(this).data('name')}`).toggle();
+        $($(this).next().toggle());
     });
 });
 
