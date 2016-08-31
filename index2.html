@@ -69,16 +69,39 @@
       </section>
       <section>
         <div class='left projects'>
-          <div id='gitnalysis' class='projectItem'></div>
-          <div id='langbattle' class='projectItem'></div>
-          <div id='caffiend' class='projectItem'></div>
+          <div id='gitnalysis' class='projectItem'>
+            <p>Gitnalysis is a Github analytics tool. It allows users to search for topics that interest them, be they technical or non-technical
+              topics. Results from searches are curated to allow users to find Github Users, Repos, and Organizations related to their
+              chosen topic of interest. 
+            </p>
+
+            <p>Clicking into a given repo will allow users to see issues, sorted by difficulty. We used the Google Predict API, an accessible
+              Machine Learning API, to train a model what an "beginner," "intermediate," or "advanced" issue look like. We use React
+              and Redux to control the view.
+            </p>
+          </div>
+          <div id='langbattle' class='projectItem'>
+            <p>Langbattle is a multiplayer flashcard app with multiple gamemodes. It allows users to go head-to-head with eachother in the
+              native and learning languages of their choice. Gamemodes include time trial as well as accuracy test. </p>
+
+            <p>Langbattle uses Angular to manage eventing on the client-side, and Socket.io to communicate between users. It is deployed
+              on Heroku and uses Heroku's Postgresql database built-in to store and access flashcards.
+            </p>
+          </div>
+          <div id='caffiend' class='projectItem'>
+            <p>Caffiend is a webapp that allows users to find their new favorite menu item at a given cafe. Users can search for cafes,
+              view menus sorted by item rating, and add their own cafes and menu items. </p>
+
+            <p>Caffiend is built in Angular on the front end, with a Node and Express backend that communicates with an SQLite3 database.
+              We designed custom stylesheets to allow finer control over the UX/UI than is possible with Bootstrap or Materialize.</p>
+          </div>
         </div>
         <div class='right projects'>
           <h2>Projects</h2>
           <ul>
-            <li>Gitnalysis</li>
-            <li>LangBattle</li>
-            <li>Caffiend</li>
+            <li data-name='gitnalysis'>Gitnalysis</li>
+            <li data-name='langbattle'>LangBattle</li>
+            <li data-name='caffiend'>Caffiend</li>
 
           </ul>
         </div>

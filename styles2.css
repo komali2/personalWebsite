@@ -115,6 +115,10 @@ nav .current{
   height: auto !important;
 }
 
+.projects .projectItem{
+  display: none;
+}
+
 
 @media all and (max-width: 780px) {
   .main section {

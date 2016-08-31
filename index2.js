@@ -25,6 +25,10 @@ $(document).ready(()=>{
         }
         
     });
+
+    $('.projects li').on('click', function(event){
+        $(`#${$(this).data('name')}`).toggle();
+    });
 });
 
 //one "scroll" is 100px
