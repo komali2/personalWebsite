@@ -14,7 +14,14 @@ li{
   flex-direction: column;
   align-content: flex-start;
 }
-
+h3{
+  margin-left: 40%;
+  margin-right: auto;
+}
+h2{
+  margin-left: 40%;
+  margin-right: auto;
+}
 /*.top{
   display: flex;
   flex-direction: column;
@@ -76,6 +83,7 @@ nav .current{
   flex-direction: row;
   align-content: center;
   justify-content: center;
+  
 }
 
 
@@ -85,6 +93,7 @@ nav .current{
   height: 382px;
   padding: 5px 5px;
   margin: 5px 5px;
+  
 }
 .right{
   border: 2px solid black;
