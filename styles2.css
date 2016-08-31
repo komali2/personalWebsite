@@ -123,6 +123,36 @@ nav .current{
   display: none;
 }
 
+.projects .info span{
+  /*margin: 0 5px;*/
+  text-align: center;
+  border: 1px solid black;
+}
+
+.projects .info table{
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.projects .info td{
+  vertical-align: top;
+}
+
+.projects .info h4{
+  margin: 1px 1px 1px 1px;
+  display: inline-block;
+}
+
+
+
+/*.projects .info h4{
+  margin-left:50px;
+  margin-right:50px;
+  margin-top: 5px;
+  margin-bottom: 2px;
+  display: inline-block;
+}*/
+
 
 @media all and (max-width: 780px) {
   .main section {
