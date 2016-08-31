@@ -140,6 +140,12 @@ nav .current{
 
 .projects .info td{
   vertical-align: top;
+  padding: 1px 30px;
+}
+
+.projects .info ul{
+  margin: 5px 0px;
+  padding: 0px 0px;
 }
 
 .projects .info h4{
