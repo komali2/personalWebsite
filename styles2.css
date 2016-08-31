@@ -119,6 +119,10 @@ nav .current{
   display: none;
 }
 
+.projects .info{
+  display: none;
+}
+
 
 @media all and (max-width: 780px) {
   .main section {
