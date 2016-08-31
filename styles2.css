@@ -80,6 +80,12 @@ nav .current{
   width: 400px;
   height: 382px;
 }
+.right{
+  border: 2px solid black;
+  width: 400px;
+  height: 382px;
+  /*flex-basis: 50%;*/
+}
 
 .main section .tech{
   display: flex;
@@ -109,12 +115,6 @@ nav .current{
   height: auto !important;
 }
 
-.right{
-  border: 2px solid black;
-  width: 400px;
-  height: 382px;
-  /*flex-basis: 50%;*/
-}
 
 @media all and (max-width: 780px) {
   .main section {
