@@ -73,11 +73,17 @@ nav li{
   margin: 2px 5px;
 }
 
+
 nav a{
   padding-left: 2px;
   padding-right: 2px;
   color: #BA4949;
   text-decoration: none;
+}
+
+nav a:hover{
+  border-left: 2px solid grey;
+  border-right: 2px solid grey;
 }
 
 nav .current{
