@@ -233,6 +233,10 @@ nav .current{
   box-shadow: none;
 }
 
+.project-name:hover{
+  cursor: pointer;
+}
+
 
 /*.projects .info h4{
   margin-left:50px;
