@@ -143,6 +143,7 @@ nav .current{
 .tech i:hover:not(.big){
   box-shadow: 5px 5px 5px 0px rgba(125,125,125,1);
   background-color: #E1F5F5;
+  cursor: pointer;
 }
 
 .left img{
