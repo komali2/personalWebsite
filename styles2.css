@@ -1,5 +1,5 @@
 body{
-  background-color: #E1E3E8;
+  background-color: #F5F7F7;
   /*background-color: red;*/
   margin: 0 auto;
 }
@@ -69,7 +69,7 @@ nav li{
 nav a{
   padding-left: 2px;
   padding-right: 2px;
-  color: #689AAB;
+  color: #BA4949;
   text-decoration: none;
 }
 
@@ -91,6 +91,8 @@ nav .current{
   flex-direction: row;
   align-content: center;
   justify-content: center;
+  /*background-color: #90C3D4;*/
+  background-color: #B3D7E3;
 }
 
 
