@@ -30,12 +30,10 @@ h2{
   margin-left: 40%;
   margin-right: auto;
 }
-/*.top{
-  display: flex;
-  flex-direction: column;
-  align-content: flex-start;
-}*/
 
+.hovering{
+  box-shadow: 4px 14px 5px 0px rgba(0,0,0,0.75);
+}
 
 
 .banner{
@@ -138,6 +136,11 @@ nav .current{
   font-size: 125px;
   margin: 5px 2px;
   color: #8A5858;
+}
+
+.tech i:hover:not(.big){
+  box-shadow: 5px 5px 5px 0px rgba(125,125,125,1);
+  background-color: #E1F5F5;
 }
 
 .left img{
