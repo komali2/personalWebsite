@@ -13,6 +13,10 @@ p{
   margin: 10px 5px;
 }
 
+a{
+  color: #BA4949;
+}
+
 .container{
   display: flex;
   flex-direction: column;
