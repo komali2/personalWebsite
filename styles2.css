@@ -145,6 +145,7 @@ nav .current{
 }
 
 .projects .project{
+  margin-right: 10px;
   box-shadow: 2px 2px 5px 0px rgba(156,156,156,1);
 }
 
