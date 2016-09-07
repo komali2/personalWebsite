@@ -2,6 +2,7 @@ body{
   background-color: #F5F7F7;
   /*background-color: red;*/
   margin: 0 auto;
+  color: #4D4D4D;
 }
 
 li{
@@ -99,6 +100,7 @@ nav .current{
   justify-content: center;
   background-color: #B3D7E3;
   font-family: 'Lato', sans-serif;
+  color: #5E5E5E;
 }
 
 
