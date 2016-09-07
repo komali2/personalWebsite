@@ -132,6 +132,11 @@ nav .current{
   height: auto;
 }
 
+.right img{
+  width: 100%;
+  height: auto;
+}
+
 .tech img{
   width: 130px;
   height: 130px;
