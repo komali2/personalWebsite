@@ -99,8 +99,8 @@ nav .current{
   flex-direction: row;
   align-content: center;
   justify-content: center;
-  /*background-color: #90C3D4;*/
   background-color: #B3D7E3;
+  font-family: 'Lato', sans-serif;
 }
 
 
@@ -111,6 +111,7 @@ nav .current{
   padding: 5px 5px;
   margin: 5px 5px;
   box-shadow: 2px 2px 5px 0px rgba(156,156,156,1);
+  font-family: 'Lato', sans-serif;
   
 }
 .right{
@@ -120,6 +121,7 @@ nav .current{
   padding: 5px 5px;
   margin: 5px 5px;
   box-shadow: 2px 2px 5px 0px rgba(156,156,156,1);
+  font-family: 'Lato', sans-serif;
 }
 
 .main section .tech{
