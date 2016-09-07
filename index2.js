@@ -15,13 +15,13 @@ $(document).ready(()=>{
         }
     })
 
-    $('.tech img').on('click', function(event){
+    $('.tech i').on('click', function(event){
         $(this).siblings().toggle();
         $(`#${$(this).data('tech')}`).toggle();
-        if($(this).hasClass('full')){
-            $(this).removeClass('full');
+        if($(this).hasClass('big')){
+            $(this).removeClass('big');
         }else{
-            $(this).addClass('full');
+            $(this).addClass('big');
         }
         
     });

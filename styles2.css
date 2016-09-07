@@ -129,6 +129,12 @@ nav .current{
   justify-content: center;
   align-content: center;
   
+  
+}
+
+.tech i{
+  font-size: 125px;
+  margin: 5px 2px;
 }
 
 .left img{
@@ -150,9 +156,13 @@ nav .current{
   display: none;
 }
 
-.full {
+.big {
   width: 100% !important;
   height: auto !important;
+  font-size: 350px !important;
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+  margin-left: 20px !important;
 }
 
 .projects .projectItem{
