@@ -9,6 +9,10 @@ li{
   list-style-type: none;
 }
 
+p{
+  margin: 10px 5px;
+}
+
 .container{
   display: flex;
   flex-direction: column;
