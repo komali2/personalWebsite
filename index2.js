@@ -27,8 +27,11 @@ $(document).ready(()=>{
     });
 
     $('.projects li').on('click', function(event){
+        $('.info').hide();
+        $('.projectItem').hide();
         $(`#${$(this).data('name')}`).toggle();
         $($(this).next().toggle());
+       
     });
 });
 
