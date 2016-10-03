@@ -5,11 +5,16 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 li{
   list-style-position: inside;
   list-style-type: none;
+}
+
+.top{
+    width: 450px;
 }
 
 .card{
