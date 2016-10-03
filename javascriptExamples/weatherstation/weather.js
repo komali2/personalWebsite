@@ -18,6 +18,6 @@ $(document).ready(function(){
 
 
     function buildElement(key, obj){
-        $('#' + key).html(obj[key])
+        $('#' + key).html(obj[key].toFixed(0));
     }
 });
