@@ -1,3 +1,7 @@
+body {
+  background-color: #f4f4f4;
+  font-family: helvetica neue,helvetica,sans-serif;
+}
 main {
   margin-left: auto;
   margin-right: auto;
@@ -7,6 +11,10 @@ header {
   font-size: 2em;
 }
 
-header small {
+h1 small, h2 small, h3 small, h4 small {
   display: block;
+}
+
+h3 small {
+  font-weight: normal;
 }
