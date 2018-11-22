@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Caleb Jay Rogers">
+    <meta name="description" content="Project Description for Pivot Table">
+    <meta name="keywords" content="Caleb Rogers, Caleb Jay, komali_2, frontend, programming, react, javascript">
+    <link href='styles.css' rel='stylesheet'>
+    </link>
+    <title>Pivot Table</title>
+</head>
+
+<body>
+    <main>
+        <header>
+            <h1>
+                Pivot Table
+            </h1>
+            <h2>
+                An exploration of displaying tabular data on the web.
+            </h2>
+            <h3>
+                <small>
+                    Updated: <time datetime="2018-11-21">Nov, 2018</time>
+                </small>
+            </h3>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="https://github.com/komali2/pivot-tables">Github</a>
+                    </li>
+                    <li>
+                        <a href="">Deployment</a>
+                    </li>
+                    <li>
+                        <a href="index.html">calebjay.com</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <article>
+            <section class="technology">
+                <ul>
+                    <li>JavaScript</li>
+                    <li>React</li>
+                    <li><a href="https://github.com/plotly/react-pivottable">React Pivot-Table</a></li>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                </ul>
+            </section>
+            <p>
+                Pivot Tables is an opportunity for me to explore displaying primarily
+                tabular data using HTML, CSS, and JavaScript. The data is a JSON blob
+                of IP addresses listing bytes of traffic to and from a given address. 
+            </p>
+            <p>
+                Primary functionality is the ability to click an IP address to create a "pivot" 
+                showing all traffic to, or from, that address. I implemented this by hand, however
+                the library I chose can also do more robust multi-select pivots using the dropdown
+                menus. I was also able to plugin another library allowing for more than just tables, 
+                with options ranging from heatmaps to graphs and other charts. 
+            </p>
+            <p>
+                I chose React as a framework to allow for a quick spin-up with Create React App, and 
+                also to have an opportunity to rekindle my React knowledge. I chose AWS to deploy on
+                because it is straightforward and easy, and has well documented methods for load balancing,
+                not that this simple app would ever require such things. 
+            </p>
+            <p>
+                Routing is done by hand - using 
+                <a href="https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/get#Example">URLSearchParams.get</a>
+                combined with the browser <a href="https://developer.mozilla.org/en-US/docs/Web/API/History_API">History API</a>
+                and <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onpopstate">window.onpopstate</a>.
+                This is actually the portion of the app I learned the most from while developing - before, I had always just used
+                built-in routers such as React Router, Angular Router, or Vue Router without thinking twice. Unfortunately, my API
+                decisions here means these features likely won't work on IE11. 
+            </p>
+            <p>
+                I did not integrate any sort of CSS library such as bootstrap or materialize, because it 
+                is unnecessary for the complexity of the app. 
+            </p>
+            <p>
+                Event handling and etc is done in vanilla JavaScript, because it's fun to keep it simple.
+            </p>
+            <p>
+                If I continue to work on the app in the future, my todo list will include:
+                <ul>
+                    <li>
+                        Allow the app to work with more than the hardcoded JSON I provided
+                    </li>
+                    <li>
+                        Explore backend options for other data (databases, making calls to APIs)
+                    </li>
+                    <li>
+                        Implement click-to-pivot functionality in more than just the "table" renderer
+                    </li>
+                    <li>
+                        Some styling improvements, looking at how to make the UX clearer and perhaps more beautiful
+                    </li>
+                    <li>
+                        More robust routing that includes history saved when different renderers (other than table)
+                        are selected from the drop-down, as well as when options are selected from the built-in dropdown
+                        filters.
+                    </li>
+                    <li>
+                        Unit tests.
+                    </li>
+                </ul>
+            </p>
+            
+        </article>
+    </main>
+</body>
+
+</html>
