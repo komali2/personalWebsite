@@ -1,6 +1,5 @@
 <template>
   <div class="article-list">
-    <h1>This is an article list page</h1>
       <article-list-item
         v-for="article in articles"
         v-bind="article"
@@ -12,6 +11,7 @@
 <script>
 import { Component, Vue } from 'vue-property-decorator';
 import ArticleListItem from '@/components/ArticleListItem.vue';
+import articleList from '@/articleIndex.ts';
 
 @Component({
   components: {
@@ -19,16 +19,7 @@ import ArticleListItem from '@/components/ArticleListItem.vue';
   },
   data: () => {
     return {
-      articles: [
-        {
-          title: 'articleone',
-          text: 'lotsofMDN articleONE',
-        },
-        {
-          title: 'articletwo',
-          text: 'lotsofMDN articletwo',
-        },
-      ],
+      articles: articleList
     };
   },
 })
