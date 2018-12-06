@@ -26,7 +26,7 @@ import ArticleList from '@/components/ArticleList.vue';
 
 @Component({
   components: {
-    ArticleList
+    ArticleList,
   },
 })
 export default class Home extends Vue {}
