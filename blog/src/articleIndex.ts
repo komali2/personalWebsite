@@ -8,5 +8,5 @@ export default [
         title: 'Cars: what are they',
         filename: 'cars-are-neat',
         description: 'Things about cars?',
-    }
-]
+    },
+];

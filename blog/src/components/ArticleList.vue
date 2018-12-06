@@ -19,7 +19,7 @@ import articleList from '@/articleIndex.ts';
   },
   data: () => {
     return {
-      articles: articleList
+      articles: articleList,
     };
   },
 })
