@@ -2,7 +2,7 @@
   <main class="article">
     <header>
       <h1>
-        {{title}}
+        {{$route.params.title}}
       </h1>
       <h3>
         <small>
@@ -20,8 +20,13 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component({
-  components: {
-  },
+    data: () => {
+        return {
+            timestamp: 'today',
+            human_time: 'today',
+            text: 'article text',
+        };
+    },
 })
 export default class Article extends Vue {}
 </script>
