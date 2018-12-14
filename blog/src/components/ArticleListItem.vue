@@ -1,6 +1,6 @@
 <template>
   <li class="article-list-item">
-      <a :href=title>{{title}}</a>
+      <router-link :to="`/article/${link}`">{{title}}</router-link>
   </li>
 </template>
 
@@ -8,7 +8,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component({
-    props: ['text', 'title'],
+    props: ['text', 'title', 'link'],
 })
 export default class ArticleListItem extends Vue {}
 </script>
