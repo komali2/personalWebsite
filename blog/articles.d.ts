@@ -1,0 +1,1 @@
+declare module 'my_very_awesome_day'

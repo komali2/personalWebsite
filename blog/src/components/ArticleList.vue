@@ -11,7 +11,7 @@
 <script>
 import { Component, Vue } from 'vue-property-decorator';
 import ArticleListItem from '@/components/ArticleListItem.vue';
-import articleList from '@/articleIndex.ts';
+import articles from '@/articleIndex.ts';
 
 @Component({
   components: {
@@ -19,7 +19,7 @@ import articleList from '@/articleIndex.ts';
   },
   data: () => {
     return {
-      articles: articleList,
+      articles,
     };
   },
 })
