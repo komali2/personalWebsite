@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Caleb Jay Rogers">
+    <meta name="description" content="Project Description for Dog Adoption">
+    <meta name="keywords" content="Caleb Rogers, Caleb Jay, komali_2, frontend, programming, vanilla, javascript">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="styles.css" rel="stylesheet">
+    </link>
+    <title>Dog Adoption</title>
+</head>
+
+<body>
+    <main>
+        <header>
+            <h1>
+                Dog Adoption
+            </h1>
+            <h2>
+                A simple playground to explore core web programming paradigms.
+            </h2>
+            <h3>
+                <small>
+                    Updated: <time datetime="2018-12-18">Dec, 2018</time>
+                </small>
+            </h3>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="https://github.com/komali2/pet_adoption">Github</a>
+                    </li>
+                    <li>
+                        <a href="http://www.calebjay.com/dogadoption">Deployment</a>
+                    </li>
+                    <li>
+                        <a href="index.html">calebjay.com</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <article>
+            <section class="technology">
+                <ul>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JavaScript (ES5)</li>
+                    <li><a href="https://github.com/jirihybek/wa-mediabox">WA-Mediabox</a></li>
+                </ul>
+            </section>
+            <p>
+                Dog adoption is a straightforward playground that allows me to
+                explore basic web-development paradigms, such as SEO and the
+                differences when implementing something in, for example, 
+                flexbox vs grid. The images and some boilerplate was helpfully
+                provided by Asana.
+            </p>
+            <p>
+                The initial iteration is a dead-simple implementation of a list
+                of images in JavaScript. I specifically avoided HTML, CSS, and
+                JavaScript APIs with lower adoption rates - the site should work
+                <em>relatively</em> well in IE11, and perfectly well in anything
+                newer than IE11. 
+            </p>
+            <p>
+                As this was an opportunity as well to explore SEO, I researched
+                some of the newer concepts of it and implemented with them in 
+                mind. These include: ensuring the content of the website matches
+                the meta keywords, ensuring the title is descriptive and matches
+                the meta description, including a descriptive (descriptive is 
+                a common requirement for Google in 2018!) h3 tag somewhere in 
+                the body, adopting accessibility principles such as giving
+                all images alt tags, and being mobile-responsive (more on that 
+                later).
+            </p>
+            <p>
+                Mobile responsiveness wasn't too difficult for such a simple
+                app. A meta tag setting viewport ensured that pixel performance
+                was the same across all devices (without this, small devices 
+                with high resolutions would show everything exactly as you'd see
+                it on a desktop screen, only tiny). Initially, I went with 
+                Flexbox for it having <em>slightly</em> higher browser adoption,
+                and also because it was truly responsive - the number of columns
+                was totally depdent on, pixel-to-pixel, the width of the screen.
+                However, this left big vertical gaps between elements, and 
+                caused the final element to be center-aligned alone on its own
+                row. So, I swapped over to css grid, which forced me to use 
+                granular media queries to dynamically set column numbers, but
+                does look so much better. (initial flexbox styling is visible
+                on the initial-approach branch)
+            </p>
+            <p>
+                Scalability is a question - right now, the app makes an internal
+                request for a JSON of dog information. What if an external API 
+                was to be queried? What if that API returned information on 
+                2000 dogs? Well, I went ahead and tested exactly that scenario
+                by blowing up the dogs array with 3,000 items, and noticed 
+                near-instantaneous load. Possibly this is due to browser 
+                efficiencies around not re-requesting images that already 
+                downloaded (I just duplicated the list many times over). In any 
+                case, a big win would be to implement pagination -
+                something that could potentially be implemented client-side. It
+                would probably work something like: determine vaguely how many
+                images could fit in viewport, invoke the buildUl function on a 
+                slice that big, if scroll down, invoke buildUl function on 
+                another slice (ensuring not to include previously-chosen items)
+                of size related to whatever the available size is now. Because
+                the img elements are being added dynamically, their src 
+                attribute should only cause a network request on being added 
+                to the dom, making this a rare case where client-side pagination
+                doesn't require a full download of data. 
+            </p>
+            <p>
+                Future work on the app:
+                <ul>
+                    <li>
+                        Implement client-side pagination.
+                    </li>
+                    <li>
+                        Explore build tooling, especially Webpack with Babel (
+                        so as to allow ES6). 
+                    </li>
+                    <li>
+                        Explore unit testing (possibly overkill for such a 
+                        simple project).
+                    </li>
+                    <li>
+                        Install a linter.
+                    </li>
+                    <li>
+                        Explore pulling in a UI framework (such as Materialize
+                        or Bootstrap) (probably unecessary)
+                    </li>
+                    <li>
+                        Explore pulling in a JavaScript framework (such as
+                        React or Vue) (probably unecessary)
+                    </li>
+                </ul>
+            </p>
+        </article>
+    </main>
+</body>
+
+</html>
