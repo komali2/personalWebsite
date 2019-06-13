@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Caleb Jay Rogers">
+    <meta name="description" content="Project Description for Bike Bounty">
+    <meta name="keywords" content="Caleb Rogers, Caleb Jay, komali_2, frontend, programming, bigquery, javascript">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="styles.css" rel="stylesheet">
+    </link>
+    <title>Soft, but What Word Count?</title>
+</head>
+
+<body>
+    <main>
+        <header>
+            <h1>
+                Soft, but What Word Count?
+            </h1>
+            <h2>
+                Exploration of Google BigQuery
+            </h2>
+            <h3>
+                <small>
+                    Updated: <time datetime="2019-06-09">June, 2019</time>
+                </small>
+            </h3>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="https://github.com/komali2/softButWhatWordCount">Github</a>
+                    </li>
+                    <li>
+                        <a href="http://www.calebjay.com/softbutwhatwordcount">Deployment</a>
+                    </li>
+                    <li>
+                        <a href="index.html">calebjay.com</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <article>
+            <section class="technology">
+                <ul>
+                    <li>JavaScript</li>
+                    <li>Node</li>
+                    <li>Express</li>
+                    <li>Google App Engine</li>
+                    <li>Google BigQuery</li>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                </ul>
+            </section>
+            <p>
+                "Soft, but What Word Count?" was created to give me the opportunity to experiment with a start to
+                finish Google BigQuery deployment on Google App Engine. The HTML and JavaScript is relatively simple,
+                as is the actual query itself, however it gave me a great perspective into all the considerations
+                I will need to make in the future on any AppEngine or BigQuery Apps.
+            </p>
+            <p>
+                The application consists of a vanilla JavaScript, HTML, and CSS frontend that displays an input box
+                for a user to enter a word for which they would like to search across all of Shakespeare's known works.
+                If the word is found, a table below the input is populated with the word, the number of times that word
+                appears across all Shakespeare works, and in which of Shakespeare's works that word appears. If the word
+                is not found, an error displays above the table indicated that the given word was not found.
+            </p>
+            <p>
+                The backend API is a simple Node server using Express. It serves the static files as well as hosts a single
+                endpoint that takes a query parameter to send on to a custom BigQuery SQL query. That query checks the
+                "bigquery-public-data.samples.shakespeare" public BigQuery database for a given word. Then, it returns
+                the results of the query to the user, or an error.
+            </p>
+            <p>
+                One thing that cropped up almost immediately was the fact that I'd need to beware of SQL Injection.
+                Luckily, BigQuery recently allowed for <a href="https://cloud.google.com/bigquery/docs/parameterized-queries">
+                paramaterized queries</a>, which is one of the OWASP recommended methods for mitigating SQL Injection risk.
+            </p>
+            <p>
+                Future work on the app:
+                <ul>
+                    <li>
+                        Better error styling. Right now it just vomits words it doesn't find into an error DIV.
+                    </li>
+                    <li>
+                        Converting Shakespeare works to more human-readable text. I'll have to write out a map manually
+                        which is obnoxious busywork that I'll save for a rainy day.
+                    </li>
+                    <li>
+                        More server-side verification of submitted data. It's pretty vulnerable right now to erroring
+                        out on invalid queries.
+                    </li>
+                    <li>
+                        Partial matching and other regexy stuff for queries. The database stores all information as words,
+                        so it would be a lot of BigQuery upskilling to do this.
+                    </li>
+                </ul>
+            </p>
+
+        </article>
+    </main>
+</body>
+
+</html>
