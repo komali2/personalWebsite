@@ -53,33 +53,33 @@
             <p>
                 Pivot Table is an opportunity for me to explore displaying primarily
                 tabular data using HTML, CSS, and JavaScript. The data is a JSON blob
-                of IP addresses listing bytes of traffic to and from a given address. 
+                of IP addresses listing bytes of traffic to and from a given address.
             </p>
             <p>
-                Primary functionality is the ability to click an IP address to create a "pivot" 
+                Primary functionality is the ability to click an IP address to create a "pivot"
                 showing all traffic to, or from, that address. I implemented this by hand, however
                 the library I chose can also do more robust multi-select pivots using the dropdown
-                menus. I was also able to plugin another library allowing for more than just tables, 
-                with options ranging from heatmaps to graphs and other charts. 
+                menus. I was also able to plugin another library allowing for more than just tables,
+                with options ranging from heatmaps to graphs and other charts.
             </p>
             <p>
-                I chose React as a framework to allow for a quick spin-up with Create React App, and 
+                I chose React as a framework to allow for a quick spin-up with Create React App, and
                 also to have an opportunity to rekindle my React knowledge. I chose AWS to deploy on
                 because it is straightforward and easy, and has well documented methods for load balancing,
-                not that this simple app would ever require such things. 
+                not that this simple app would ever require such things.
             </p>
             <p>
-                Routing is done by hand - using 
+                Routing is done by hand - using
                 <a href="https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/get#Example">URLSearchParams.get</a>
                 combined with the browser <a href="https://developer.mozilla.org/en-US/docs/Web/API/History_API">History API</a>
                 and <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onpopstate">window.onpopstate</a>.
                 This is actually the portion of the app I learned the most from while developing - before, I had always just used
                 built-in routers such as React Router, Angular Router, or Vue Router without thinking twice. Unfortunately, my API
-                decisions here means these features likely won't work on IE11. 
+                decisions here means these features likely won't work on IE11.
             </p>
             <p>
-                I did not integrate any sort of CSS library such as bootstrap or materialize, because it 
-                is unnecessary for the complexity of the app. 
+                I did not integrate any sort of CSS library such as bootstrap or materialize, because it
+                is unnecessary for the complexity of the app.
             </p>
             <p>
                 Event handling and etc is done in vanilla JavaScript, because it's fun to keep it simple.
@@ -109,9 +109,21 @@
                     </li>
                 </ul>
             </p>
-            
+
         </article>
     </main>
+    <script>
+	  (function() {
+		  var script = document.createElement('script');
+		  window.counter = 'https://calebjay_com.goatcounter.com/count'
+		  script.async = 1;
+		  script.src = '//gc.zgo.at/count.js';
+
+		  var ins = document.getElementsByTagName('script')[0];
+		  ins.parentNode.insertBefore(script, ins)
+	  })();
+    </script>
+
 </body>
 
 </html>

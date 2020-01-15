@@ -56,15 +56,15 @@
                 </ul>
             </section>
             <p>
-                Bike Bounty is the AWS prize winning app at AngelHack San Francisco 2018, selected from among 200 projects. It is a 
-                crowd-sourced asset retrieval solution for bike and scooter sharing companies, such as Lime, Ford Bicycle, or Bird. 
-                The project team was composed of <a href="https://www.linkedin.com/in/jordan-park/">Jordan Park</a>, 
-                <a href="http://minjiportfolio.herokuapp.com/">Minji Lee</a>, <a href="http://www.albull.us/">Amanda Bullington</a>, 
+                Bike Bounty is the AWS prize winning app at AngelHack San Francisco 2018, selected from among 200 projects. It is a
+                crowd-sourced asset retrieval solution for bike and scooter sharing companies, such as Lime, Ford Bicycle, or Bird.
+                The project team was composed of <a href="https://www.linkedin.com/in/jordan-park/">Jordan Park</a>,
+                <a href="http://minjiportfolio.herokuapp.com/">Minji Lee</a>, <a href="http://www.albull.us/">Amanda Bullington</a>,
                 and <a href="http://www.calebjay.com">Caleb Rogers</a>. The project was conceived, designed, programmed, and deployed
                 in about 10 hours of working time over 2 days.
             </p>
             <p>
-                The premise of the app is that bike-sharing companies can either upload to our database, or provide their own API that exposes, 
+                The premise of the app is that bike-sharing companies can either upload to our database, or provide their own API that exposes,
                 the last-known location of missing or damaged assets (bicycles, scooters). Users of our app can then access a map showing these locations
                 on a live google map and attempt to find these assets. If they find an asset, they can then use our app to find the nearest dock or drop-off
                 location to bring the asset to, allowing them to then collect a bounty.
@@ -72,8 +72,8 @@
             <p>
                 The basic system architecture has been established - using AWS Lambda, we can easily tailor queries to provide external API or our own database data,
                 while being charged on a per-request basis rather than needing to maintain a server running 24/7. The React frontend allows quick frontend iterations,
-                making it easy to plug in new features. The use of the Coord API allows us access to the locations of bike sharing company docks and other relevant 
-                information. 
+                making it easy to plug in new features. The use of the Coord API allows us access to the locations of bike sharing company docks and other relevant
+                information.
             </p>
             <p>
                 Future work on the app:
@@ -95,9 +95,21 @@
                     </li>
                 </ul>
             </p>
-            
+
         </article>
     </main>
+    <script>
+	  (function() {
+		  var script = document.createElement('script');
+		  window.counter = 'https://calebjay_com.goatcounter.com/count'
+		  script.async = 1;
+		  script.src = '//gc.zgo.at/count.js';
+
+		  var ins = document.getElementsByTagName('script')[0];
+		  ins.parentNode.insertBefore(script, ins)
+	  })();
+    </script>
+
 </body>
 
 </html>
