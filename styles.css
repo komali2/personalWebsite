@@ -30,10 +30,11 @@ section {
 }
 
 section small {
-  font-weight: normal
+  font-weight: normal;
+  margin-top: 6px;
 }
 
-section ul{
+section ul {
   display: grid;
   grid-template-columns: 30px 30px 30px;
   align-items: start;
@@ -50,6 +51,18 @@ ul.column-style{
 }
 ul.column-style li {
     margin-top: 5px;
+}
+
+.companies h2 {
+    font-size: 1.3em;
+}
+
+.companies h3 {
+    font-weight: normal;
+}
+
+.project h2 {
+    font-size: 1.2em;
 }
 
 @media only screen {
