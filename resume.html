@@ -12,7 +12,7 @@
   </head>
 
   <body>
-    <main>
+    <main class="resume">
       <header>
         <h1>
           <small>Caleb's</small>
@@ -37,124 +37,274 @@
           </ul>
         </nav>
       </header>
+      <div class="technologies" >
+        <h1>Technologies</h1>
+        <section>
+          <p>
+            All of the technologies below I have worked with in a project.
+            They're listed in project context in the "Companies" section, below.
+            The list is non-exhaustive.
+          </p>
+          <ul>
+            <li>Javascript</li>
+            <li>ES6, ES2016, etc</li>
+            <li>Vue</li>
+            <li>React</li>
+            <li>508 Web Accessibility</li>
+            <li>Webpack</li>
+            <li>Node</li>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>LESS</li>
+            <li>SASS</li>
+            <li>SCSS</li>
+            <li>Python</li>
+            <li>Django</li>
+            <li>Bootstrap</li>
+            <li>Material Design Components (MDC)</li>
+            <li>SQL</li>
+            <li>Mongo</li>
+          </ul>
+        </section>
+      </div>
       <div class="companies">
         <h1>Companies</h1>
         <section>
           <h1>
-            <a href="https://www.p.ota.to">Potato</a>
+            <a href="https://p.ota.to">Potato</a>
             <small>
               <time datetime="2019">2019</time> to <time datetime="2021">2021</time>.
-              <!-- <a href="https://www.p.ota.to">https://www.p.ota.to</a> -->
+              <!-- <a href="https://p.ota.to">https://p.ota.to</a> -->
             </small>
           </h2>
           <h3>
             Potato is a design and development agency out of San Francisco and London. During my time there,
-            we took a very consultative, start-to-finish role in projects, often leading clients from
-            brainstorming, through design, app devleopment, all the way to continued maintenance. We built
-            web applications, voice applications (Alexa, Google Home), web games, and VR applications.
+            we took a consultative, start-to-finish role in projects, often leading clients from
+            brainstorming, through design, app development, all the way to continued maintenance. We built
+            web apps, voice apps (Alexa, Google Home), web games, and VR apps.
           </h3>
           <h2>
             Projects
           </h2>
           <section class="project">
             <h1>
-              <a href="https://www.careers.google.com">Google Careers</a>
-              <!-- <small><a href="https://www.careers.google.com">https://www.careers.google.com</a> -->
+              <a href="https://careers.google.com">Google Careers</a>
+              <!-- <small><a href="https://careers.google.com">https://www.careers.google.com</a> -->
             </h1>
             <p>
               Google Careers is a web app that allows users to search for open Google positions, find out about
               student opportunities, and learn more about what it's like to work at Google in general, as well
               as at specific locations. Requirements included that the site be available in English, French,
-              Japanese, and Mandarin Chinese, and that the website be fully accessible.
-            </p>
-            <h2>
+              Japanese, and Mandarin Chinese, and that the website be fully accessible.             </p>
+            <h1>
               Technologies:
-            </h2>
+            </h1>
             <ul>
+              <li>Vue</li>
               <li>Javascript</li>
               <li>HTML</li>
+              <li>Python</li>
+              <li>Django</li>
+              <li>SCSS</li>
+              <li>Webpack</li>
+              <li>Jest</li>
+              <li>Google Cloud</li>
+              <li>Material Design Components (MDC)</li>
             </ul>
           </section>
-          <a href="https://github.com/komali2/highlights-getter">Github</a>
-          <a href="https://blog.calebjay.com/posts/highlights-getter/">Blog Post</a>
-          <ul>
-            <li>Javascript</li>
-            <li>HTML</li>
-          </ul>
+          <section class="project">
+            <h1>
+              Unpublished, Internal Project - Sales Tool
+            </h1>
+            <p>
+              This project was a front and backend app designed to allow sales people to generate and share value
+              maps. The user would be taken through steps involved making the map, including creating nodes against
+              pre-defined columns, connecting said nodes, and then generating sales pitch tracks based off connected
+              nodes. The backend was a Node API managing a Datastore DB and user authentication through OAuth. I was
+              the sole frontend engineer on this project.
+            </p>
+            <h1>
+              Technologies:
+            </h1>
+            <ul>
+              <li>Vue</li>
+              <li>Javascript</li>
+              <li>Node</li>
+              <li>Fast API</li>
+              <li>HTML</li>
+              <li>SCSS</li>
+              <li>Webpack</li>
+              <li>Datastore</li>
+              <li>Google Cloud</li>
+              <li>Material Design Components (MDC)</li>
+            </ul>
+          </section>
+          <section class="project">
+            <h1>
+              Unpublished, Soon to be Published Project - SQL Query Generator Game
+            </h1>
+            <p>
+              This project was a game designed to teach users how to use the client's SQL
+              Cloud database product, which essentially also made it a game to teach users
+              how to craft SQL queries in general. One part was a WebGL / Canvas game map,
+              designed in Tiled. The user could zoom in and out, scroll around, and select
+              dynamically generated pins based on their progress in the game. The other part
+              was a sort of two-pane text editor. One side would have a dropdown SQL generator,
+              and the other the results of whatever query was on the left. The dropdown SQL
+              generator essentially turned the DOM into an
+              <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">AST</a> representation
+              of a user-generated SQL query. We had to roll our own Javascript SQL tokenizer and
+              parser. Furthermore, for security reasons, we had to parameterize all queries before
+              sending them to the client's cloud database product. The frontend could craft queries using
+              SELECT, FROM, WHERE, AND, OR, NOT, DISTINCT, JOIN (INNER, LEFT, RIGHT, FULL) and GROUP BY,
+              and was fully recursive (JOIN could be used essentially ininitely, as could WHERE combined
+              with AND / OR). The publishing has been delayed by COVID-19. Except for occasional involvement
+              by my lead, I was the sole frontend engineer on this project.
+            </p>
+            <h1>
+              Technologies:
+            </h1>
+            <ul>
+              <li>Vue</li>
+              <li>Javascript</li>
+              <li>Node</li>
+              <li>Fast API (Node framework)</li>
+              <li>HTML</li>
+              <li>SCSS</li>
+              <li>Webpack</li>
+              <li>SQL</li>
+              <li>Canvas</li>
+              <li>WebGL</li>
+              <li>Tiled</li>
+              <li>Google Cloud</li>
+            </ul>
+          </section>
+          <section class="project">
+            <h1>
+              Further Projects
+            </h1>
+            <p>
+              I worked on a lot of various projects while at Potato, but I don't want to have a 30 page resume.
+              If you're curious, feel free to ask!
+            </p>
+          </section>
         </section>
+
         <section>
-          <h2>
-            VSCode Default High Contrast (Emacs Theme)
+          <h1>
+            <a href="https://www.electricimp.com/">Electric Imp</a>
             <small>
-              My attempt to capture the VSCode Default High Contrast theme in Emacs.
+              <time datetime="2016">2016</time> to <time datetime="2019">2019</time>.
+              <!-- <a href="https://www.electricimp.com">electricimp.com</a> -->
             </small>
           </h2>
-          <a href="https://github.com/komali2/Emacs-VSCode-Default-High-Contrast">Github</a>
-          <a href="vscode-default-high-contrast.html">Write-up</a>
-          <ul>
-            <li>Emacs Lisp</li>
-          </ul>
-        </section>
-        <section>
+          <h3>
+            Electric Imp is an IOT company in Mountain View. The product is a combination of a cloud service for IoT devices,
+            a secure operating system to run on recommended hardware, and a factory flow for producing IoT
+            devices. The primary focus is on securing every step of producing IoT products. From the website:
+            "The Electric Imp Platform is purpose-built for IoT with a unique edge-to-enterprise architecture;
+            featuring fully integrated hardware, device and cloud software, communications, APIs,
+            managed cloud services, and continuous security for a complete and solution-ready offering."
+          </h3>
           <h2>
-            Soft, but What Word Count?
-            <small>
-              A Google BigQuery application that allows users to query all of Shakespeare's works for a given word.
-            </small>
+            Projects
           </h2>
-          <a href="https://github.com/komali2/softButWhatWordCount">Github</a>
-          <a href="http://www.calebjay.com/softbutwhatwordcount">Deployment</a>
-          <a href="soft-but-what-word-count.html">Write-up</a>
-          <ul>
-            <li>JavaScript</li>
-            <li>Node</li>
-            <li>Express</li>
-            <li>Google App Engine</li>
-            <li>Google BigQuery</li>
-            <li>HTML</li>
-            <li>CSS</li>
-          </ul>
+          <section class="project">
+            <h1>
+              <a href="https://impcentral.electricimp.com">Imp Central</a>
+              <!-- <small><a href="https://impcentral.electricimp.com">impcentral.electricimp.com</a> -->
+            </h1>
+            <p>
+              ImpCentral is the device management platform for Electric Imp Cloud and Electric Imp devices.
+              Users can write, lint, and upload code to devices and servers. Users can also see the status
+              of all of their devices, which could number in the hundreds of thousands. The frontend is
+              a Backbone and Marionette app, using the Ace library as a web IDE, and Bootstrap as a CSS library.
+              Originally, the app was bundled with Grunt, and there was no unit testing framework (although we had
+              an incredible QA team). During my time, I upgraded the build system to use Webpack 3. Halfway through
+              the upgrade, Webpack 4 was released, and so I redid the work to use Webpack 4, issuing several pull
+              requests to major libraries (bootstrap, etc) to make them compatible with Webpack 4 so we could continue
+              using them. I enabled hot-reloading for the team and took advantage of other Webpack features to reduce
+              our bundle size and automate other parts of our workflow. I also integrated unit tests through Jest.
+              The backend was various services in Node and Go, talking to various other services such as RabbitMQ.
+              The application was mirrored across every major cloud provider, including AWS, Google Cloud, and Azure,
+              as some clients wanted private clouds. Imp device VMs, and their paired servers, are programmed with Squirrel.
+              Imp OS is written in C.
+            </p>
+            <h1>
+              Technologies:
+            </h1>
+            <ul>
+              <li>Javascript</li>
+              <li>Node</li>
+              <li>Backbone JS</li>
+              <li>Marionette JS</li>
+              <li>HTML</li>
+              <li>LESS</li>
+              <li>Bootstrap</li>
+              <li>Ace editor</li>
+              <li>Grunt</li>
+              <li>Webpack</li>
+              <li>Jest</li>
+              <li>Google Cloud</li>
+              <li>AWS</li>
+              <li>Azure</li>
+            </ul>
+          </section>
+          <section class="project">
+            <h1>
+              Imp  CMS
+            </h1>
+            <p>
+              As more clients contracted for Electric Imp's private cloud offering, we needed a way for them to manage
+              common requests like user management or certain text changes without needing to file a support ticket
+              with our relatively small engineering team. So, I was tasked with setting up a CMS that would deploy
+              alongside all cloud instances. It was a Vue app that talked to a Node API.
+            </p>
+            <h1>
+              Technologies:
+            </h1>
+            <ul>
+              <li>Vue</li>
+              <li>Javascript</li>
+              <li>Node</li>
+              <li>HTML</li>
+              <li>SCSS</li>
+              <li>Material Design Components</li>
+              <li>Webpack</li>
+            </ul>
+          </section>
         </section>
+      </div>
+      <div class="personal">
+        <h1>Personal</h1>
         <section>
-          <h2>
-            Pivot Table
-            <small>
-              An exploration of displaying tabular data on the web.
-            </small>
-          </h2>
-          <a href="https://github.com/komali2/pivot-tables">Github</a>
-          <a href="http://www.calebjay.com/pivottable">Deployment</a>
-          <a href="pivot-table.html">Write-up</a>
-          <ul>
-            <li>JavaScript</li>
-            <li>React</li>
-            <li>AWS S3</li>
-            <li>Webpack</li>
-            <li>HTML</li>
-            <li>CSS</li>
-          </ul>
-        </section>
-        <section>
-          <h2>
-            Bike Bounty
-            <small>
-              AWS prize winning app at AngelHack San Francisco 2018, selected from among 200 projects.
-            </small>
-          </h2>
-          <a href="https://github.com/Bike-Finder-Angelhack-2018/bike-bounty">Github</a>
-          <a href="http://www.calebjay.com/bikebounty">Deployment</a>
-          <a href="bike-bounty.html">Write-up</a>
-          <ul>
-            <li>JavaScript</li>
-            <li>React</li>
-            <li>AWS Lambda</li>
-            <li>Google Maps API</li>
-            <li><a href="https://coord.co/">COORD Api</a></li>
-            <li>AWS S3</li>
-            <li>Webpack</li>
-            <li>HTML</li>
-            <li>CSS</li>
-          </ul>
+          <p>
+            I live in Taipei, Taiwan. I'm open to local or remote roles. I don't
+            intend to move back to the USA any time in the next 3 years. I have an
+            unrestricted Gold Card work visa that allows me to work for Taiwanese or
+            foreign companies with, well, no restrictions.
+          </p>
+          <p>
+            In my journey to discover the trailhead to my path as a Software Engineer,
+            I've worked as an English teacher in China, Japan, and Taiwan. I've also
+            worked as a recruiter in Taiwan and the USA. This have given me a unique
+            advantage when mentoring budding engineers. If this describes you (or doesn't!),
+            please feel free to contact me!
+          </p>
+          <p>
+            I need to always be learning new things in order to feel happy. Right now,
+            I'm working on achieving Mandarin fluency, bolstering my backend skills in
+            Javascript and Python, learning native programming on microcontrollers as well
+            as on iOS and Android, undergoing a Bachelor's in Computer Science curriculum
+            through online courses, studying philosophy of mind, and trying (poorly)
+            to produce music in Ableton.
+          </p>
+          <p>
+            My hobbies include motorcycling, baking, cooking, hiking, camping, weightlifting,
+            reading, writing, photography, music production, and traveling.
+            I blog about some of this, feel free to read
+            at <a href="https://blog.calebjay.com">blog.calebjay.com</a>.
+          </p>
         </section>
       </div>
     </main>
