@@ -20,7 +20,7 @@
         </h1>
         <h3>
           <small>
-            Updated: <time datetime="2022-03-15">March 2022</time>
+            Updated: <time datetime="2022-09-21">September 2022</time>
           </small>
         </h3>
         <nav>
@@ -40,6 +40,14 @@
           </ul>
         </nav>
       </header>
+      <div class="summary">
+        <h1>Summary</h1>
+        <section>
+          <p>
+            I'm a software engineer with extensive web development experience. Since 2016 I've been building React, Vue, Node, and Python apps for companies such as Electric Imp, Potato, Google, Captec, Curative, and Cofactr. I've led engineering teams and functioned as a project manager. Since 2021 I've been building a software engineering co-op, and we've had two very successful projects so far.
+          </p>
+        </section>
+      </div>
       <div class="technologies" >
         <h1>Technologies and Skillset</h1>
         <section>
@@ -52,8 +60,10 @@
             <li>Javascript</li>
             <li>Node</li>
             <li>Typescript</li>
-            <li>Vue</li>
             <li>React</li>
+            <li>Vue</li>
+            <li>Vuex</li>
+            <li>Redux</li>
             <li>508 Web Accessibility</li>
             <li>WCAG</li>
             <li>Webpack</li>
@@ -74,6 +84,7 @@
             <li>Tailwind</li>
             <li>Bootstrap</li>
             <li>Material Design Components (MDC)</li>
+            <li>MUI</li>
             <li>Canvas</li>
             <li>Pixi.js</li>
             <li>WebGL</li>
@@ -110,6 +121,8 @@
             I also have the following non-technical skills.
           </p>
           <ul>
+            <li>Project Management</li>
+            <li>Engineering Management</li>
             <li>Mandarin, <a href="https://www.youtube.com/watch?v=ru3FRUSmRcY">intermediate</a></li>
             <li>Writing, <a href="https://blog.calebjay.com">extensive</a></li>
             <li>Recruiting and Interviewing, extensive</li>
@@ -127,15 +140,86 @@
             </small>
           </h1>
           <h3>
-            508.dev is a US-registered LLC I've founded that provides general software engineering services, consultation, and project-based development, particularly focused
-            on developing accessible web applications.
+            508.dev is a US-registered LLC I've founded that provides general software engineering services, consultation, project management, and project-based development, particularly focused
+            on developing accessible web applications. My team excels at both rapid prototyping and brownfield upgrades, as well as asynchronous engineering management across multiple timezones.
           </h3>
+          <h2>
+            Projects
+          </h2>
+          <section class="project">
+            <h1>
+              <a href="https://www.cofactr.com/">Cofactr</a> - Electronic Component Procurement, Purchase, and Management Platform
+              <small>
+                <time datetime="March 2022">March 2022</time> to present. <a href="https://www.cofactr.com/">https://www.cofactr.com/</a>
+              </small>
+            </h1>
+            <p>
+              Cofactr is a <a href="https://www.ycombinator.com/companies/cofactr">YCombinator</a> startup with a platform for "procurement, purchase, and management of electronic components."
+              Their platform was built on a no-code toolset, and the rapid addition of customers created an urgent need for a full rewrite.
+              I was brought on to lead the UI side of the rewrite.
+            </p>
+            <p>
+              Functioning as architect and project manager for the frontend, I advised on framework and technology choices. I set up project management in Linear and ticketed all UI features based on designs provided by the CEO, while advising on the UX. I established the project timeline, estimated tickets, and when we were ready to build, put together a team of frontend engineers for which I managed tasks and HR ancillaries through 508.dev. I also integrated the Toptal engineer Cofactr added partway through the project. In all, I was project managing a team of four frontend engineers (including me) across four timezones. Throughout the project, I planned our sprints, ticketed new features, managed bug reports and QA from the executive team, reviewed and merged code from the frontend team, and worked with the API team on design decisions.
+            </p>
+            <p>
+              While functioning as project manager, I also functioned as lead individual contributor and architect on the frontend, with occasional contributions on the backend API as well. I built a large bulk of the frontend app, creating components, patterns, authentication, token management, and request frameworks to be used by the rest of the frontend team while implementing features.
+            </p>
+            <p>
+              The frontend app is a React SPA deployed statically to an Amazon S3 bucket. It communicates with a Django REST API. State management was initially done using Thunk style API requests feeding a Redux data store, but was later converted entirely to an RTK Query cache and state management pattern. MUI components were integrated to allow for rapid prototyping and UX iteration. Typescript allowed for easy mapping of the frontend objects against the API types. There are extensive form based UX flows for creating and editing resources, for which Formik and Yup were used to allow for good form error UX, validation, and state management. There are also a great many resource tables throughout the app, for which we used MUI DataGrid to render data, creating custom render cell components as needed. The app is built with Webpack. Eslint enforced a code standard that I chose.
+            </p>
+            <p>
+              Now that the app is built, I'm working with Cofactr's new platform lead to transition further development of the app to a new internal staff team, while continuing to optimize and fix any bugs found as the new engineers established themselves.
+            </p>
+            <h1>
+              Technologies:
+            </h1>
+            <ul>
+              <li>React</li>
+              <li>Redux Toolkit</li>
+              <li>Redux</li>
+              <li>Typescript</li>
+              <li>Python</li>
+              <li>Docker</li>
+              <li>Mui</li>
+              <li>Javascript</li>
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>Webpack</li>
+              <li>Formik</li>
+              <li>Yup</li>
+              <li>Mui DataGrid</li>
+            </ul>
+          </section>
+          <section class="project">
+            <h1>
+              <a href="https://www.jovono.com/">Jovono</a> - Investment Firm Landing Page
+              <small>
+                <time datetime="2022">2022</time> <a href="https://www.jovono.com/">https://www.jovono.com/</a>
+              </small>
+            </h1>
+            <p>
+              Jovono is a principled investment firm with a portfolio that includes Hacker Noon, DoNotPay, and Paragon. I worked with them on updates and maintenance of their server side rendered React app, with data fetched from an Airtable API. I also migrated them to a Heroku deployment strategy, ensuring their SSL certificates continued to auto-renew under the new deployment strategy.
+            </p>
+            <h1>
+              Technologies:
+            </h1>
+            <ul>
+              <li>React</li>
+              <li>Airtable</li>
+              <li>Typescript</li>
+              <li>Javascript</li>
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>Heroku</li>
+            </ul>
+          </section>
+
         </section>
         <section>
           <h1>
             <a href="https://curative.com">Curative</a>
             <small>
-              <time datetime="January 2021">Jan 2021</time> to present.
+              <time datetime="January 2021">Jan 2021</time> to <time datetime="May 2022">May 2022</time>.
               <a href="https://curative.com">https://curative.com</a>
             </small>
           </h1>
@@ -164,7 +248,7 @@
             <ul>
               <li>React</li>
               <li>Typescript</li>
-              <li>tsx</li>
+              <li>TSX</li>
               <li>Styled Components</li>
               <li>Javascript</li>
               <li>HTML</li>
@@ -207,7 +291,7 @@
             <p>
               I'm fortunate that leadership at Curative is very pro-accessibility, and so I spend the majority of
               my time now auditing, ticketing bugs towards, and then fixing, accessibility problems in various Curative
-              websites and applications. Recently I'm proud to have converted Curative's custom, inacessible Checkbox
+              websites and applications. Recently I'm proud to have converted Curative's custom, inaccessible Checkbox
               components into accessible ones. See the before: <a href="https://www.youtube.com/watch?v=HyhMb38WG0k">https://www.youtube.com/watch?v=HyhMb38WG0k</a> and after:
               <a href="https://www.youtube.com/watch?v=PxLZHMvMKnw">https://www.youtube.com/watch?v=PxLZHMvMKnw</a> .
               I also made the Radio components accessible. See the before: <a href="https://www.youtube.com/watch?v=oZgV3Z5RGdU" >https://www.youtube.com/watch?v=oZgV3Z5RGdU</a> and after: <a href="https://www.youtube.com/watch?v=NjczgRHZ8e8">https://www.youtube.com/watch?v=NjczgRHZ8e8</a>.
@@ -218,7 +302,7 @@
             <ul>
               <li>React</li>
               <li>Typescript</li>
-              <li>tsx</li>
+              <li>TSX</li>
               <li>Styled Components</li>
               <li>Tailwind</li>
               <li>Javascript</li>
@@ -238,7 +322,7 @@
             </small>
           </h1>
           <h3>
-            g0v is a non-profit hacker collective with no formal hierarchy or organization. It's a large collection of people mostly based in Taiwan that seek to mostly improve Taiwan in some way, though most of the projcts, including the collective itself, are designed to be reproducible in other countries. One could call g0v a "civic tech" collective.
+            g0v is a non-profit hacker collective with no formal hierarchy or organization. It's a large collection of people mostly based in Taiwan that seek to mostly improve Taiwan in some way, though most of the projects, including the collective itself, are designed to be reproducible in other countries. One could call g0v a "civic tech" collective.
           </h3>
           <h2>
             Projects
@@ -296,7 +380,7 @@
           <h3>
             Captec (registered as "Capital") is a New York based Fintech startup that helps companies determine
             their true net worth through unconventional, proprietary analysis. This leads to companies then
-            being able to acquire non-dilutitative equity. From the website:
+            being able to acquire equity. From the website:
            "The Intelligent Credit Market looks at financial data from an unbiased vantage point.
             It uses artificial intelligence and machine learning to surface pockets of profitability which if doubled down on can drive business success.
             The result is a blueprint for smart resource allocation accompanied by financing to power those plans."
@@ -455,7 +539,7 @@
             </small>
           </h1>
           <h3>
-            Electric Imp is an IOT company in Mountain View, California. The product is a combination of a cloud service for IoT devices,
+            Electric Imp is an IoT company in Mountain View, California. The product is a combination of a cloud service for IoT devices,
             a secure operating system to run on recommended hardware, and a factory flow for producing IoT
             devices. The primary focus is on securing every step of producing IoT products. From the website:
             "The Electric Imp Platform is purpose-built for IoT with a unique edge-to-enterprise architecture;
@@ -508,7 +592,7 @@
           </section>
           <section class="project">
             <h1>
-              Imp  CMS
+              Imp CMS
             </h1>
             <p>
               As more clients contracted for Electric Imp's private cloud offering, we needed a way for them to manage
@@ -551,7 +635,7 @@
             I need to always be learning new things in order to feel happy. Right now,
             I'm working on achieving Mandarin fluency, learning Machine Learning,
             bolstering my backend skills in
-            Javascript and Python, learning native programming on microcontrollers as well
+            Javascript and Python, learning native programming on micro-controllers as well
             as on iOS and Android, undergoing a Bachelor's in Computer Science curriculum
             through online courses, studying philosophy of mind, and trying (poorly)
             to produce music in Ableton.
@@ -578,3 +662,6 @@
     </script>
   </body>
 </html>
+
+<!-- LocalWords:  TSX Buildkite plaintext IoT
+-->
