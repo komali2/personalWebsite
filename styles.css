@@ -65,6 +65,13 @@ ul.column-style li {
     font-size: 1.2em;
 }
 
+.awards small {
+    margin: 4px 0px;
+}
+.awards h2, .awards h3 {
+    margin: 4px 0px;
+}
+
 @media only screen {
   section ul {
     display: grid;
