@@ -20,7 +20,7 @@
         </h1>
         <h3>
           <small>
-            Updated: <time datetime="2023-05-30">May 2023</time>
+            Updated: <time datetime="2023-09-12">Sep 2023</time>
           </small>
         </h3>
         <nav>
@@ -44,7 +44,7 @@
         <h1>Summary</h1>
         <section>
           <p>
-            I'm a software engineer with extensive web development experience. Since 2016 I've been building React, Vue, Node, and Python apps for companies such as Electric Imp, Potato, Google, Captec, Curative, and Cofactr. I've led engineering teams and functioned as a project manager. Since 2021 I've been building a software engineering co-op, and we've had two very successful projects so far.
+            I'm a software engineer with extensive web development experience. Since 2016 I've been building React, Vue, Node/JS/TS, and Python apps for companies such as Electric Imp, Potato, Google, Captec, Curative, and Cofactr. I've led engineering teams and functioned as a project manager. Since 2021 I've been building a software engineering co-op called <a href="https://508.dev">508.dev</a>, and we've had several very successful projects so far.
           </p>
         </section>
       </div>
@@ -70,13 +70,11 @@
             <li>Webpack</li>
             <li>Parcel</li>
             <li>ESbuild</li>
-            <li>Node</li>
             <li>HTML</li>
             <li>CSS</li>
             <li>LESS</li>
             <li>SASS</li>
             <li>SCSS</li>
-            <li>Tailwind</li>
             <li>Angular</li>
             <li>jquery</li>
             <li>Python</li>
@@ -102,6 +100,9 @@
             <li>Docker</li>
             <li>AWS</li>
             <li>AWS Lambda</li>
+            <li>AWS EC2</li>
+            <li>AWS S3</li>
+            <li>AWS API Gateway</li>
             <li>Google Cloud Platform</li>
             <li>Google App Engine</li>
             <li>Heroku</li>
@@ -165,8 +166,12 @@
               <a href="https://508.dev">https://508.dev</a>
             </small>
           </h1>
+          <h2>
+            Founder, Chief Engineering Officer
+          </h2>
+
           <h3>
-            508.dev is a US-registered LLC I've founded that provides general software engineering services, consultation, project management, and project-based development, particularly focused
+            508.dev is a US-registered LLC and software engineering co-op I've founded that provides general software engineering services, consultation, project management, and project-based development, particularly focused
             on developing accessible web applications. My team excels at both rapid prototyping and brownfield upgrades, as well as asynchronous engineering management across multiple timezones.
           </h3>
           <h2>
@@ -174,11 +179,57 @@
           </h2>
           <section class="project">
             <h1>
+              <a href="https://www.owlysearch.com/">Owlysearch</a> - AI-Powered Search Listening Platform
+              <small>
+                <time datetime="June 2023">June 2023</time> to present. <a href="https://www.owlysearch.com/">https://www.owlysearch.com/</a>
+              </small>
+            </h1>
+            <h2>
+              Lead Software Engineer (Fullstack), Project Manager
+            </h2>
+            <p>
+
+              Owlysearch is a French marketing startup using various ML/AI techniques to analyze Google Search trends in order to add value for marketing teams.
+            </p>
+            <p>
+              I've taken over the entire SaaS platform development from the founding engineer, who has left for other projects. As a very new company, Owlysearch has no established engineering or project management best practices, so I've been from-scratch building out the engineering and project management processes while developing the SaaS product to get it into a state where customers can be onboarded and investors can be pitched.
+            </p>
+            <p>
+              When I arrived, there was no documentation anywhere in the codebases, nor on deployment methods or even what external APIs were being used. Lacking any contact with the founding engineer, I've been documenting the current functionality and state of the application suite, while adding new features to achieve MVP. The SaaS platform is a combination of several Python servers, using numpy and ML tooling to analyze the output of beautifulsoup and other Python scraping tools. A mongo database tracks analyzed data and user accounts, and there is a react / js / jsx / html frontend for viewing market analysis and managing user accounts. I've set up manual prod deployments using Github actions to rsync files to the Amazon EC2 instance and restart the services via systemctl.
+            </p>
+            <h1>
+              Technologies:
+            </h1>
+            <ul>
+              <li>Python</li>
+              <li>Flask</li>
+              <li>Numpy</li>
+              <li>Pandas</li>
+              <li>Beautifulsoup</li>
+              <li>jinja2</li>
+              <li>matplotlib</li>
+              <li>scipy</li>
+              <li>Mongo</li>
+              <li>Javascript</li>
+              <li>React</li>
+              <li>d3</li>
+              <li>mui</li>
+              <li>vite</li>
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>Webpack</li>
+            </ul>
+          </section>
+          <section class="project">
+            <h1>
               <a href="https://www.cofactr.com/">Cofactr</a> - Electronic Component Procurement, Purchase, and Management Platform
               <small>
                 <time datetime="March 2022">March 2022</time> to present. <a href="https://www.cofactr.com/">https://www.cofactr.com/</a>
               </small>
             </h1>
+            <h2>
+              Lead Software Engineer (Frontend), Architect, Project Manager
+            </h2>
             <p>
               Cofactr is a <a href="https://www.ycombinator.com/companies/cofactr">YCombinator</a> startup with a platform for "procurement, purchase, and management of electronic components."
               Their platform was built on a no-code toolset, and the rapid addition of customers created an urgent need for a full rewrite.
@@ -223,6 +274,9 @@
                 <time datetime="2022">2022</time> to <time datetime="2023">2023</time> <a href="https://www.jovono.com/">https://www.jovono.com/</a>
               </small>
             </h1>
+            <h2>
+              Lead Software Engineer (Fullstack)
+            </h2>
             <p>
               Jovono is a principled investment firm with a portfolio that includes Hacker Noon, DoNotPay, and Paragon. I worked with them on updates and maintenance of their server side rendered React app, with data fetched from an Airtable API. I also migrated them to a Heroku deployment strategy, ensuring their SSL certificates continued to auto-renew under the new deployment strategy.
             </p>
@@ -255,6 +309,9 @@
               <a href="https://curative.com">https://curative.com</a>
             </small>
           </h1>
+          <h2>
+            Software Engineer (Frontend)
+          </h2>
           <h3>
             Curative is a healthcare company which has a primary business in Covid-19 testing and vaccine distribution.
             It has delivered over one million Covid-19 vaccines and processes millions of Covid-19 tests every week.
@@ -353,6 +410,9 @@
               <a href="https://g0v.tw/intl/en/">https://g0v.tw/intl/en/</a>
             </small>
           </h1>
+          <h2>
+            Software Engineer
+          </h2>
           <h3>
             g0v is a non-profit hacker collective with no formal hierarchy or organization. It's a large collection of people mostly based in Taiwan that seek to mostly improve Taiwan in some way, though most of the projects, including the collective itself, are designed to be reproducible in other countries. One could call g0v a "civic tech" collective.
           </h3>
@@ -409,6 +469,9 @@
               <a href="https://www.captec.io/">https://www.captec.io/</a>
             </small>
           </h1>
+          <h2>
+            Software Engineer (Fullstack)
+          </h2>
           <h3>
             Captec (registered as "Capital") is a New York based Fintech startup that helps companies determine
             their true net worth through unconventional, proprietary analysis. This leads to companies then
@@ -447,6 +510,9 @@
               <a href="https://p.ota.to">https://p.ota.to</a>
             </small>
           </h1>
+          <h2>
+            Software Engineer (Fullstack)
+          </h2>
           <h3>
             Potato is a design and development agency out of San Francisco and London. During my time there,
             we took a consultative, start-to-finish role in projects, often leading clients from
@@ -570,6 +636,9 @@
               <a href="https://www.electricimp.com">electricimp.com</a>
             </small>
           </h1>
+          <h2>
+            Software Engineer (Frontend)
+          </h2>
           <h3>
             Electric Imp is an IoT company in Mountain View, California. The product is a combination of a cloud service for IoT devices,
             a secure operating system to run on recommended hardware, and a factory flow for producing IoT
@@ -651,10 +720,23 @@
         <h1>Personal</h1>
         <section>
           <p>
-            I live in Taipei, Taiwan. I'm open to local or remote roles. I don't
-            intend to move back to the USA any time in the next 3 years. I have an
+            I'm a USA citizen living in Taipei, Taiwan. I'm open to local or remote roles.  I have an
             unrestricted Gold Card work visa that allows me to work for Taiwanese or
             foreign companies with, well, no restrictions.
+          </p>
+          <p>
+            There's no tax requirements for companies in the USA
+            hiring w2 or 1099 employees outside of the USA: it is identical to hiring them locally from the IRS' perspective.
+            Any tax burden falls on the remote employee to solve, companies can withhold as normal. Also, it's a frequent rumor that
+            companies in the USA with employees abroad must open a remote office in the abroad country; this is
+            untrue, no such universal requirement exists: any such requirement would be on a country-to-country basis, and Taiwan has no such requirement.
+            If hiring a remote employee as 1099, a company simply needs a W-9 that the
+            person fills out (a form with the person's name and TIN that indicates they're legally eligible to work in the USA, which
+            I as a USA citizen am), and, at the end of the tax year, a 1099-NEC that simply details all payments made to the person (generated
+            by the hiring company). If hiring a firm, (such as 508.dev), the process is identical, except the hiring company need not
+            file a W-9, and the 1099-NEC simply lists the firm's name (such as 508.dev) instead of any individual person's name as the receiver.
+            <a href="https://www.irs.gov/businesses/small-businesses-self-employed/forms-and-associated-taxes-for-independent-contractors">The
+              IRS spells this all out on their site.</a>
           </p>
           <p>
             In my journey to discover the trailhead to my path as a Software Engineer,

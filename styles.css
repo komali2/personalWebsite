@@ -60,6 +60,15 @@ ul.column-style li {
 .resume section h3 {
     font-weight: normal;
 }
+.resume .companies h1 {
+    margin-bottom: 6px;
+}
+
+.resume .companies h2 {
+    margin: 0px;
+    font-size: 1em;
+    font-style: italic;
+}
 
 .projects h2 {
     font-size: 1.3em;
