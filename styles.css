@@ -15,6 +15,10 @@ h1 small, h2 small, h3 small, h4 small {
   display: block;
 }
 
+h4 {
+    margin-bottom: 6px;
+}
+
 h3 small {
   font-weight: normal;
 }
