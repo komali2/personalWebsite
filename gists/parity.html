@@ -1,0 +1,72 @@
+<html>
+  <script>
+// Given a string of integers separated by spaces, return the place of the integer with different parity.
+// Note that place is not INDEX, it is origin-1 place,
+// So for array [5, 6, 7], the 5 is in the "1" place, the "6" is in the "2" place, etc
+//     Parity means is a number odd or even.
+//     Constraints:
+// All numbers except the outlier will have the same parity.
+//     The numbers will all be positive integers less than 10^9.
+//     The string will contain at least 3 numbers.
+//     Examples:
+
+const inputString1 = "10 9 8 6 4 2";
+const inputString2 = "7 9 1 6 3";
+const i3 = "-2 4 3 8 6 4";
+const i4 = "-1 5 2 7 9 11";
+const i5 = "2 -3 4 6 8 10";
+const i6 = "-1 -4 3 -5 9 11";
+const i7 = "-1 -4 6 -8 10 12";
+const i8 = "2 -3 7 -5 9 11";
+const i9 = "2 -6 8 -5 10 12";
+const i10 = "1 -3 7 -6 9 11";
+
+function findParity(num) {
+    return Number(num) % 2 === 0;
+}
+
+
+function findOutlier(input) {
+    const arr = input.split(' ');
+    if ( arr.length < 3 ) return;
+    let parity = findParity(arr[0]);
+
+    const parity2 = findParity(arr[1]);
+    const parity3 = findParity(arr[2]);
+
+    // parity diff in first 3 numbers
+    if (parity !== parity2 || parity !== parity3) {
+        // arr[2] is outlier
+        if (parity === parity2) {
+            return 2 + 1;
+        // arr[1] is outlier
+        } else if (parity === parity3) {
+            return 1 + 1;
+        // arr[0] is outlier
+        } else {
+            return 0 + 1;
+        }
+    }
+    // None of first 3 are outlier.
+    // First parity definition is true for remainder of relay,
+    // except for outlier.
+    // The first number that violates parity is the outlier.
+    for (var i = 3; i < arr.length; i++) {
+        if ( findParity(arr[i]) !== parity) return i + 1;
+    }
+    return 0;
+};
+
+console.log(findOutlier(inputString1) === 2);
+console.log(findOutlier(inputString2) === 4);
+console.log(findOutlier(i3) === 3);
+console.log(findOutlier(i4) === 3);
+console.log(findOutlier(i5) === 2);
+console.log(findOutlier(i6) === 2);
+console.log(findOutlier(i7) === 1);
+console.log(findOutlier(i8) === 1);
+console.log(findOutlier(i9) === 4);
+console.log(findOutlier(i10) === 4);
+
+  </script>
+</html>
