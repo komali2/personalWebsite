@@ -66,70 +66,97 @@
             They're listed in project context in the "Companies" section, below.
             The list is non-exhaustive.
           </p>
-          <ul>
-            <li>Javascript</li>
-            <li>Node</li>
-            <li>Typescript</li>
-            <li>React</li>
-            <li>Vue</li>
-            <li>Vuex</li>
-            <li>Redux</li>
-            <li>Next.js</li>
-            <li>Svelte</li>
-            <li>Astro</li>
-            <li>Python</li>
-            <li>508 Web Accessibility</li>
-            <li>WCAG</li>
-            <li>Webpack</li>
-            <li>Parcel</li>
-            <li>ESbuild</li>
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>LESS</li>
-            <li>SASS</li>
-            <li>SCSS</li>
-            <li>Angular</li>
-            <li>jquery</li>
-            <li>Django</li>
-            <li>FastAPI</li>
-            <li>Tailwind</li>
-            <li>Bootstrap</li>
-            <li>Material Design Components (MDC)</li>
-            <li>MUI</li>
-            <li>Canvas</li>
-            <li>Pixi.js</li>
-            <li>WebGL</li>
-            <li>Mocha</li>
-            <li>Chai</li>
-            <li>Jasmine</li>
-            <li>Jest</li>
-            <li>SQL</li>
-            <li>SQLAlchemy</li>
-            <li>Postgresql</li>
-            <li>mysql</li>
-            <li>MJML</li>
-            <li>Mongo</li>
-            <li>Docker</li>
-            <li>AWS</li>
-            <li>AWS Lambda</li>
-            <li>AWS EC2</li>
-            <li>AWS S3</li>
-            <li>AWS API Gateway</li>
-            <li>Google Cloud Platform</li>
-            <li>Google App Engine</li>
-            <li>Heroku</li>
-            <li>nginx</li>
-            <li>Ubuntu Server</li>
-            <li>Linux</li>
-            <li>git</li>
-            <li>Gitlab</li>
-            <li>Github</li>
-            <li>Linear</li>
-            <li>Jira</li>
-            <li>Go</li>
-            <li>Lisp</li>
-            <li>Bash</li>
-            <li>C</li>
+          <fieldset>
+            <legend>Filter Technologies</legend>
+            <div>
+              <input type="radio" id="tech-all" name="technologies" value="all" checked/>
+              <label for="tech-all">All</label>
+
+              <input type="radio" id="tech-frontend" name="technologies" value="frontend" />
+              <label for="tech-frontend">Frontend</label>
+
+              <input type="radio" id="tech-backend" name="technologies" value="backend" />
+              <label for="tech-backend">Backend</label>
+
+              <input type="radio" id="tech-fullstack" name="technologies" value="fullstack" />
+              <label for="tech-fullstack">Fullstack</label>
+
+              <input type="radio" id="tech-devops" name="technologies" value="devops" />
+              <label for="tech-devops">Devops</label>
+
+              <input type="radio" id="tech-gamedev" name="technologies" value="gamedev" />
+              <label for="tech-gamedev">Gamedev</label>
+
+              <input type="radio" id="tech-desktop" name="technologies" value="desktop" />
+              <label for="tech-desktop">Desktop</label>
+
+            </div>
+          </fieldset>
+          <ul class="technologies-list">
+            <li class="technology-item web frontend">Javascript</li>
+            <li class="technology-item web backend desktop fullstack">Node</li>
+            <li class="technology-item web frontend backend desktop fullstack">Typescript</li>
+            <li class="technology-item web frontend">React</li>
+            <li class="technology-item web frontend">Vue</li>
+            <li class="technology-item web frontend">Vuex</li>
+            <li class="technology-item web frontend">Redux</li>
+            <li class="technology-item web frontend fullstack">Next.js</li>
+            <li class="technology-item web frontend fullstack">Svelte</li>
+            <li class="technology-item web frontend">Astro</li>
+            <li class="technology-item web frontend backend fullstack desktop">Python</li>
+            <li class="technology-item web frontend">508 Web Accessibility</li>
+            <li class="technology-item web frontend">WCAG</li>
+            <li class="technology-item web frontend">Webpack</li>
+            <li class="technology-item web frontend ">Parcel</li>
+            <li class="technology-item web frontend ">ESbuild</li>
+            <li class="technology-item web frontend ">HTML</li>
+            <li class="technology-item web frontend ">CSS</li>
+            <li class="technology-item web frontend ">LESS</li>
+            <li class="technology-item web frontend ">SASS</li>
+            <li class="technology-item web frontend ">SCSS</li>
+            <li class="technology-item web frontend ">Angular</li>
+            <li class="technology-item web frontend ">jquery</li>
+            <li class="technology-item web fullstack ">Django</li>
+            <li class="technology-item web backend">FastAPI</li>
+            <li class="technology-item web frontend">Tailwind</li>
+            <li class="technology-item web frontend">Bootstrap</li>
+            <li class="technology-item web frontend">Material Design Components (MDC)</li>
+            <li class="technology-item web frontend">MUI</li>
+            <li class="technology-item web frontend">Canvas</li>
+            <li class="technology-item web frontend gamedev">Pixi.js</li>
+            <li class="technology-item web frontend gamedev">WebGL</li>
+            <li class="technology-item gamedev">Godot</li>
+            <li class="technology-item web frontend">Mocha</li>
+            <li class="technology-item web frontend">Chai</li>
+            <li class="technology-item web frontend">Jasmine</li>
+            <li class="technology-item web frontend">Jest</li>
+            <li class="technology-item backend">SQL</li>
+            <li class="technology-item backend">SQLAlchemy</li>
+            <li class="technology-item backend ">Postgresql</li>
+            <li class="technology-item backend ">mysql</li>
+            <li class="technology-item web frontend">MJML</li>
+            <li class="technology-item backend">Mongo</li>
+            <li class="technology-item devops">Docker</li>
+            <li class="technology-item devops">AWS</li>
+            <li class="technology-item devops backend">AWS Lambda</li>
+            <li class="technology-item devops">AWS EC2</li>
+            <li class="technology-item devops">AWS S3</li>
+            <li class="technology-item devops backend">AWS API Gateway</li>
+            <li class="technology-item devops">Google Cloud Platform</li>
+            <li class="technology-item devops">Google App Engine</li>
+            <li class="technology-item devops">Heroku</li>
+            <li class="technology-item devops">nginx</li>
+            <li class="technology-item devops">Ubuntu Server</li>
+            <li class="technology-item devops">Linux</li>
+            <li class="technology-item project-management">git</li>
+            <li class="technology-item project-management">Gitlab</li>
+            <li class="technology-item project-management">Github</li>
+            <li class="technology-item project-management">Linear</li>
+            <li class="technology-item project-management">Jira</li>
+            <li class="technology-item backend">Go</li>
+            <li class="technology-item desktop">Lisp</li>
+            <li class="technology-item devops">Bash</li>
+            <li class="technology-item desktop">C</li>
           </ul>
           <p>
             I also have the following non-technical skills.
@@ -808,6 +835,27 @@
 		  var ins = document.getElementsByTagName('script')[0];
 		  ins.parentNode.insertBefore(script, ins)
 	  })();
+     window.onload = function() {
+       let itemstore = [];
+       if(document.querySelector('input[name="technologies"]')){
+         document.querySelectorAll('input[name="technologies"]').forEach((elem) => {
+           elem.addEventListener("click", function(event){
+             const tech = event.target.value;
+             itemstore.forEach((itemEl) => {
+               itemEl.classList.remove('invisible')
+             });
+             if (tech === 'all') {
+               return;
+             }
+             const items = document.querySelectorAll('.technology-item:not(.' + tech + ')');
+             items.forEach((itemEl) => {
+               itemEl.classList.add('invisible');
+             });
+             itemstore = items;
+           });
+         });
+       }
+     }
     </script>
   </body>
 </html>

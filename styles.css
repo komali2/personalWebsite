@@ -164,3 +164,18 @@ ul.column-style li {
 @media only screen and (min-width: 90.063em) and (max-width: 120em) { } /* min-width 1441px and max-width 1920px, use when QAing xlarge screen-only issues */
 
 @media only screen and (min-width: 120.063em) { } /* min-width 1921px, xxlarge screens */
+
+.technology-item {
+    transition-duration: 0ms, 200ms;
+    transition-property: visibility, opacity;
+    transition-delay: 0;
+}
+
+.technology-item.invisible {
+    visibility: hidden;
+    opacity: 0;
+    transition-duration: 200ms, 0ms;
+    transition-property: opacity, visibility;
+    transition-delay: 0ms, 200ms;
+    order: 10000;
+}
