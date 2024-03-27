@@ -20,7 +20,7 @@
         </h1>
         <h3>
           <small>
-            Updated: <time datetime="2024-02-29">Feb 2024</time>
+            Updated: <time datetime="2024-03-27">March 2024</time>
           </small>
         </h3>
         <nav>
@@ -47,7 +47,14 @@
         <h1>Summary</h1>
         <section>
           <p>
-            I'm a software engineer with extensive web development experience. Since 2016 I've been building React, Vue, Node/JS/TS, and Python apps for companies such as Electric Imp, Potato, Google, Captec, Curative, and Cofactr. I've led engineering teams and functioned as a project manager. Since 2021 I've been building a software engineering co-op called <a href="https://508.dev">508.dev</a>, a design and development firm that's delivered successfully for several clients, including Ycombinator startups.
+            I'm a software engineer with 8 years of web development experience.
+            Since 2016 I've been building React, Vue, Node/JS/TS, and Python
+            apps for companies such as Electric Imp, Potato, Google, Captec,
+            Curative, and Cofactr. I've led engineering teams and functioned as
+            a project manager. Since 2021 I've been building a software
+            engineering co-op called <a href="https://508.dev">508.dev</a>, a
+            design and development firm that's delivered successfully for
+            several clients, including Ycombinator startups.
           </p>
         </section>
       </div>
@@ -70,6 +77,7 @@
             <li>Next.js</li>
             <li>Svelte</li>
             <li>Astro</li>
+            <li>Python</li>
             <li>508 Web Accessibility</li>
             <li>WCAG</li>
             <li>Webpack</li>
@@ -82,7 +90,6 @@
             <li>SCSS</li>
             <li>Angular</li>
             <li>jquery</li>
-            <li>Python</li>
             <li>Django</li>
             <li>FastAPI</li>
             <li>Tailwind</li>
@@ -146,6 +153,8 @@
           </small>
           <p>
             Gave a presentation to a conference of around thirty graduate students on a start to finish process for designing, engineering, deploying, and hosting a personal portfolio site. Created presentation materials and templates for students to use. Technologies involved were HTML, CSS, PHP, and Javascript. Overall objective was to keep things as simple and easily maintainable as possible so students could indefinitely update their portfolio.
+          </p>
+          <p>
             Unlike typical tutorials on the subject, a good portion of the lecture focused on affordable, sustainable, and reliable deployment and hosting, so that participants could have their portfolio accessible on the web by the end of the lecture.
           </p>
         </section>
@@ -172,59 +181,65 @@
             </small>
           </h1>
           <h2>
-            Founder, Chief Engineering Officer
+            Founding Engineer
           </h2>
 
           <h3>
-            508.dev is a US-registered LLC and software engineering co-op I've founded that provides general software engineering services, consultation, project management, and project-based development, particularly focused
-            on developing accessible web applications. My team excels at both rapid prototyping and brownfield upgrades, as well as asynchronous engineering management across multiple timezones.
+            508.dev is a US-registered LLC and software engineering co-op I've
+            founded that provides general software engineering services,
+            consultation, project management, and project-based development,
+            particularly focused on developing accessible web applications. My
+            team excels at both rapid prototyping and brownfield upgrades, as
+            well as asynchronous engineering management across multiple timezones.
           </h3>
           <h2>
             Projects
           </h2>
           <section class="project">
             <h1>
-              <a href="https://www.owlysearch.com/">Owlysearch</a> - AI-Powered Search Listening Platform
+              Stealth Streaming Startup
               <small>
-                <time datetime="June 2023">June 2023</time> to present. <a href="https://www.owlysearch.com/">https://www.owlysearch.com/</a>
+                <time datetime="November 2023">November 2023</time> to <time datetime="March 2024">March 2024</time>.
               </small>
             </h1>
             <h2>
-              Lead Software Engineer (Fullstack), Project Manager
+              Lead Software Engineer (Frontend), Project Manager
             </h2>
             <p>
-
-              Owlysearch is a French marketing startup using various ML/AI techniques to analyze Google Search trends in order to add value for marketing teams.
+              An American streaming startup still in stealth requisitioned me to
+              build a team to design and develop a desktop web streaming platform
+              that integrated with their mobile streaming app's backend.
             </p>
             <p>
-              I've taken over the entire SaaS platform development from the founding engineer, who has left for other projects. As a very new company, Owlysearch has no established engineering or project management best practices, so I've been from-scratch building out the engineering and project management processes while developing the SaaS product to get it into a state where customers can be onboarded and investors can be pitched.
+              I led most of the architectural decisions, taking input on the
+              client's specific technical requests such as building in NextJS.
             </p>
             <p>
-              When I arrived, there was no documentation anywhere in the codebases, nor on deployment methods or even what external APIs were being used. Lacking any contact with the founding engineer, I've been documenting the current functionality and state of the application suite, while adding new features to achieve MVP. The SaaS platform is a combination of several Python servers, using numpy and ML tooling to analyze the output of beautifulsoup and other Python scraping tools. A mongo database tracks analyzed data and user accounts, and there is a react / js / jsx / html frontend for viewing market analysis and managing user accounts. I've set up manual prod deployments using Github actions to rsync files to the Amazon EC2 instance and restart the services via systemctl.
+              We built this just after the release of the new NextJS "app router"
+              paradigm, necessitating forking and getting commits on the Apollo
+              GraphQL Typescript library to ensure it worked with some of the
+              new concepts in the latest version of NextJS.
+            </p>
+            <p>
+              The app allows users to login and host streaming sessions with chat,
+              interactive games with viewers, and streaming statistics.
             </p>
             <h1>
               Technologies:
             </h1>
             <ul>
-              <li>Python</li>
-              <li>Flask</li>
-              <li>Numpy</li>
-              <li>Pandas</li>
-              <li>Beautifulsoup</li>
-              <li>jinja2</li>
-              <li>matplotlib</li>
-              <li>scipy</li>
-              <li>Mongo</li>
-              <li>Javascript</li>
+              <li>Typescript</li>
+              <li>NextJS 14</li>
               <li>React</li>
-              <li>d3</li>
-              <li>mui</li>
-              <li>vite</li>
-              <li>HTML</li>
-              <li>CSS</li>
-              <li>Webpack</li>
+              <li>Apollo</li>
+              <li>GraphQL</li>
+              <li>Tailwind</li>
+              <li>Javascript</li>
+              <li>Streamchat</li>
+              <li>Livekit</li>
             </ul>
           </section>
+
           <section class="project">
             <h1>
               <a href="https://www.cofactr.com/">Cofactr</a> - Electronic Component Procurement, Purchase, and Management Platform
@@ -502,9 +517,40 @@
               a goal of visualizing what various actions they can take would have on their bottom line. The application
               was standalone and Captec wanted to integrate it into their main web application. It was
               an extremely fascinating project in a field far outside my comfort zone (that is to say, finance)
-              and I thoroughly enjoyed working in such an unfamiliar place. The primary technologies involved
-              were Javascript, HTML, CSS, React, Docker, Webpack, Node, and Python 3.
+              and I thoroughly enjoyed working in such an unfamiliar place.
             </p>
+            <h1>
+              Technologies:
+            </h1>
+            <ul>
+              <li>
+                Javascript
+              </li>
+              <li>
+                Typescript
+              </li>
+              <li>
+                React
+              </li>
+              <li>
+                Webpack
+              </li>
+              <li>
+                Node
+              </li>
+              <li>
+                Python
+              </li>
+              <li>
+                Docker
+              </li>
+              <li>
+                HTML
+              </li>
+              <li>
+                CSS
+              </li>
+            </ul>
           </section>
         </section>
         <section>
@@ -545,6 +591,7 @@
             <ul>
               <li>Vue</li>
               <li>Javascript</li>
+              <li>Typescript</li>
               <li>HTML</li>
               <li>Python</li>
               <li>Django</li>
@@ -572,6 +619,7 @@
             <ul>
               <li>Vue</li>
               <li>Javascript</li>
+              <li>Typescript</li>
               <li>Node</li>
               <li>Fast API</li>
               <li>HTML</li>
@@ -610,6 +658,7 @@
             <ul>
               <li>Vue</li>
               <li>Javascript</li>
+              <li>Typescript</li>
               <li>Node</li>
               <li>Fast API (Node framework)</li>
               <li>HTML</li>
@@ -725,23 +774,7 @@
         <h1>Personal</h1>
         <section>
           <p>
-            I'm a USA citizen living in Taipei, Taiwan. I'm open to local or remote roles.  I have an
-            unrestricted Gold Card work visa that allows me to work for Taiwanese or
-            foreign companies with, well, no restrictions.
-          </p>
-          <p>
-            There's no tax requirements for companies in the USA
-            hiring w2 or 1099 employees outside of the USA: it is identical to hiring them locally from the IRS' perspective.
-            Any tax burden falls on the remote employee to solve, companies can withhold as normal. Also, it's a frequent rumor that
-            companies in the USA with employees abroad must open a remote office in the abroad country; this is
-            untrue, no such universal requirement exists: any such requirement would be on a country-to-country basis, and Taiwan has no such requirement.
-            If hiring a remote employee as 1099, a company simply needs a W-9 that the
-            person fills out (a form with the person's name and TIN that indicates they're legally eligible to work in the USA, which
-            I as a USA citizen am), and, at the end of the tax year, a 1099-NEC that simply details all payments made to the person (generated
-            by the hiring company). If hiring a firm, (such as 508.dev), the process is identical, except the hiring company need not
-            file a W-9, and the 1099-NEC simply lists the firm's name (such as 508.dev) instead of any individual person's name as the receiver.
-            <a href="https://www.irs.gov/businesses/small-businesses-self-employed/forms-and-associated-taxes-for-independent-contractors">The
-              IRS spells this all out on their site.</a>
+            I'm a USA citizen. I'm open to local or remote roles.
           </p>
           <p>
             In my journey to discover the trailhead to my path as a Software Engineer,
@@ -752,12 +785,9 @@
           </p>
           <p>
             I need to always be learning new things in order to feel happy. Right now,
-            I'm working on achieving Mandarin fluency, learning Machine Learning,
-            bolstering my backend skills in
-            Javascript and Python, learning native programming on micro-controllers as well
-            as on iOS and Android, undergoing a Bachelor's in Computer Science curriculum
-            through online courses, studying philosophy of mind, and trying (poorly)
-            to produce music in Ableton.
+            I'm working on achieving Mandarin fluency, learning Godot, grabbing a few new
+            frontend libraries, deploying a ton of self hosted software, cranking microSaaS
+            ideas, picking up mobile app development, and organizing hackathons.
           </p>
           <p>
             My hobbies include motorcycling, baking, cooking, hiking, camping, weightlifting,
