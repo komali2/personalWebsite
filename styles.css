@@ -1,6 +1,9 @@
 body {
   background-color: #f4f4f4;
-  font-family: helvetica neue,helvetica,sans-serif;
+  font-family:
+    helvetica neue,
+    helvetica,
+    sans-serif;
 }
 main {
   margin-left: auto;
@@ -11,12 +14,15 @@ header {
   font-size: 2em;
 }
 
-h1 small, h2 small, h3 small, h4 small {
+h1 small,
+h2 small,
+h3 small,
+h4 small {
   display: block;
 }
 
 h4 {
-    margin-bottom: 6px;
+  margin-bottom: 6px;
 }
 
 h3 small {
@@ -24,7 +30,7 @@ h3 small {
 }
 
 p {
-    line-height: 1.5;
+  line-height: 1.5;
 }
 
 section {
@@ -49,52 +55,57 @@ section ul {
   list-style-type: circle;
 }
 
-ul.column-style{
-    display: flex;
-    flex-flow: column;
+ul.column-style {
+  display: flex;
+  flex-flow: column;
 }
 ul.column-style li {
-    margin-top: 5px;
+  margin-top: 5px;
 }
 
 .resume section h2 {
-    font-size: 1.3em;
+  font-size: 1.3em;
 }
 
 .resume section h3 {
-    font-weight: normal;
+  font-weight: normal;
 }
 .resume .companies h1 {
-    margin-bottom: 6px;
+  margin-bottom: 6px;
 }
 
 .resume .companies h2 {
-    margin: 0px;
-    font-size: 1em;
-    font-style: italic;
+  margin: 0px;
+  font-size: 1em;
+  font-style: italic;
+}
+
+.resume .companies .project h2 {
+  font-size: 1.3em;
 }
 
 .projects h2 {
-    font-size: 1.3em;
-    margin: 0px;
+  font-size: 1.3em;
+  margin: 0px;
 }
 .projects h2 small {
-    margin-top: 6px;
-    font-style: italic;
-    font-size: 1rem;
-    font-weight: normal;
+  margin-top: 6px;
+  font-style: italic;
+  font-size: 1rem;
+  font-weight: normal;
 }
 .projects p {
-    margin-block-start: 0;
-    margin-block-end: 0;
-    margin: .5rem 0rem;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin: 0.5rem 0rem;
 }
 
 .awards small {
-    margin: 4px 0px;
+  margin: 4px 0px;
 }
-.awards h2, .awards h3 {
-    margin: 4px 0px;
+.awards h2,
+.awards h3 {
+  margin: 4px 0px;
 }
 
 @media only screen {
@@ -108,18 +119,17 @@ ul.column-style li {
     justify-content: space-around;
     list-style-type: circle;
   }
-  ul.column-style{
-      display: flex;
-      flex-flow: column;
+  ul.column-style {
+    display: flex;
+    flex-flow: column;
   }
+} /* Define mobile styles */
 
-
- } /* Define mobile styles */
-
-@media only screen and (max-width: 40em) { } /* max-width 640px, mobile-only styles, use when QAing mobile issues */
+@media only screen and (max-width: 40em) {
+} /* max-width 640px, mobile-only styles, use when QAing mobile issues */
 
 @media only screen and (min-width: 40.063em) {
-    section ul {
+  section ul {
     display: grid;
     grid-template-columns: 45% 45%;
     align-items: start;
@@ -129,53 +139,56 @@ ul.column-style li {
     justify-content: space-around;
     list-style-type: circle;
   }
-    ul.column-style{
-        display: flex;
-        flex-flow: column;
-    }
+  ul.column-style {
+    display: flex;
+    flex-flow: column;
+  }
+} /* min-width 641px, medium screens */
 
- } /* min-width 641px, medium screens */
-
-@media only screen and (min-width: 40.063em) and (max-width: 64em) { } /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+} /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
 
 @media only screen and (min-width: 64.063em) {
-  section ul{
-      display: grid;
-      grid-template-columns: 30% 30% 30%;
-      align-items: start;
-      justify-items: start;
-      grid-gap: 10px 5px;
-      padding: 0px;
-      justify-content: space-around;
-      list-style-type: circle;
-      padding: 0px 10px;
+  section ul {
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    align-items: start;
+    justify-items: start;
+    grid-gap: 10px 5px;
+    padding: 0px;
+    justify-content: space-around;
+    list-style-type: circle;
+    padding: 0px 10px;
   }
-  ul.column-style{
-      display: flex;
-      flex-flow: column;
+  ul.column-style {
+    display: flex;
+    flex-flow: column;
   }
+} /* min-width 1025px, large screens */
 
- } /* min-width 1025px, large screens */
+@media only screen and (min-width: 64.063em) and (max-width: 90em) {
+} /* min-width 1025px and max-width 1440px, use when QAing large screen-only issues */
 
-@media only screen and (min-width: 64.063em) and (max-width: 90em) { } /* min-width 1025px and max-width 1440px, use when QAing large screen-only issues */
+@media only screen and (min-width: 90.063em) {
+} /* min-width 1441px, xlarge screens */
 
-@media only screen and (min-width: 90.063em) { } /* min-width 1441px, xlarge screens */
+@media only screen and (min-width: 90.063em) and (max-width: 120em) {
+} /* min-width 1441px and max-width 1920px, use when QAing xlarge screen-only issues */
 
-@media only screen and (min-width: 90.063em) and (max-width: 120em) { } /* min-width 1441px and max-width 1920px, use when QAing xlarge screen-only issues */
-
-@media only screen and (min-width: 120.063em) { } /* min-width 1921px, xxlarge screens */
+@media only screen and (min-width: 120.063em) {
+} /* min-width 1921px, xxlarge screens */
 
 .technology-item {
-    transition-duration: 0ms, 200ms;
-    transition-property: visibility, opacity;
-    transition-delay: 0;
+  transition-duration: 0ms, 200ms;
+  transition-property: visibility, opacity;
+  transition-delay: 0;
 }
 
 .technology-item.invisible {
-    visibility: hidden;
-    opacity: 0;
-    transition-duration: 200ms, 0ms;
-    transition-property: opacity, visibility;
-    transition-delay: 0ms, 200ms;
-    order: 10000;
+  visibility: hidden;
+  opacity: 0;
+  transition-duration: 200ms, 0ms;
+  transition-property: opacity, visibility;
+  transition-delay: 0ms, 200ms;
+  order: 10000;
 }
