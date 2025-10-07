@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="author" content="Caleb Jay Rogers">
+    <meta name="description" content="A talk on how self hosting can save you money and protect your business.">
+    <meta name="keywords" content="Caleb Rogers, Caleb Jay, komali_2, frontend, programming, writing">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta property="og:title" content="Caleb's Website">
+    <meta property="og:description" content="A talk on how self hosting can save you money and protect your business, data, and freedom.">
+    <meta property="og:url" content="https://calebjay.com/selfhosting.html">
+    <meta name="twitter:card" content="summary">
+    <link href="/styles.css" rel="stylesheet">
+    <title>Self Hosting</title>
+  </head>
+
+  <body class="talk">
+    <main>
+      <header>
+        <h1>
+          Self Host your SaaS: Save Money, Safeguard Your Business, Ensure Your Freedom
+        </h1>
+        <h3>
+          <small>
+            Updated: <time datetime="2025-10-07">October 2025</time>
+          </small>
+          <small>
+            By: Caleb Rogers
+          </small>
+        </h3>
+        <nav>
+          <ul>
+            <li>
+              <a href="http://blog.calebjay.com/">Blog</a>
+            </li>
+            <li>
+              <a href="/about.html">About Me</a>
+            </li>
+            <li>
+              <a href="/resume.html">Resume</a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <section id="me">
+        <h2>Me</h2>
+        <ul>
+          <li>
+            Software Engineer, 9 years
+          </li>
+          <li>
+            Founder, 508.dev:  software engineering co-op, ~100 members, ~20 revenue-generating members, ~250,000USD/yr revenue
+          </li>
+          <li>
+            FOSS Enthusiast
+          </li>
+          <li>
+            ~150 TB in my house. Definitely nothing pirated.
+          </li>
+        </ul>
+      <a href="#you">Next Slide</a>
+      </section>
+      <section id="you">
+        <h2>You</h2>
+        <p>
+          What SaaS products do you use? Examples: Notion, Google Workspace, JIRA. 
+          <a href="https://docs.google.com/spreadsheets/d/1XnqVPb8PmncchlhKdFdDByzvjqb_uVI7w3vYTZjr1io/edit?usp=sharing">Let's keep track here.</a>
+        </p>
+      <a href="#enshittification">Next Slide</a>
+      </section>
+      <section id="enshittification">
+        <h2>Enshittification</h2>
+        <p>
+          <q cite="https://pluralistic.net/2023/01/21/potemkin-ai/#hey-guys">
+Here is how platforms die: first, they are good to their users; then they abuse their users to make things better for their business customers; finally, they abuse those business customers to claw back all the value for themselves. Then, they die.
+          </q> 
+          -- Cory Doctorow
+        </p>
+        <h3>Case 1: Publishers on Facebook</h3>
+        <p>
+          Facebook would overload feeds with content from publishers. Publishers became dependent upon FB
+          traffic. FB waited, then reduced traffic. As it tightened the vice, it forced publishers to pay
+          to have their articles actually show up, even to subscribers. Then, it forced publishers to 
+          "pivot to video" to force its customers to fund its attempt to compete with Youtube. When customers
+          had spent billions on this pivot, it decided videos aren't profitable, and killed the product, 
+          and its customers along with it.
+        </p>
+        <h3>
+          Case 2: Slack
+        </h3>
+        <p>
+          <a href="https://skyfall.dev/posts/slack">Hack Club</a> provides coding education and community
+          to teenagers. The business was run on Slack. One day Slack sent them two bills: $50,000, due in a week,
+          and $200,000 per year on top. Failure to pay within the week would result in 11 years of chat history
+          being deleted and the server being shut down.
+        </p>
+        <p>
+          In another case, Slack raised prices to account for their new "AI features." Users that opted out
+          of the AI features still pay the new prices.
+        </p>
+        <h3>Security</h3>
+        <p>
+         <a href="sign.dropbox.com/blog/a-recent-security-incident-involving-dropbox-sign"> April 24, 2024</a>:
+          Dropbox hack leaks "customer information such as email addresses, user names, phone numbers and hashed passwords, in addition to general account settings and certain authentication information such as API keys, OAuth tokens, and multi-factor authentication"
+          of unstated number of customers. 
+        </p>
+        <p>
+          <a href="https://www.twingate.com/blog/tips/dropbox-data-breach">2012:</a>
+          Dropbox hack leaks email addresses and salted hashes of passwords for 68 million users.
+        </p>
+        <a href="#self-hosting-intro">Next Slide</a>
+      </section>
+      <section id="self-hosting-intro">
+        <h2>Self Hosting Intro</h2>
+        <p>
+          Self Hosting is when instead of paying a monthly SaaS bill for access to 
+          a service, you deploy and manage a service yourself. 
+        </p>
+        <p>
+          Let's find some FOSS, self-hostable 
+          <a href="https://github.com/awesome-selfhosted/awesome-selfhosted">alternatives</a> 
+          to some of the SaaS products 
+          we discussed previously.
+        </p>
+        <p>
+          <h3>Steps:</h3>
+        <ol>
+          <li>Buy VPS</li>
+          <li>Set up VPS:
+            <ol>
+              <li>
+                Set up SSH keys
+              </li>
+              <li>
+                Disable root login
+              </li>
+              <li>
+                Set up reverse proxy or cloudflare tunnels
+              </li>
+              <li>
+                Install service (probably a docker compose file)
+              </li>
+              <li>
+                If reverse proxy, set up Let's Encrypt using certbot
+              </li>
+              <li>
+                Forward DNS
+              </li>
+              <li>
+                Set up auto-backup
+              </li>
+              <li>
+                Set up firewall
+              </li>
+              <li>
+                Set up logging
+              </li>
+            </ol>
+          </li>
+        </ol>
+        </p>
+        <a href="">Next Slide</a>
+      </section>
+      <section id="managed-hosting">
+        <h2>Or... Managed Hosting</h2>
+        <p>Let's take a look at <a href="https://elest.io/">Elestio</a></p>
+        <p>
+          <h3>Steps:</h3>
+        <ol>
+          <li>
+            Click the service you want in Elestio
+          </li>
+          <li>
+            Copy the 
+          </li>
+        </ol>
+        </p>
+      </section>
+    </main>
+    <script>
+	  (function() {
+		  var script = document.createElement('script');
+		  window.counter = 'https://calebjay_com.goatcounter.com/count'
+		  script.async = 1;
+		  script.src = '//gc.zgo.at/count.js';
+
+		  var ins = document.getElementsByTagName('script')[0];
+		  ins.parentNode.insertBefore(script, ins)
+	  })();
+    </script>
+  </body>
+</html>

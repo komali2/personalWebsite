@@ -192,3 +192,7 @@ ul.column-style li {
   transition-delay: 0ms, 200ms;
   order: 10000;
 }
+
+.talk section {
+  margin-bottom: 36em;
+}
