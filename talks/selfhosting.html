@@ -50,14 +50,16 @@
             Software Engineer, 9 years
           </li>
           <li>
-            Founder, 508.dev:  software engineering co-op, ~100 members, ~20 revenue-generating members, ~250,000USD/yr revenue
+            Founder, 508.dev:  software engineering co-op, ~100 members, ~250,000USD/yr revenue
           </li>
           <li>
             FOSS Enthusiast
           </li>
           <li>
-            ~150 TB in my house. Definitely nothing pirated.
+            ~150 TB in my house. 15 services for personal life self-hosted on 2 machines. 10 services self-hosted for co-op. 
           </li>
+          <li>ADHD</li>
+          <li>Autistic special interest: crime</li>
         </ul>
       <a href="#you">Next Slide</a>
       </section>
@@ -76,6 +78,9 @@
 Here is how platforms die: first, they are good to their users; then they abuse their users to make things better for their business customers; finally, they abuse those business customers to claw back all the value for themselves. Then, they die.
           </q> 
           -- Cory Doctorow
+        </p>
+        <p>
+          "I can just stay on the free version." <br /> - A founder about to get fucked
         </p>
         <h3>Case 1: Publishers on Facebook</h3>
         <p>
@@ -109,6 +114,29 @@ Here is how platforms die: first, they are good to their users; then they abuse 
           <a href="https://www.twingate.com/blog/tips/dropbox-data-breach">2012:</a>
           Dropbox hack leaks email addresses and salted hashes of passwords for 68 million users.
         </p>
+        <a href="#worst-case">Next Slide</a>
+      </section>
+      <section id="worst-case">
+        <h2>Bad Things Have Happened Before; it can Happen to You!</h2>
+        <ul>
+          <li>Price increase erases margin</li>
+          <li>License change makes your business model illegal</li>
+          <li>Service is killed:
+            <ul>
+              <li>Because not profitable</li>
+              <li>Because acquisition</li>
+              <li>Because new product manager</li>
+              <li>Because woke</li>
+            </ul>
+          </li>
+          <li>Company bought by nazi; brand harm to continue using their services</li>
+          <li>Company starts harvesting your customer's data to train its nazi AI</li>
+          <li>Country that provides product gets invaded and the server room gets bombed</li>
+          <li>The NSA nukes service provider's servers to get at Dr. Antifa, who happened to use the same SaaS as you</li>
+          <li>America sanctions company, you can no longer access services</li>
+          <li>America sanctions you, company bans you from using their services</li>
+          <li>API for service is deprecated</li>
+        </ul>
         <a href="#self-hosting-intro">Next Slide</a>
       </section>
       <section id="self-hosting-intro">
@@ -123,6 +151,27 @@ Here is how platforms die: first, they are good to their users; then they abuse 
           to some of the SaaS products 
           we discussed previously.
         </p>
+        <h3>
+          Advantages
+        </h3>
+        <ul>
+          <li>If hacked, your fault</li>
+          <li>Hack less likely, you're not in a honeypot</li>
+          <li>No service shutdown</li>
+          <li>Cheaper, usually</li>
+          <li>Data sovereignty (export)</li>
+        </ul>
+        <a href="#types">Next Slide</a>
+      </section>
+      <section id="types">
+        <h2>Types of Self Hosting</h2>
+        <p>Self hosting can be running applications on VPS you rent, or "on-prem" equipment literally in your office.</p>
+        <p>Or, it can be done through managed hosting.</p>
+
+        <a href="#on-prem">Next Slide</a>
+      </section>
+      <section id="on-prem">
+        <h2>On-Prem</h2>
         <p>
           <h3>Steps:</h3>
         <ol>
@@ -156,11 +205,15 @@ Here is how platforms die: first, they are good to their users; then they abuse 
               <li>
                 Set up logging
               </li>
+              <li>
+                Occasionally update software
+              </li>
             </ol>
           </li>
         </ol>
         </p>
-        <a href="">Next Slide</a>
+
+        <a href="#managed-hosting">Next Slide</a>
       </section>
       <section id="managed-hosting">
         <h2>Or... Managed Hosting</h2>
@@ -172,10 +225,45 @@ Here is how platforms die: first, they are good to their users; then they abuse 
             Click the service you want in Elestio
           </li>
           <li>
-            Copy the 
+            Copy the IP address for the server it provisions out of the "Configure Domains" modal
+          </li>
+          <li>
+            Paste that into an A record in your domain manager (cloudflare, gandi.net, whoever) under whatever subdomain
+          </li>
+          <li>
+            Enter the subdomain name back into the "Configure Domains" modal in Elestio
           </li>
         </ol>
         </p>
+        <a href="#plug">Next Slide</a>
+      </section>
+      <section id="plug">
+        <h2>Shameless Plug to Leave On Screen While I Answer Questions</h2>
+        <p>
+          508.dev is always looking for excellent engineers to add to our team. 
+          We offer co-ownership of the business and thus better margins (85-95% rate to you) 
+          of any freelance situation
+          outside of running your own thing solo. If interested, come talk to me or go to 
+          <a href="https://508.dev">https://508.dev</a>. We also have budget for kickstarting
+          internal application development - have an idea but don't have the know-how, time, or budget
+          to develop or market it? Come to us and engage in profit-share.
+
+        </p>
+        <p>
+          508.dev does client work. If you're looking for the best offshore engineers and are willing to  
+          pay a bit more than normal offshare rates (but far less than local ones probably) (also 
+          far less than Toptal), come chat! 
+          We do frontend, backend, fullstack, mobile, AI, ML, game dev, 3d modeling, blockchain, firmware, and more.
+        </p>
+        <p>
+          Read my blog: <a href="https://blog.calebjay.com">https://blog.calebjay.com</a>
+        </p>
+        <p>
+          Read 508.dev's blog: <a href="https://blog.508.dev">https://blog.508.dev</a>
+        </p>
+
+
+
       </section>
     </main>
     <script>
