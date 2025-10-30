@@ -196,3 +196,36 @@ ul.column-style li {
 .talk section {
   margin-bottom: 36em;
 }
+
+
+.short h1,
+.short h2,
+.short h3,
+.short h4 {
+    margin: 4px;
+    margin-top: 12px;
+}
+
+.short p {
+    margin: 6px;
+}
+
+.short h1 {
+    font-size: 1.8em;
+}
+
+.short h2 {
+    font-size: 1.4rem !important;
+}
+
+.short section {
+    margin-bottom: 16px;
+}
+.inline-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0;
+    list-style-type: none;
+}

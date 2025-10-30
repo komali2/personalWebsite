@@ -16,20 +16,19 @@
     <title>Caleb's Resume</title>
   </head>
 
-  <body>
+  <body class="short">
     <main class="resume">
       <header>
         <h1>
-          <small>Caleb's</small>
-          Resume
+          Caleb Rogers' Resume
         </h1>
         <h3>
           <small>
-            Updated: <time datetime="2025-07-10">July 2025</time>
+            Updated: <time datetime="2025-10-30">Oct 2025</time>
           </small>
         </h3>
         <nav>
-          <ul>
+          <ul class="inline-list">
            <li>
               <a href="https://github.com/komali2">Github</a>
             </li>
@@ -52,14 +51,12 @@
         <h1>Summary</h1>
         <section>
           <p>
-            I'm a software engineer with 8 years of experience.
-            Since 2016 I've been building React, Vue, Node/JS/TS, and Python
-            apps for companies such as Electric Imp, Potato, Google, Captec,
-            Curative, Cofactr, and Reactwise. I've led engineering teams and functioned as
-            a project manager. In 2021 I founded a software
-            engineering co-op called <a href="https://508.dev">508.dev</a>, a
-            design and development firm that's delivered successfully for
-            several clients, including Y Combinator startups.
+            Software engineer with nine years of experience.
+            Specializing in full stack web development in Javascript / Typescript and Python,
+            using frameworks such as React, Nextjs, Vue, FastAPI, and Django,
+            for companies such as Google or startups backed by YCombinator.
+            Four years experience leading engineering teams. Founder of
+            508.dev, a software engineering co-op.
           </p>
         </section>
       </div>
@@ -67,301 +64,118 @@
         <h1>Technologies and Skillset</h1>
         <section>
           <p>
-            All of the technologies below I have worked with in a project.
-            They're listed in project context in the "Companies" section, below.
-            The list is non-exhaustive.
+            Hard skills: Typescript, Javascript, React, Nextjs, Vue, Node, HTML, CSS, Tailwind,
+            Python, FastAPI, Django, SQL, Postgresql, Docker, AWS, Git, CI/CD.
           </p>
-          <fieldset>
-            <legend>Filter Technologies</legend>
-            <div>
-              <input type="radio" id="tech-all" name="technologies" value="all" checked/>
-              <label for="tech-all">All</label>
-
-              <input type="radio" id="tech-frontend" name="technologies" value="frontend" />
-              <label for="tech-frontend">Frontend</label>
-
-              <input type="radio" id="tech-backend" name="technologies" value="backend" />
-              <label for="tech-backend">Backend</label>
-
-              <input type="radio" id="tech-fullstack" name="technologies" value="fullstack" />
-              <label for="tech-fullstack">Fullstack</label>
-
-              <input type="radio" id="tech-devops" name="technologies" value="devops" />
-              <label for="tech-devops">Devops</label>
-
-              <input type="radio" id="tech-gamedev" name="technologies" value="gamedev" />
-              <label for="tech-gamedev">Gamedev</label>
-
-              <input type="radio" id="tech-desktop" name="technologies" value="desktop" />
-              <label for="tech-desktop">Desktop</label>
-
-            </div>
-          </fieldset>
-          <ul class="technologies-list">
-            <li class="technology-item web frontend">Javascript</li>
-            <li class="technology-item web backend desktop fullstack">Node</li>
-            <li class="technology-item web frontend backend desktop fullstack">Typescript</li>
-            <li class="technology-item web frontend">React</li>
-            <li class="technology-item web frontend">Vue</li>
-            <li class="technology-item web frontend">Vuex</li>
-            <li class="technology-item web frontend">Pinia</li>
-            <li class="technology-item web frontend">Redux</li>
-            <li class="technology-item web frontend fullstack">Next.js</li>
-            <li class="technology-item web frontend fullstack">Svelte</li>
-            <li class="technology-item web frontend">Astro</li>
-            <li class="technology-item web frontend backend fullstack desktop">Python</li>
-            <li class="technology-item web frontend">508 Web Accessibility</li>
-            <li class="technology-item web frontend">WCAG</li>
-            <li class="technology-item web frontend">Webpack</li>
-            <li class="technology-item web frontend">Vite</li>
-            <li class="technology-item web frontend">Vercel</li>
-            <li class="technology-item web frontend ">Parcel</li>
-            <li class="technology-item web frontend ">ESbuild</li>
-            <li class="technology-item web frontend ">HTML</li>
-            <li class="technology-item web frontend ">CSS</li>
-            <li class="technology-item web frontend ">LESS</li>
-            <li class="technology-item web frontend ">SASS</li>
-            <li class="technology-item web frontend ">SCSS</li>
-            <li class="technology-item web frontend ">Angular</li>
-            <li class="technology-item web frontend ">jquery</li>
-            <li class="technology-item web fullstack ">Django</li>
-            <li class="technology-item web backend">FastAPI</li>
-            <li class="technology-item web frontend">Tailwind</li>
-            <li class="technology-item web frontend">Bootstrap</li>
-            <li class="technology-item web frontend">Material Design Components (MDC)</li>
-            <li class="technology-item web frontend">MUI</li>
-            <li class="technology-item web frontend">Canvas</li>
-            <li class="technology-item web frontend gamedev">Pixi.js</li>
-            <li class="technology-item web frontend gamedev">WebGL</li>
-            <li class="technology-item gamedev">Godot</li>
-            <li class="technology-item web frontend">Mocha</li>
-            <li class="technology-item web frontend">Chai</li>
-            <li class="technology-item web frontend">Jasmine</li>
-            <li class="technology-item web frontend">Jest</li>
-            <li class="technology-item backend">SQL</li>
-            <li class="technology-item backend">SQLAlchemy</li>
-            <li class="technology-item backend ">Postgresql</li>
-            <li class="technology-item backend ">mysql</li>
-            <li class="technology-item web frontend">MJML</li>
-            <li class="technology-item backend">Mongo</li>
-            <li class="technology-item devops">Docker</li>
-            <li class="technology-item devops">AWS</li>
-            <li class="technology-item devops backend">AWS Lambda</li>
-            <li class="technology-item devops">AWS EC2</li>
-            <li class="technology-item devops">AWS S3</li>
-            <li class="technology-item devops backend">AWS API Gateway</li>
-            <li class="technology-item devops">Google Cloud Platform</li>
-            <li class="technology-item devops">Google App Engine</li>
-            <li class="technology-item devops">Heroku</li>
-            <li class="technology-item devops">nginx</li>
-            <li class="technology-item devops">Ubuntu Server</li>
-            <li class="technology-item devops">Linux</li>
-            <li class="technology-item project-management">git</li>
-            <li class="technology-item project-management">Gitlab</li>
-            <li class="technology-item project-management">Github</li>
-            <li class="technology-item project-management">Linear</li>
-            <li class="technology-item project-management">Jira</li>
-            <li class="technology-item backend">Go</li>
-            <li class="technology-item desktop">Lisp</li>
-            <li class="technology-item devops">Bash</li>
-            <li class="technology-item desktop">C</li>
-          </ul>
           <p>
-            I also have the following non-technical skills.
-          </p>
-          <ul>
-            <li>Project Management</li>
-            <li>Engineering Management</li>
-            <li>Mandarin, <a href="https://www.youtube.com/watch?v=ru3FRUSmRcY">intermediate</a></li>
-            <li>Writing, <a href="https://blog.calebjay.com">extensive</a></li>
-            <li>Recruiting and Interviewing, extensive</li>
-          </ul>
-        </section>
-      </div>
-      <div class="awards">
-        <h1>Talks, Awards</h1>
-        <section>
-          <h2>" Self Host your SaaS: Save Money, Safeguard Your Business, Ensure Your Freedom"</h2>
-          <small>
-            <h3>Fukuoka Digital Nomad Conference</h3>
-            <time datetime="May, 2024">May, 2024</time>
-            <a href="https://calebjay.com/talks/selfhosting/">Slides</a>
-          </small>
-          <p>
-            A talk given to a group of digital nomads on how they can save thousands in SaaS costs by self hosting.
+            Soft skills: Building engineering teams, project management, training juniors, ideation to MVP to
+            production.
           </p>
         </section>
-
-        <section>
-          <h2>"Pave Your Career," Talk to Junior Engineers</h2>
-          <small>
-            <h3>National Taiwan University of Science and Technology, Taipei, Taiwan</h3>
-            <time datetime="May, 2024">May, 2024</time>
-          </small>
-          <p>
-            I was invited to give a talk at NTUST to recent grads and junior software engineers, providing advice on both early career development as well as jobhunting.
-          </p>
-        </section>
-        <section>
-          <h2>AWS Prize Winner, AngleHack Hackathon</h2>
-          <small>
-            <h3>San Francisco, California, USA</h3>
-            <time datetime="September, 2018">September, 2018</time>
-          </small>
-          <p>
-            AWS held a multi-category hackathon in San Francisco to evangelize some new cloud products
-            they were launching. I led a team of engineers and designers to build an app that
-            integrated several APIs of on-site sponsors and deploy on the new AWS cloud products.
-            Our application was a reporting system for stranded dockless bicycles, built in
-            Javascript / React, leveraging AWS Lambda, S3, and deployment via Amplify. Our app
-            was selected by AWS as winners of the AWS portion of the hackathon, from among
-            200 projects.
-          </p>
-        </section>
-        <section>
-          <h2>Sensel Prize Winner, APIs Hackathon</h2>
-          <small>
-            <h3>San Francisco, California, USA</h3>
-            <time datetime="March, 2018">March, 2018</time>
-          </small>
-          <p>
-            A hackathon was organized by multiple startups to advertise their API services. I led
-            a team to strategically select from available sponsored APIs and create an integration
-            that could lead to us winning multiple categories at once. We build a Python / Javascript
-            application that leveraged the newly released Sensel hardware platform to create
-            arbitrary-sequence programmable locks on a touchpad device. Sensel selected us as winner
-            from about 100 other teams for their portion of the hackathon.
-          </p>
-        </section>
-
-        <section>
-          <h2>Lecture on Web Portfolio Creation and Hosting</h2>
-          <small>
-            <h3>University of Houston, Texas, USA</h3>
-            <time datetime="January, 2016">Jan, 2016</time>
-          </small>
-          <p>
-            Gave a presentation to a conference of around thirty graduate students on a start to finish process for designing, engineering, deploying, and hosting a personal portfolio site. Created presentation materials and templates for students to use. Technologies involved were HTML, CSS, PHP, and Javascript. Overall objective was to keep things as simple and easily maintainable as possible so students could indefinitely update their portfolio.
-          </p>
-          <p>
-            Unlike typical tutorials on the subject, a good portion of the lecture focused on affordable, sustainable, and reliable deployment and hosting, so that participants could have their portfolio accessible on the web by the end of the lecture.
-          </p>
-        </section>
-
-
       </div>
       <div class="companies">
-        <h1>Companies</h1>
+        <h1>Employment History</h1>
+
         <section>
-          <h1>
+          <h2>
             <a href="https://reactwise.com">Reactwise</a>
             <small>
               <time datetime="2024">2024</time> to present.
               <a href="https://reactwise.com">reactwise.com</a>
             </small>
-          </h1>
-          <h2>
-            Software Engineer
           </h2>
           <h3>
-            Reactwise is a software as a service (SaaS) company specializing in (bio)chemical
-            process optimization. Our platform leverages advanced optimization algorithms and
-            machine learning to help experimentalists in the pharmaceutical, chemical manufacturing,
-            and biotech industries optimize their processes.
+            Software Engineer
           </h3>
-          <h2>
-            Projects
-          </h2>
-          <section class="project">
-            <h1>
-              Standardize Fullstack App
-            </h1>
-            <p>
-              When I first joined Reactwise, the team was comprised of highly energetic and intelligent
-              PhDs and interns, who had developed the SaaS product as a fullstack NextJS app. They'd done
-              an excellent job considering their lack of industry experience, so my role in the beginning
-              was to, alongside developing new features, polish off their efforts by establishing standard
-              practices such as CI/CD, database migrations, database backups, and linting.
-            </p>
-            <h2>
-              Technologies:
-            </h2>
-            <ul>
-              <li>React</li>
-              <li>Nextjs</li>
-              <li>Typescript</li>
-              <li>TSX</li>
-              <li>Node</li>
-              <li>Javascript</li>
-              <li>Python</li>
-              <li>pydantic</li>
-              <li>Alembic</li>
-              <li>FastAPI</li>
-              <li>Pytorch</li>
-              <li>Botorch</li>
-              <li>HTML</li>
-              <li>CSS</li>
-              <li>Tailwind</li>
-              <li>Docker</li>
-              <li>AWS</li>
-            </ul>
-
-          </section>
-          <section class=project>
-            <h1>
-              Build SPA
-            </h1>
-            <p>
-              As we further built out the team, we hired a phenomenal backend engineer who began a full rewrite
-              of the backend as a standard REST API in FastAPI. To accomodate the new stack, I rewrote the frontend
-              in plain and simple React, with Vite as a build system, Tanstack Query for a query and cacheing library,
-              and Tanstack Router as the router. I implemented Zustan for the few stores we needed, AG-grid for
-              our tables, and Plotly for the extensive scientific plots that comprise some of the core functionality of
-              the app.
-            </p>
-            <p>
-              Currently I mostly do frontend feature development.
-            </p>
-            <h2>
-              Technologies:
-            </h2>
-            <ul>
-              <li>React</li>
-              <li>Typescript</li>
-              <li>TSX</li>
-              <li>Javascript</li>
-              <li>Python</li>
-              <li>pydantic</li>
-              <li>FastAPI</li>
-              <li>Pytorch</li>
-              <li>Botorch</li>
-              <li>HTML</li>
-              <li>CSS</li>
-              <li>Tailwind</li>
-              <li>Tanstack Query</li>
-              <li>Tanstack Router</li>
-              <li>zustan</li>
-              <li>kubb</li>
-              <li>Plotly</li>
-              <li>ag-grid</li>
-              <li>Mantine</li>
-              <li>Docker</li>
-              <li>AWS</li>
-            </ul>
-          </section>
+          <p>
+            Reactwise is a software as a service (SaaS) company specializing in (bio)chemical
+            process optimization.
+          </p>
+          <p>
+            As one of the first engineers and as the fullstack lead, later
+            frontend lead, I designed and architected
+            two early iterations of the frontend as well as the current prod build. We started
+            in Nextjs with a Node backend and then moved to a React SPA with a FastAPI backend.
+          </p>
+          <p>
+            Features I developed include complex scientific plots using Plotly, such as a 3d surface
+            plot and a complex interactive set of parameter interaction charts,
+            a custom experimental design table using AG-grid, and a chemical name to SMILES string to
+            graphic molecular representation component.
+          </p>
         </section>
 
         <section>
-          <h1>
+          <h2>
+            <a href="https://cofactr.com">Cofactr</a>
+            <small>
+              <time datetime="2022">2022</time> to <time datetime="2024">2024</time>.
+              <a href="https://cofactr.com">cofactr.com</a>
+            </small>
+          </h2>
+          <h3>
+            Software Engineering Lead
+          </h3>
+          <p>
+            Cofactr is a Y Combinator startup based out of NYC
+            with a SaaS platform for procurement, purchase, and management of electronic components.
+          </p>
+          <p>
+            I joined to lead a rewrite of their frontend from a no-code platform to a
+            React SPA backed by a Django backend. I hired and then led 2 other frontend engineers,
+            set up project management in Linear, ticketed all UI features, established project
+            timeline, managed bug reports and feature requests, and delegated tasks to the team.
+          </p>
+          <p>
+            I also functioned as a full time IC, implementing features such as hardware component
+            tables, extensively complicated dynamic forms for managing component prices in a shopping
+            cart flow, authentication and token management, state management, API integrations, and
+            build, deployment, and CI flows.
+          </p>
+        </section>
+
+        <section>
+          <h2>
+            <a href="https://curative.com">Curative</a>
+            <small>
+              <time datetime="2021">2021</time> to <time datetime="2022">2022</time>.
+              <a href="https://curative.com">curative.com</a>
+            </small>
+          </h2>
+          <h3>
+            Frontend Engineer
+          </h3>
+          <p>
+            Curative is a health insurance and Covid-19 testing distribution compan
+            Cofactr is a Y Combinator startup based out of NYC
+            with a SaaS platform for procurement, purchase, and management of electronic components.
+          </p>
+          <p>
+            I joined to lead a rewrite of their frontend from a no-code platform to a
+            React SPA backed by a Django backend. I hired and then led 2 other frontend engineers,
+            set up project management in Linear, ticketed all UI features, established project
+            timeline, managed bug reports and feature requests, and delegated tasks to the team.
+          </p>
+          <p>
+            I also functioned as a full time IC, implementing features such as hardware component
+            tables, extensively complicated dynamic forms for managing component prices in a shopping
+            cart flow, authentication and token management, state management, API integrations, and
+            build, deployment, and CI flows.
+          </p>
+        </section>
+
+
+        <section>
+          <h2>
             <a href="https://508.dev">508.dev</a>
             <small>
               <time datetime="January 2022">Jan 2022</time> to present
               <a href="https://508.dev">508.dev</a>
             </small>
-          </h1>
-          <h2>
-            Founding Engineer
           </h2>
+          <h3>
+            Founding Engineer
+          </h3>
 
           <h3>
             508.dev is a US-registered LLC and software engineering co-op I've
@@ -374,54 +188,6 @@
           <h2>
             Projects
           </h2>
-          <section class="project">
-            <h1>
-              <a href="https://www.cofactr.com/">Cofactr</a> - Electronic Component Procurement, Purchase, and Management Platform
-              <small>
-                <time datetime="March 2022">March 2022</time> to present <a href="https://www.cofactr.com/">cofactr.com</a>
-              </small>
-            </h1>
-            <h2>
-              Lead Software Engineer (Frontend), Architect, Project Manager
-            </h2>
-            <p>
-              Cofactr is a <a href="https://www.ycombinator.com/companies/cofactr">Y Combinator</a> startup based out of Brooklyn, New York,
-              with a platform for "procurement, purchase, and management of electronic components."
-              Their platform was built on a no-code toolset, and the rapid addition of customers created an urgent need for a full rewrite.
-              I was brought on to lead the frontend side of the rewrite.
-            </p>
-            <p>
-              Functioning as architect and project manager for the frontend, I advised on framework and technology choices. I set up project management in Linear and ticketed all UI features based on designs provided by the CEO, while advising on the UX. I established the project timeline, estimated tickets, and when we were ready to build, put together a team of frontend engineers for which I managed tasks and HR ancillaries through 508.dev. I also integrated the Toptal engineer Cofactr added partway through the project. In all, I was project managing a team of four frontend engineers (including me) across four timezones. Throughout the project, I planned our sprints, ticketed new features, managed bug reports and QA from the executive team, reviewed and merged code from the frontend team, and worked with the API team on design decisions.
-            </p>
-            <p>
-              While functioning as project manager, I also functioned as lead individual contributor and architect on the frontend, with occasional contributions on the backend API as well. I built a large bulk of the frontend app, creating components, patterns, authentication, token management, and request frameworks to be used by the rest of the frontend team while implementing features.
-            </p>
-            <p>
-              The frontend app is a React SPA deployed statically to an Amazon S3 bucket. It communicates with a Django REST API. State management was initially done using Thunk style API requests feeding a Redux data store, but was later converted entirely to an RTK Query cache and state management pattern. MUI components were integrated to allow for rapid prototyping and UX iteration. Typescript allowed for easy mapping of the frontend objects against the API types. There are extensive form based UX flows for creating and editing resources, for which Formik and Yup were used to allow for good form error UX, validation, and state management. There are also a great many resource tables throughout the app, for which we used MUI DataGrid to render data, creating custom render cell components as needed. The app is built with Webpack. Eslint enforced a code standard that I chose.
-            </p>
-            <p>
-              Now that the app is built, I'm working with Cofactr's new platform lead to transition further development of the app to a new internal staff team, while continuing to optimize and fix any bugs found as the new engineers established themselves.
-            </p>
-            <h2>
-              Technologies:
-            </h2>
-            <ul>
-              <li>React</li>
-              <li>Redux Toolkit</li>
-              <li>Redux</li>
-              <li>Typescript</li>
-              <li>Python</li>
-              <li>Docker</li>
-              <li>Mui</li>
-              <li>Javascript</li>
-              <li>HTML</li>
-              <li>CSS</li>
-              <li>Webpack</li>
-              <li>Formik</li>
-              <li>Yup</li>
-              <li>Mui DataGrid</li>
-            </ul>
-          </section>
 
           <section class="project">
             <h1>
@@ -989,6 +755,79 @@
           </section>
         </section>
       </div>
+      <div class="awards">
+        <h1>Talks, Awards</h1>
+        <section>
+          <h2>" Self Host your SaaS: Save Money, Safeguard Your Business, Ensure Your Freedom"</h2>
+          <small>
+            <h3>Fukuoka Digital Nomad Conference</h3>
+            <time datetime="May, 2024">May, 2024</time>
+            <a href="https://calebjay.com/talks/selfhosting/">Slides</a>
+          </small>
+          <p>
+            A talk given to a group of digital nomads on how they can save thousands in SaaS costs by self hosting.
+          </p>
+        </section>
+
+        <section>
+          <h2>"Pave Your Career," Talk to Junior Engineers</h2>
+          <small>
+            <h3>National Taiwan University of Science and Technology, Taipei, Taiwan</h3>
+            <time datetime="May, 2024">May, 2024</time>
+          </small>
+          <p>
+            I was invited to give a talk at NTUST to recent grads and junior software engineers, providing advice on both early career development as well as jobhunting.
+          </p>
+        </section>
+        <section>
+          <h2>AWS Prize Winner, AngleHack Hackathon</h2>
+          <small>
+            <h3>San Francisco, California, USA</h3>
+            <time datetime="September, 2018">September, 2018</time>
+          </small>
+          <p>
+            AWS held a multi-category hackathon in San Francisco to evangelize some new cloud products
+            they were launching. I led a team of engineers and designers to build an app that
+            integrated several APIs of on-site sponsors and deploy on the new AWS cloud products.
+            Our application was a reporting system for stranded dockless bicycles, built in
+            Javascript / React, leveraging AWS Lambda, S3, and deployment via Amplify. Our app
+            was selected by AWS as winners of the AWS portion of the hackathon, from among
+            200 projects.
+          </p>
+        </section>
+        <section>
+          <h2>Sensel Prize Winner, APIs Hackathon</h2>
+          <small>
+            <h3>San Francisco, California, USA</h3>
+            <time datetime="March, 2018">March, 2018</time>
+          </small>
+          <p>
+            A hackathon was organized by multiple startups to advertise their API services. I led
+            a team to strategically select from available sponsored APIs and create an integration
+            that could lead to us winning multiple categories at once. We build a Python / Javascript
+            application that leveraged the newly released Sensel hardware platform to create
+            arbitrary-sequence programmable locks on a touchpad device. Sensel selected us as winner
+            from about 100 other teams for their portion of the hackathon.
+          </p>
+        </section>
+
+        <section>
+          <h2>Lecture on Web Portfolio Creation and Hosting</h2>
+          <small>
+            <h3>University of Houston, Texas, USA</h3>
+            <time datetime="January, 2016">Jan, 2016</time>
+          </small>
+          <p>
+            Gave a presentation to a conference of around thirty graduate students on a start to finish process for designing, engineering, deploying, and hosting a personal portfolio site. Created presentation materials and templates for students to use. Technologies involved were HTML, CSS, PHP, and Javascript. Overall objective was to keep things as simple and easily maintainable as possible so students could indefinitely update their portfolio.
+          </p>
+          <p>
+            Unlike typical tutorials on the subject, a good portion of the lecture focused on affordable, sustainable, and reliable deployment and hosting, so that participants could have their portfolio accessible on the web by the end of the lecture.
+          </p>
+        </section>
+
+
+      </div>
+
       <div class="personal">
         <h1>Personal</h1>
         <section>
@@ -1035,27 +874,6 @@
 		  var ins = document.getElementsByTagName('script')[0];
 		  ins.parentNode.insertBefore(script, ins)
 	  })();
-     window.onload = function() {
-       let itemstore = [];
-       if(document.querySelector('input[name="technologies"]')){
-         document.querySelectorAll('input[name="technologies"]').forEach((elem) => {
-           elem.addEventListener("click", function(event){
-             const tech = event.target.value;
-             itemstore.forEach((itemEl) => {
-               itemEl.classList.remove('invisible')
-             });
-             if (tech === 'all') {
-               return;
-             }
-             const items = document.querySelectorAll('.technology-item:not(.' + tech + ')');
-             items.forEach((itemEl) => {
-               itemEl.classList.add('invisible');
-             });
-             itemstore = items;
-           });
-         });
-       }
-     }
     </script>
   </body>
 </html>
