@@ -14,6 +14,11 @@ header {
   font-size: 2em;
 }
 
+header h2,
+header h1 {
+  margin: 16px 0px;
+}
+
 h1 small,
 h2 small,
 h3 small,
@@ -237,4 +242,9 @@ ul.column-style li {
   padding: 0;
   list-style-type: none;
   margin: 10px 0;
+}
+
+.name {
+  font-family: cursive;
+  font-size: 2.5em;
 }
