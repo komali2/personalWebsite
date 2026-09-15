@@ -248,3 +248,10 @@ ul.column-style li {
   font-family: cursive;
   font-size: 2.5em;
 }
+.big-text {
+  font-size: 2rem;
+}
+
+.big-text p {
+  margin: 0px 8px;
+}
