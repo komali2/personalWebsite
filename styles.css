@@ -60,6 +60,20 @@ section ul {
   list-style-type: circle;
 }
 
+section ul.normal-list {
+  display: block;
+  margin-top: 12px;
+}
+section ul.normal-list li {
+  margin-top: 12px;
+}
+
+section ul.flex-list {
+  display: flex;
+  gap: 20px;
+  border: 1px solid gray;
+}
+
 ul.column-style {
   display: flex;
   flex-flow: column;
@@ -128,6 +142,20 @@ ul.column-style li {
     display: flex;
     flex-flow: column;
   }
+  section ul.normal-list {
+    display: block;
+    margin-top: 12px;
+  }
+  section ul.normal-list li {
+    margin-top: 12px;
+    padding: 5px;
+  }
+
+  section ul.flex-list {
+    display: flex;
+
+    gap: 20px;
+  }
 } /* Define mobile styles */
 
 @media only screen and (max-width: 40em) {
@@ -147,6 +175,20 @@ ul.column-style li {
   ul.column-style {
     display: flex;
     flex-flow: column;
+  }
+  section ul.normal-list {
+    display: block;
+    margin-top: 12px;
+  }
+  section ul.normal-list li {
+    margin-top: 12px;
+  }
+
+  section ul.flex-list {
+    display: flex;
+
+    border: 1px solid gray;
+    gap: 20px;
   }
 } /* min-width 641px, medium screens */
 
@@ -168,6 +210,19 @@ ul.column-style li {
   ul.column-style {
     display: flex;
     flex-flow: column;
+  }
+  section ul.normal-list {
+    display: block;
+    margin-top: 12px;
+  }
+  section ul.normal-list li {
+    margin-top: 12px;
+  }
+
+  section ul.flex-list {
+    display: flex;
+    gap: 20px;
+    border: 1px solid gray;
   }
 } /* min-width 1025px, large screens */
 
