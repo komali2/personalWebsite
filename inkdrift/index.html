@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Inkdrift</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0a0e1a">
+<meta name="description" content="Paint glowing ink that pulls your orb and pushes danger away. A one-of-a-kind touch game.">
+<style>
+  :root{ color-scheme: dark; }
+  html,body{
+    margin:0; padding:0; height:100%; overflow:hidden;
+    background:#0a0e1a; touch-action:none; overscroll-behavior:none;
+    -webkit-user-select:none; user-select:none; -webkit-tap-highlight-color:transparent;
+  }
+  canvas{ display:block; position:fixed; inset:0; }
+  #ui{ position:fixed; inset:0; pointer-events:none; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:#dfe7ff; }
+  #hud{
+    position:fixed; top:calc(12px + env(safe-area-inset-top)); left:calc(16px + env(safe-area-inset-left));
+    right:calc(16px + env(safe-area-inset-right)); display:flex; justify-content:space-between; align-items:center;
+  }
+  #score{ font-size:22px; font-weight:700; letter-spacing:1px; font-variant-numeric:tabular-nums; text-shadow:0 0 12px rgba(62,230,255,.6); }
+  #lives{ font-size:18px; letter-spacing:3px; color:#ff5b7d; text-shadow:0 0 8px rgba(255,91,125,.7); }
+  #staminaWrap{
+    position:fixed; bottom:calc(16px + env(safe-area-inset-bottom)); left:calc(16px + env(safe-area-inset-left));
+    right:calc(16px + env(safe-area-inset-right)); height:9px; background:rgba(255,255,255,.09); border-radius:6px; overflow:hidden;
+  }
+  #stamina{ height:100%; width:100%; background:linear-gradient(90deg,#3ee6ff,#a06bff); }
+  #overlay{
+    position:fixed; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:28px; background:radial-gradient(ellipse at 50% 40%, rgba(20,26,46,.55), rgba(6,9,17,.96));
+    pointer-events:auto;
+  }
+  #overlay.hidden{ display:none; }
+  #overlay h1{
+    margin:0; font-size:44px; letter-spacing:6px; font-weight:800;
+    background:linear-gradient(90deg,#3ee6ff,#ff5bd6); -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  #overlay .sub{ margin-top:2px; font-size:12px; letter-spacing:3px; color:#5c6a92; text-transform:uppercase; }
+  #overlay p{ max-width:320px; line-height:1.6; color:#a9b4d0; font-size:15px; margin:22px 0 4px; }
+  #overlay .btn{
+    margin-top:26px; padding:15px 40px; border-radius:32px; border:none;
+    background:linear-gradient(90deg,#3ee6ff,#7b5bff); color:#04101f; font-weight:800; font-size:16px; letter-spacing:1px;
+  }
+  #overlay .hint{ margin-top:16px; font-size:12px; color:#465073; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div id="ui">
+  <div id="hud">
+    <div id="score">0</div>
+    <div id="lives">♥♥♥</div>
+  </div>
+  <div id="staminaWrap"><div id="stamina"></div></div>
+</div>
+
+<div id="overlay">
+  <h1>INKDRIFT</h1>
+  <div class="sub">an ink-leash game</div>
+  <p id="overlayText">Drag your finger to paint glowing ink. Ink pulls your orb toward it and shoves red spikes away — but it fades fast, so you have to keep drawing to lead the orb where you want it to go.</p>
+  <button class="btn" id="startBtn">Tap to Play</button>
+  <div class="hint">Reach the gold light. Avoid the spikes. Three lives.</div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+// ---------- setup ----------
+var canvas = document.getElementById('c');
+var ctx = canvas.getContext('2d');
+var overlay = document.getElementById('overlay');
+var overlayText = document.getElementById('overlayText');
+var startBtn = document.getElementById('startBtn');
+var scoreEl = document.getElementById('score');
+var livesEl = document.getElementById('lives');
+var staminaEl = document.getElementById('stamina');
+
+var DPR = Math.min(window.devicePixelRatio || 1, 2);
+
+function W(){ return window.innerWidth; }
+function H(){ return window.innerHeight; }
+
+function resize(){
+  DPR = Math.min(window.devicePixelRatio || 1, 2);
+  canvas.width = Math.floor(W() * DPR);
+  canvas.height = Math.floor(H() * DPR);
+  canvas.style.width = W() + 'px';
+  canvas.style.height = H() + 'px';
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+}
+window.addEventListener('resize', resize);
+window.addEventListener('orientationchange', function(){ setTimeout(resize, 300); });
+document.addEventListener('gesturestart', function(e){ e.preventDefault(); });
+resize();
+
+// ---------- tunables ----------
+var INK_LIFE = 2200;      // ms an ink point lives
+var INK_RADIUS = 115;     // px influence radius
+var INK_PULL = 2600;      // accel applied to ball
+var INK_PUSH = 1500;      // accel applied to hazards (weaker = less oppressive)
+var STAMINA_MAX = 100;
+var STAMINA_COST = 1.6;   // per ink sample
+var STAMINA_REGEN = 34;   // per second while not drawing
+
+// ---------- state ----------
+var state = 'start'; // start | playing | gameover
+var score = 0, lives = 3, best = 0;
+var stamina = STAMINA_MAX;
+var invuln = 0;
+var shake = 0;
+var pointerDown = false, lastPX = 0, lastPY = 0;
+
+var ball = { x: 0, y: 0, vx: 0, vy: 0, r: 11 };
+var ballTrail = [];
+var ink = [];       // {x,y,t}
+var hazards = [];   // {x,y,vx,vy,r,spin}
+var particles = []; // {x,y,vx,vy,life,maxLife,color,r}
+var target = null;  // {x,y,r,color,glow}
+
+function dist(a, b){ var dx = a.x - b.x, dy = a.y - b.y; return Math.sqrt(dx*dx + dy*dy); }
+function rand(a, b){ return a + Math.random() * (b - a); }
+function clamp(v, a, b){ return v < a ? a : (v > b ? b : v); }
+
+// ---------- spawning ----------
+function spawnTarget(){
+  var margin = 60;
+  var p, tries = 0;
+  do {
+    p = { x: rand(margin, W()-margin), y: rand(margin + 90, H()-margin-90) };
+    tries++;
+  } while (dist(p, ball) < 160 && tries < 25);
+  return { x: p.x, y: p.y, r: 16, color: '#ffd23e' };
+}
+
+function spawnHazard(){
+  var edge = Math.floor(rand(0,4));
+  var x, y;
+  if (edge === 0){ x = rand(0, W()); y = -30; }
+  else if (edge === 1){ x = W()+30; y = rand(0, H()); }
+  else if (edge === 2){ x = rand(0, W()); y = H()+30; }
+  else { x = -30; y = rand(0, H()); }
+  var ang = rand(0, Math.PI*2);
+  var speed = rand(40, 75) + score*0.35;
+  hazards.push({
+    x: x, y: y,
+    vx: Math.cos(ang)*speed, vy: Math.sin(ang)*speed,
+    r: rand(14, 19), spin: rand(-1.5, 1.5)
+  });
+}
+
+function spawnParticles(x, y, color, count){
+  for (var i=0; i<count; i++){
+    var ang = rand(0, Math.PI*2);
+    var sp = rand(40, 220);
+    particles.push({
+      x: x, y: y,
+      vx: Math.cos(ang)*sp, vy: Math.sin(ang)*sp,
+      life: rand(300, 650), maxLife: 650,
+      color: color, r: rand(1.5, 3.5)
+    });
+  }
+}
+
+// ---------- input ----------
+function addInk(x, y){
+  if (state !== 'playing' || stamina <= 0) return;
+  ink.push({ x: x, y: y, t: performance.now() });
+  stamina = clamp(stamina - STAMINA_COST, 0, STAMINA_MAX);
+}
+
+canvas.addEventListener('pointerdown', function(e){
+  pointerDown = true;
+  lastPX = e.clientX; lastPY = e.clientY;
+  addInk(e.clientX, e.clientY);
+});
+canvas.addEventListener('pointermove', function(e){
+  if (!pointerDown) return;
+  var dx = e.clientX - lastPX, dy = e.clientY - lastPY;
+  if (dx*dx + dy*dy < 36) return; // min 6px spacing between samples
+  lastPX = e.clientX; lastPY = e.clientY;
+  addInk(e.clientX, e.clientY);
+});
+function releasePointer(){ pointerDown = false; }
+canvas.addEventListener('pointerup', releasePointer);
+canvas.addEventListener('pointercancel', releasePointer);
+canvas.addEventListener('pointerleave', releasePointer);
+
+startBtn.addEventListener('pointerdown', function(e){
+  e.preventDefault();
+  e.stopPropagation();
+  startGame();
+});
+
+// ---------- game flow ----------
+function updateHUD(){
+  scoreEl.textContent = score;
+  var s = '';
+  for (var i=0;i<3;i++) s += (i < lives ? '♥' : '♡');
+  livesEl.textContent = s;
+}
+
+function startGame(){
+  score = 0; lives = 3; stamina = STAMINA_MAX;
+  ink = []; hazards = []; particles = []; ballTrail = [];
+  ball.x = W()/2; ball.y = H()/2; ball.vx = 0; ball.vy = 0;
+  invuln = 900; shake = 0;
+  target = spawnTarget();
+  spawnHazard();
+  state = 'playing';
+  overlay.classList.add('hidden');
+  updateHUD();
+}
+
+function hitHazard(){
+  lives--;
+  invuln = 1400;
+  shake = 16;
+  spawnParticles(ball.x, ball.y, '#ff5b7d', 20);
+  ball.x = W()/2; ball.y = H()/2; ball.vx = 0; ball.vy = 0;
+  if (navigator.vibrate) navigator.vibrate(35);
+  updateHUD();
+  if (lives <= 0) gameOver();
+}
+
+function collectTarget(){
+  score += 10;
+  if (score > best) best = score;
+  spawnParticles(target.x, target.y, '#ffd23e', 22);
+  if (navigator.vibrate) navigator.vibrate(15);
+  target = spawnTarget();
+  if (score % 30 === 0 && hazards.length < 6) spawnHazard();
+  updateHUD();
+}
+
+function gameOver(){
+  state = 'gameover';
+  overlayText.textContent = 'You scored ' + score + '. Best this session: ' + best + '.';
+  startBtn.textContent = 'Play Again';
+  overlay.classList.remove('hidden');
+}
+
+// ---------- physics ----------
+function applyField(obj, p, strength, attract, dt){
+  var dx = p.x - obj.x, dy = p.y - obj.y;
+  var d = Math.sqrt(dx*dx + dy*dy) || 0.0001;
+  if (d > INK_RADIUS) return;
+  var falloff = 1 - d / INK_RADIUS;
+  var acc = strength * falloff * falloff;
+  var sign = attract ? 1 : -1;
+  obj.vx += (dx / d) * acc * sign * dt;
+  obj.vy += (dy / d) * acc * sign * dt;
+}
+
+function bounceWall(o){
+  var m = o.r;
+  if (o.x < m){ o.x = m; o.vx = Math.abs(o.vx) * 0.55; }
+  if (o.x > W()-m){ o.x = W()-m; o.vx = -Math.abs(o.vx) * 0.55; }
+  if (o.y < m){ o.y = m; o.vy = Math.abs(o.vy) * 0.55; }
+  if (o.y > H()-m){ o.y = H()-m; o.vy = -Math.abs(o.vy) * 0.55; }
+}
+
+function update(dt){
+  if (!pointerDown) stamina = clamp(stamina + STAMINA_REGEN*dt, 0, STAMINA_MAX);
+  staminaEl.style.width = stamina + '%';
+
+  if (state !== 'playing') return;
+
+  var now = performance.now();
+  for (var i = ink.length - 1; i >= 0; i--){
+    if (now - ink[i].t > INK_LIFE) ink.splice(i, 1);
+  }
+
+  for (var i=0; i<ink.length; i++){
+    var p = ink[i];
+    var alpha = 1 - (now - p.t) / INK_LIFE;
+    applyField(ball, p, INK_PULL * alpha, true, dt);
+    for (var j=0; j<hazards.length; j++) applyField(hazards[j], p, INK_PUSH * alpha, false, dt);
+  }
+
+  ball.vx *= 0.986; ball.vy *= 0.986;
+  ball.x += ball.vx * dt; ball.y += ball.vy * dt;
+  bounceWall(ball);
+
+  ballTrail.push({x: ball.x, y: ball.y});
+  if (ballTrail.length > 12) ballTrail.shift();
+
+  for (var h=0; h<hazards.length; h++){
+    var hz = hazards[h];
+    hz.vx *= 0.995; hz.vy *= 0.995;
+    hz.x += hz.vx * dt; hz.y += hz.vy * dt;
+    bounceWall(hz);
+  }
+
+  if (target && dist(ball, target) < ball.r + target.r) collectTarget();
+
+  if (invuln > 0){
+    invuln -= dt * 1000;
+  } else {
+    for (var h2=0; h2<hazards.length; h2++){
+      if (dist(ball, hazards[h2]) < ball.r + hazards[h2].r){ hitHazard(); break; }
+    }
+  }
+
+  for (var i2 = particles.length - 1; i2 >= 0; i2--){
+    var pt = particles[i2];
+    pt.life -= dt * 1000;
+    if (pt.life <= 0){ particles.splice(i2, 1); continue; }
+    pt.x += pt.vx * dt; pt.y += pt.vy * dt;
+    pt.vx *= 0.94; pt.vy *= 0.94;
+  }
+
+  if (shake > 0) shake = Math.max(0, shake - dt * 1000 * 3);
+}
+
+// ---------- render ----------
+function drawGrid(){
+  ctx.fillStyle = '#0a0e1a';
+  ctx.fillRect(0, 0, W(), H());
+  ctx.fillStyle = 'rgba(255,255,255,0.045)';
+  var step = 46;
+  for (var x = step/2; x < W(); x += step){
+    for (var y = step/2; y < H(); y += step){
+      ctx.beginPath();
+      ctx.arc(x, y, 1.2, 0, 6.28319);
+      ctx.fill();
+    }
+  }
+}
+
+function drawInk(now){
+  ctx.lineCap = 'round';
+  ctx.globalCompositeOperation = 'lighter';
+  for (var i=1; i<ink.length; i++){
+    var a = ink[i-1], b = ink[i];
+    if (b.t - a.t > 120) continue; // gap between separate strokes
+    var age = now - b.t;
+    var alpha = 1 - age / INK_LIFE;
+    if (alpha <= 0) continue;
+    ctx.strokeStyle = 'rgba(62,230,255,' + (alpha*0.85) + ')';
+    ctx.lineWidth = 3 + alpha*5;
+    ctx.shadowColor = '#3ee6ff';
+    ctx.shadowBlur = 16 * alpha;
+    ctx.beginPath();
+    ctx.moveTo(a.x, a.y);
+    ctx.lineTo(b.x, b.y);
+    ctx.stroke();
+  }
+  ctx.shadowBlur = 0;
+  ctx.globalCompositeOperation = 'source-over';
+}
+
+function drawTarget(now){
+  if (!target) return;
+  var pulse = 1 + Math.sin(now/260) * 0.16;
+  ctx.save();
+  ctx.globalCompositeOperation = 'lighter';
+  ctx.fillStyle = 'rgba(255,210,62,0.22)';
+  ctx.beginPath();
+  ctx.arc(target.x, target.y, target.r*2.2*pulse, 0, 6.28319);
+  ctx.fill();
+  ctx.fillStyle = target.color;
+  ctx.shadowColor = target.color;
+  ctx.shadowBlur = 22;
+  ctx.beginPath();
+  ctx.arc(target.x, target.y, target.r*pulse, 0, 6.28319);
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawHazards(now){
+  for (var i=0; i<hazards.length; i++){
+    var hz = hazards[i];
+    var rot = now/500 * hz.spin;
+    ctx.save();
+    ctx.translate(hz.x, hz.y);
+    ctx.rotate(rot);
+    ctx.fillStyle = 'rgba(255,75,109,0.85)';
+    ctx.shadowColor = '#ff4d6d';
+    ctx.shadowBlur = 14;
+    ctx.beginPath();
+    var spikes = 7;
+    for (var s=0; s<spikes; s++){
+      var ang1 = (s / spikes) * 6.28319;
+      var ang2 = ang1 + (Math.PI / spikes);
+      var rOuter = hz.r * 1.35, rInner = hz.r * 0.72;
+      if (s === 0) ctx.moveTo(Math.cos(ang1)*rOuter, Math.sin(ang1)*rOuter);
+      else ctx.lineTo(Math.cos(ang1)*rOuter, Math.sin(ang1)*rOuter);
+      ctx.lineTo(Math.cos(ang2)*rInner, Math.sin(ang2)*rInner);
+    }
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+function drawBall(){
+  ctx.save();
+  ctx.globalCompositeOperation = 'lighter';
+  for (var i=0; i<ballTrail.length; i++){
+    var t = ballTrail[i];
+    var a = (i / ballTrail.length) * 0.35;
+    ctx.fillStyle = 'rgba(180,220,255,' + a + ')';
+    ctx.beginPath();
+    ctx.arc(t.x, t.y, ball.r * (i/ballTrail.length) * 0.8, 0, 6.28319);
+    ctx.fill();
+  }
+  var flashing = invuln > 0 && Math.floor(invuln/90) % 2 === 0;
+  ctx.fillStyle = flashing ? 'rgba(255,255,255,0.35)' : '#eaf6ff';
+  ctx.shadowColor = '#8fe9ff';
+  ctx.shadowBlur = 20;
+  ctx.beginPath();
+  ctx.arc(ball.x, ball.y, ball.r, 0, 6.28319);
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawParticles(){
+  ctx.save();
+  ctx.globalCompositeOperation = 'lighter';
+  for (var i=0; i<particles.length; i++){
+    var p = particles[i];
+    var a = clamp(p.life / p.maxLife, 0, 1);
+    ctx.fillStyle = p.color;
+    ctx.globalAlpha = a;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, 6.28319);
+    ctx.fill();
+  }
+  ctx.restore();
+  ctx.globalAlpha = 1;
+}
+
+function render(){
+  var now = performance.now();
+  ctx.save();
+  if (shake > 0){
+    ctx.translate((Math.random()-0.5)*shake, (Math.random()-0.5)*shake);
+  }
+  drawGrid();
+  drawInk(now);
+  drawTarget(now);
+  drawHazards(now);
+  drawParticles();
+  drawBall();
+  ctx.restore();
+}
+
+// ---------- loop ----------
+var lastT = performance.now();
+function loop(t){
+  var dt = Math.min((t - lastT) / 1000, 0.05);
+  lastT = t;
+  update(dt);
+  render();
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+})();
+</script>
+</body>
+</html>
