@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Taiwan Treats Trip 吃飽逃颱</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#181425">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="吃飽逃颱">
+<meta name="description" content="Drive Taiwan's winding mountain roads, eat every snack you can, and outrun Typhoon Hangry.">
+<!--
+  Taiwan Treats Trip 吃飽逃颱
+  A road-trip game for Jeremy, Riley, Caleb, Lauren and Rachel. Single self-contained file:
+  vanilla Canvas 2D, pixel art authored as text grids (SPR, near the end), WebAudio synth sound.
+
+  Font: Cubic 11 / 俐方體11號 (OFL-1.1, https://github.com/ACh-K/Cubic-11), subset to the characters
+  used here, with pinyin tone vowels (ā ǎ ē ě ī ǐ ū ǔ) added. It lives base64-encoded in the last
+  <script>. If you add text with new CJK or tone characters, re-subset the font, otherwise those
+  characters fall back to a system font.
+-->
+<style>
+:root{--k:#181425;--n:#262b44;--N:#3a4466;--g:#5a6988;--G:#8b9bb4;--l:#c0cbdc;--w:#fff;--r:#a22633;--R:#e43b44;--o:#f77622;--y:#feae34;--Y:#fee761;--e:#63c74d;--E:#3e8948;--B:#0099db;--c:#2ce8f5;--q:#b55088;--s:#f6757a;--P:#68386c;
+  --st:env(safe-area-inset-top,0px);--sb:env(safe-area-inset-bottom,0px);}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#0e0b16;overflow:hidden;touch-action:none;overscroll-behavior:none;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
+body{font-family:Cubic11,"Noto Sans TC","PingFang TC","Microsoft JhengHei",monospace;color:var(--w);font-size:12px;line-height:14px;-webkit-font-smoothing:none;font-smooth:never}
+#frame{position:fixed;top:0;left:50%;transform:translateX(-50%);width:min(100vw,calc(100vh * 0.5625));width:min(100vw,calc(100dvh * 0.5625));height:100vh;height:100dvh;overflow:hidden;background:var(--k)}
+@media (max-aspect-ratio:3/4){#frame{width:100vw}}
+#game{position:absolute;inset:0;width:100%;height:100%;display:block}
+img.px,canvas.px{image-rendering:pixelated;image-rendering:crisp-edges}
+.big{font-size:24px;line-height:28px}
+.huge{font-size:48px;line-height:52px}
+.dim{color:var(--G)}
+.hide{display:none!important}
+
+/* ---------- HUD ---------- */
+#hud{position:absolute;inset:0;pointer-events:none}
+#hudTop{position:absolute;left:8px;right:8px;top:calc(var(--st) + 6px);display:flex;align-items:flex-start;gap:8px}
+#scoreBox{flex:1;min-width:0}
+#score{font-size:24px;line-height:26px;text-shadow:2px 2px 0 var(--k),-1px -1px 0 var(--k),1px -1px 0 var(--k),-1px 1px 0 var(--k)}
+#combo{display:inline-block;margin-top:2px;padding:1px 4px;background:var(--Y);color:var(--k);box-shadow:0 0 0 2px var(--k)}
+#combo.x1{visibility:hidden}
+.meter{display:flex;align-items:center;gap:4px;margin-top:6px;height:14px}
+.meter img{width:24px;height:24px;margin:-5px 0}
+.bar{position:relative;flex:0 0 112px;height:10px;background:var(--k);box-shadow:0 0 0 2px var(--k)}
+.bar>i{position:absolute;left:0;top:0;bottom:0;background:var(--e);box-shadow:inset 0 -3px 0 rgba(0,0,0,.25)}
+#bellyFill.low{background:var(--R);animation:blink .4s steps(2) infinite}
+#stormBar{background:linear-gradient(90deg,#68386c,#262b44 60%,#181425)}
+#stormBar>b{position:absolute;top:-7px;width:24px;height:24px;margin-left:-12px}
+#stormBar>u{position:absolute;right:-8px;top:-7px;width:24px;height:24px}
+#stormTxt{font-size:12px;text-shadow:1px 1px 0 var(--k)}
+#mapWrap{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+#minimap{width:72px;height:120px;background:rgba(18,78,137,.55);box-shadow:0 0 0 2px var(--k)}
+#pauseBtn{pointer-events:auto;width:36px;height:36px;border:0;background:var(--N);box-shadow:0 0 0 2px var(--k),inset 0 -3px 0 var(--n);display:flex;align-items:center;justify-content:center}
+#pauseBtn img{width:18px;height:18px}
+#banner{position:absolute;left:0;right:0;top:32%;text-align:center;opacity:0;transition:opacity .3s,transform .3s;transform:translateY(-8px)}
+#banner.on{opacity:1;transform:none}
+#banner .zh{font-size:48px;line-height:52px;color:var(--Y);text-shadow:3px 3px 0 var(--k),-2px -2px 0 var(--k),2px -2px 0 var(--k),-2px 2px 0 var(--k)}
+#banner .en{font-size:24px;line-height:28px;text-shadow:2px 2px 0 var(--k),-1px -1px 0 var(--k)}
+#banner .sp{margin-top:6px;display:flex;justify-content:center;gap:6px}
+#banner .sp img{width:36px;height:36px}
+#abilityBtn{pointer-events:auto;position:absolute;right:14px;bottom:calc(var(--sb) + 16px);width:76px;height:76px;border:0;border-radius:50%;background:conic-gradient(var(--Y) var(--p,0%),#262b44 0);box-shadow:0 0 0 3px var(--k);display:flex;align-items:center;justify-content:center;opacity:.9}
+#abilityBtn img{width:56px;height:56px;border-radius:50%;background:var(--n);box-shadow:0 0 0 3px var(--k);filter:grayscale(.7) brightness(.8)}
+#abilityBtn.ready{animation:pulse .8s ease-in-out infinite}
+#abilityBtn.ready img{filter:none}
+#abilityBtn.active img{filter:none;box-shadow:0 0 0 3px var(--Y)}
+#crew{position:absolute;left:10px;bottom:calc(var(--sb) + 14px);display:flex;gap:4px}
+#crew img{width:32px;height:32px;background:var(--n);box-shadow:0 0 0 2px var(--k)}
+#crew img.lost{filter:grayscale(1) brightness(.5);opacity:.6}
+#toast{position:absolute;left:50%;bottom:calc(var(--sb) + 110px);transform:translateX(-50%);background:var(--k);padding:6px 10px;box-shadow:0 0 0 2px var(--G);opacity:0;transition:opacity .2s;white-space:nowrap;pointer-events:none;z-index:9}
+#toast.on{opacity:1}
+@keyframes pulse{50%{box-shadow:0 0 0 3px var(--k),0 0 0 7px var(--Y)}}
+@keyframes blink{50%{opacity:.4}}
+
+/* ---------- screens ---------- */
+.screen{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding:calc(var(--st) + 16px) 14px calc(var(--sb) + 18px)}
+.screen.on{display:flex}
+.scrim{background:rgba(24,20,37,.82)}
+.panel{background:var(--n);box-shadow:0 0 0 3px var(--k),inset 0 0 0 2px var(--N);padding:10px 12px;width:100%;max-width:400px}
+.btn{font:inherit;font-size:24px;line-height:26px;color:var(--k);background:var(--Y);border:0;padding:8px 18px 11px;box-shadow:0 0 0 3px var(--k),inset 0 -4px 0 var(--o);cursor:pointer;min-width:120px}
+.btn:active{transform:translateY(2px);box-shadow:0 0 0 3px var(--k),inset 0 -2px 0 var(--o)}
+.btn.alt{background:var(--l);box-shadow:0 0 0 3px var(--k),inset 0 -4px 0 var(--G)}
+.btn.sm{font-size:12px;line-height:14px;padding:6px 10px 8px;min-width:0}
+.row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;width:100%}
+h2{font-size:24px;line-height:28px;font-weight:normal;text-align:center;margin:4px 0 10px;text-shadow:2px 2px 0 var(--k)}
+h3{font-size:12px;font-weight:normal;color:var(--Y);margin:12px 0 6px;text-transform:uppercase;letter-spacing:1px}
+
+#title{justify-content:space-between}
+#logo{margin-top:6vh;text-align:center}
+#logo .en{font-size:24px;line-height:28px;letter-spacing:2px;text-shadow:2px 2px 0 var(--k)}
+#logo .zh{font-size:48px;line-height:56px;color:var(--Y);text-shadow:4px 4px 0 var(--r),-2px -2px 0 var(--k),2px -2px 0 var(--k),-2px 2px 0 var(--k),6px 6px 0 var(--k)}
+#logo .sub{margin-top:8px;color:var(--l);text-shadow:1px 1px 0 var(--k)}
+#titleBtns{display:flex;flex-direction:column;align-items:center;gap:16px;margin-bottom:4vh}
+#bestLine{text-shadow:1px 1px 0 var(--k)}
+#toggles{position:absolute;right:10px;top:calc(var(--st) + 10px);display:flex;gap:8px}
+.tgl{font:inherit;width:40px;height:40px;border:0;background:var(--N);box-shadow:0 0 0 2px var(--k),inset 0 -3px 0 var(--n);color:var(--w);display:flex;align-items:center;justify-content:center}
+.tgl img{width:27px;height:27px}
+.tgl.off{opacity:.55}
+
+.cards{display:grid;gap:10px;width:100%;max-width:400px}
+.card{font:inherit;color:var(--w);text-align:left;border:0;background:var(--n);box-shadow:0 0 0 3px var(--k),inset 0 0 0 2px var(--N);padding:8px;display:flex;gap:10px;align-items:center;cursor:pointer}
+.card.sel{background:var(--N);box-shadow:0 0 0 3px var(--Y),inset 0 0 0 2px var(--g)}
+.card img{flex:none}
+.card b{font-weight:normal;font-size:24px;line-height:26px;display:block}
+.card em{font-style:normal;color:var(--Y);display:block;margin:2px 0}
+.card small{font-size:12px;color:var(--l);display:block}
+#vehCards{grid-template-columns:1fr 1fr}
+#vehCards .card{flex-direction:column;text-align:center;gap:6px}
+#goBar{position:sticky;bottom:0;padding-top:14px;width:100%;display:flex;justify-content:center}
+
+#over .panel{margin-bottom:12px}
+#caughtAt{color:var(--l);text-align:center}
+#routeMap{display:block;margin:8px auto 0;background:#124e89;box-shadow:0 0 0 3px var(--k)}
+#routeTxt{text-align:center;margin-top:6px;color:var(--Y)}
+.stats{display:flex;justify-content:space-around;text-align:center;margin:4px 0}
+.stats b{display:block;font-weight:normal;font-size:24px;line-height:28px}
+#newBest{color:var(--Y);text-align:center;animation:blink .5s steps(2) infinite}
+#tally{display:flex;flex-wrap:wrap;gap:6px 10px;justify-content:center}
+#tally span{display:flex;align-items:center;gap:2px}
+#tally img{width:24px;height:24px}
+#quips div{display:flex;gap:8px;align-items:center;margin:6px 0}
+#quips img{width:32px;height:32px;flex:none;background:var(--N);box-shadow:0 0 0 2px var(--k)}
+
+#logGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%;max-width:400px}
+#logGrid button{font:inherit;color:var(--w);border:0;background:var(--n);box-shadow:0 0 0 2px var(--k),inset 0 0 0 2px var(--N);padding:6px 2px 4px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer}
+#logGrid img{width:36px;height:36px}
+#logGrid .rg{font-size:12px;color:var(--Y);grid-column:1/-1;margin-top:6px}
+#logDetail{text-align:center}
+#logDetail img{width:72px;height:72px}
+#logDetail .zh{font-size:24px;line-height:28px;color:var(--Y)}
+#credits p{margin:8px 0;color:var(--l)}
+#credits a{color:var(--c)}
+pre.lic{white-space:pre-wrap;font:inherit;font-size:12px;color:var(--G);margin-top:8px;max-height:220px;overflow:auto;touch-action:pan-y}
+</style>
+</head>
+<body>
+<div id="frame">
+  <canvas id="game"></canvas>
+
+  <div id="hud" class="hide">
+    <div id="hudTop">
+      <div id="scoreBox">
+        <div id="score">0</div>
+        <div id="combo" class="x1">×1</div>
+        <div class="meter"><img class="px" id="bellyIco" alt=""><div class="bar"><i id="bellyFill"></i></div></div>
+        <div class="meter"><div class="bar" id="stormBar"><b><img class="px" id="stormIco" alt="" width="24" height="24"></b><u><img class="px" id="carIco" alt="" width="24" height="24"></u></div></div>
+        <div id="stormTxt"></div>
+      </div>
+      <div id="mapWrap">
+        <button id="pauseBtn" aria-label="Pause"><img class="px" id="pauseIco" alt=""></button>
+        <canvas id="minimap" class="px" width="36" height="60"></canvas>
+      </div>
+    </div>
+    <div id="banner"></div>
+    <div id="crew"></div>
+    <button id="abilityBtn" aria-label="Ability"><img class="px" id="abilityImg" alt=""></button>
+  </div>
+
+  <div id="title" class="screen">
+    <div id="toggles">
+      <button class="tgl" id="tglSound" aria-label="Sound"><img class="px" alt=""></button>
+      <button class="tgl" id="tglMotion" aria-label="Reduced motion">≈</button>
+    </div>
+    <div id="logo">
+      <div class="en">TAIWAN TREATS TRIP</div>
+      <div class="zh">吃飽逃颱</div>
+      <div class="sub">Eat your fill. Outrun Typhoon Hangry.</div>
+    </div>
+    <div id="titleBtns">
+      <button class="btn" id="playBtn">PLAY</button>
+      <div class="row">
+        <button class="btn alt sm" id="logBtn">SNACK LOG 圖鑑</button>
+        <button class="btn alt sm" id="credBtn">CREDITS</button>
+      </div>
+      <div id="bestLine"></div>
+    </div>
+  </div>
+
+  <div id="select" class="screen scrim">
+    <h2>Pick your ride</h2>
+    <div class="cards" id="vehCards"></div>
+    <h2 style="margin-top:16px">Who's leading?</h2>
+    <div class="cards" id="leadCards"></div>
+    <div id="goBar"><button class="btn" id="goBtn">GO!</button></div>
+  </div>
+
+  <div id="pause" class="screen scrim" style="justify-content:center">
+    <div class="panel" style="text-align:center">
+      <h2>Paused</h2>
+      <div class="row" style="flex-direction:column;align-items:center;gap:14px">
+        <button class="btn" id="resumeBtn">RESUME</button>
+        <div class="row">
+          <button class="btn alt sm" id="pSound">SOUND</button>
+          <button class="btn alt sm" id="pMotion">MOTION</button>
+        </div>
+        <button class="btn alt sm" id="quitBtn">QUIT TO MENU</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="over" class="screen scrim">
+    <div class="panel">
+      <h2 id="overTitle">HANGRY CAUGHT YOU</h2>
+      <div id="caughtAt"></div>
+      <canvas id="routeMap" class="px"></canvas>
+      <div id="routeTxt"></div>
+    </div>
+    <div class="panel">
+      <div class="stats"><div>SCORE<b id="oScore">0</b></div><div>SNACKS<b id="oSnacks">0</b></div><div>BEST<b id="oBest">0</b></div></div>
+      <div id="newBest" class="hide">NEW BEST!</div>
+      <h3>Snacks eaten</h3>
+      <div id="tally"></div>
+      <h3>The crew says</h3>
+      <div id="quips"></div>
+    </div>
+    <div class="row" style="margin-top:4px">
+      <button class="btn" id="againBtn">AGAIN</button>
+      <button class="btn alt" id="shareBtn">SHARE</button>
+    </div>
+    <button class="btn alt sm" id="menuBtn" style="margin-top:14px">MENU</button>
+  </div>
+
+  <div id="log" class="screen scrim">
+    <h2>Snack Log 圖鑑</h2>
+    <div id="logCount" class="dim" style="margin-bottom:8px"></div>
+    <div class="panel hide" id="logDetail" style="margin-bottom:12px"></div>
+    <div id="logGrid"></div>
+    <button class="btn alt sm" id="logBack" style="margin-top:16px">BACK</button>
+  </div>
+
+  <div id="credits" class="screen scrim">
+    <h2>Credits</h2>
+    <div class="panel">
+      <p>Made for the crew's 2026 road trip through the middle of Taiwan: Jeremy, Riley, Caleb, Lauren &amp; Rachel.</p>
+      <p>Design, code, pixel art and sound synthesized by Caleb with Claude.</p>
+      <p>Font: Cubic 11 俐方體11號 by ACh &amp; the Cubic 11 Project Authors, derived from JF Dot M+H 12 and M+ Bitmap Fonts. Licensed under the SIL Open Font License 1.1. Tone vowels added for pinyin. <a href="https://github.com/ACh-K/Cubic-11" target="_blank" rel="noopener">github.com/ACh-K/Cubic-11</a></p>
+      <p>No typhoons were harmed. Several snacks were.</p>
+      <pre class="lic" id="licText"></pre>
+    </div>
+    <button class="btn alt sm" id="credBack" style="margin-top:16px">BACK</button>
+  </div>
+
+  <div id="toast"></div>
+</div>

@@ -49,6 +49,7 @@ mirror -R --only-newer --ignore-time --parallel=5 --verbose \
     -X package.json -X package-lock.json \
     -X .gitignore -X .prettierrc -X README.md \
     -X deploy.sh \
+    -X dev/ \
     "$PUBLIC_DIR/" .
 
 # Exit
