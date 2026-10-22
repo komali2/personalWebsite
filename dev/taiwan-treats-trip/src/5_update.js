@@ -40,7 +40,7 @@ function updateCamera(dt) {
 function updatePlayer(dt, ts) {
   const p = G.p, k = Math.min(G.k, 10), V = VEH[G.veh];
   G.belly = clamp(G.belly - (4.4 + .3 * k) * dt * ts, 0, 100);
-  const vmax = (136 + 4 * k) * (G.veh === 'car' ? 1.06 : 1);
+  const vmax = (136 + 4 * k) * (G.veh === 'car' ? 1.1 : 1);
   let v = 50 + (vmax - 50) * Math.pow(G.belly / 100, .7);
   if (p.spin > 0) v *= .35;
   if (G.twisty) v *= .9;
@@ -283,8 +283,8 @@ function touch(e, s, ex) {
     return;
   }
   const big = e.type === 'bluetruck' || e.type === 'bus' || e.type === 'gravel';
-  p.spin = big ? .85 : .6; p.iT = 1.5;
-  G.belly = Math.max(0, G.belly - (big ? 14 : 10));
+  p.spin = big ? .75 : .5; p.iT = 1.5;
+  G.belly = Math.max(0, G.belly - (big ? 12 : 8));
   G.combo = 0; G.comboT = 0;
   spill(2);
   G.shake = .3; G.stats.hits++;
@@ -390,9 +390,9 @@ function updateStorm(dt, wdt) {
   const rear = G.squad[G.squad.length - 1];
   const rearD = rear.d - VEH[G.veh].hh;
   const gap = rearD - s.d;
-  let v = 88 + 5 * k;
-  if (gap > 280) v += (gap - 280) * .4;
-  if (G.inStorm) v *= 1.3;
+  let v = 84 + 6 * k;
+  if (gap > 480) v += (gap - 480) * .3;
+  if (G.inStorm) v *= 1.25;
   if (s.munch > 0) { v *= .45; s.munch -= dt; }
   if (s.freeze > 0) { v = 0; s.freeze -= dt; }
   if (G.cool > 0) v *= .7;

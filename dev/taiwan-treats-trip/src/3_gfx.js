@@ -4,6 +4,7 @@
    Sprites, pixel text, audio
    ========================================================================= */
 const SPR = {}; // filled by the art <script> near the end of the file
+const DEBUG = /debug/.test(location.search);
 const SLOT_DEFAULT = 'RBYe';
 const sprCache = new Map();
 // slots: string of palette keys replacing digits 1..4. mode: 'sil' silhouette, 'white' flash

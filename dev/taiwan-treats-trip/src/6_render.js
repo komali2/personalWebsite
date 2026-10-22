@@ -146,12 +146,12 @@ function renderGround() {
 function sprOr(id, fb) { return spr(id) ? id : fb; }
 function dspr(id, x, y, slots, flip, mode) {
   const c = spr(id, slots, flip, mode);
-  if (!c) { lctx.fillStyle = '#ff00ff'; lctx.fillRect(Math.round(x) - 3, Math.round(y) - 3, 6, 6); return; }
+  if (!c) { if (!DEBUG) return; lctx.fillStyle = '#ff00ff'; lctx.fillRect(Math.round(x) - 3, Math.round(y) - 3, 6, 6); return; }
   lctx.drawImage(c, Math.round(x - c.width / 2), Math.round(y - c.height / 2));
 }
 function dsprB(id, x, y, slots, flip) { // bottom anchored
   const c = spr(id, slots, flip);
-  if (!c) { lctx.fillStyle = '#ff00ff'; lctx.fillRect(Math.round(x) - 4, Math.round(y) - 8, 8, 8); return; }
+  if (!c) { if (!DEBUG) return; lctx.fillStyle = '#ff00ff'; lctx.fillRect(Math.round(x) - 4, Math.round(y) - 8, 8, 8); return; }
   lctx.drawImage(c, Math.round(x - c.width / 2), Math.round(y - c.height));
 }
 function dsprRot(id, x, y, a, slots, flipY) {

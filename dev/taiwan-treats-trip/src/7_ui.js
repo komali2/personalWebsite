@@ -150,8 +150,12 @@ function quipFor(id) {
   }[id].filter(Boolean);
   if (G.stats.hits >= 6) pool.push(`${name} would like a different driver next time.`);
   if (km > 150) pool.push(`${name} says ${km} km is a personal record for snacking.`);
-  return pool[Math.random() * pool.length | 0];
+  const fresh = pool.filter(q => !quipFor.used.has(q.replace(name, '')));
+  const q = (fresh.length ? fresh : pool)[Math.random() * (fresh.length || pool.length) | 0];
+  quipFor.used.add(q.replace(name, ''));
+  return q;
 }
+quipFor.used = new Set();
 function showOver() {
   state = 'over';
   $('hud').classList.add('hide');
@@ -167,6 +171,7 @@ function showOver() {
   $('newBest').classList.toggle('hide', !G.newBest);
   const ids = Object.keys(G.tally).filter(k => G.tally[k] > 0).sort((a, b) => G.tally[b] - G.tally[a]);
   $('tally').innerHTML = ids.length ? ids.map(k => `<span title="${SNACKS[k].en}"><img class="px" src="${sprURL(k)}" alt="${SNACKS[k].en}">×${G.tally[k]}</span>`).join('') : '<span class="dim">Nothing. Hangry is proud of you.</span>';
+  quipFor.used.clear();
   $('quips').innerHTML = G.crew.map(id => `<div><img class="px" src="${sprURL('por_' + id)}" alt=""><span>${quipFor(id)}</span></div>`).join('');
   show('over');
   $('over').scrollTop = 0;

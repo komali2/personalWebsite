@@ -18,7 +18,7 @@ function newRun(o) {
     propD: -260,
     p: { x: 0, tx: 0, d: 0, v: 100, spin: 0, iT: 0, f: null, bi: 0, lastC: 0, scrapeT: 0, lean: 0, wob: 0 },
     squad: [], lost: [], hist: [], rescueT: 0,
-    storm: { d: -250, v: 0, freeze: 0, munch: 0, glitch: 0 },
+    storm: { d: -300, v: 0, freeze: 0, munch: 0, glitch: 0 },
     drone: 0, cool: 0, whimsy: 0, kung: 0,
     truckT: 9, shake: 0, flash: 0, bolt: null, boltT: 3, gust: 0, gustT: 2, inStorm: 0, twisty: 0,
     regIdx: 0, route: [], over: false, overT: 0, k: 0,
@@ -183,7 +183,7 @@ function addEnt(e) {
 }
 function placeHazards(r, f, bi, dA, dB, mul) {
   const def = REG[r.id], k = Math.min(r.k, 9);
-  const exp = (dB - dA) / 300 * (.5 + .13 * k) * mul;
+  const exp = (dB - dA) / 300 * (.32 + .1 * k) * mul;
   const n = Math.floor(exp + rnd());
   for (let i = 0; i < n; i++) spawnHazard(wpick(def.haz), rf(dA + 50, Math.max(dA + 60, dB - 40)), f, bi);
 }
@@ -192,7 +192,7 @@ function spawnHazard(type, d, f, bi) {
   const b = { f, bi };
   switch (type) {
     case 'scooters': {
-      const n = ri(4, 7), v = rf(40, 60);
+      const n = ri(3, 6), v = rf(40, 60);
       for (let j = 0; j < n; j++) addEnt({ ...b, type: 'npcscooter', d: d + j * rf(8, 14), u: rf(-.75, .75), vd: v + rf(-6, 6), w: 5, h: 10, slots: pick(NPC_SLOTS), wob: rf(0, 6) });
       break;
     }

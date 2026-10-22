@@ -80,7 +80,7 @@ const COMMON = Object.keys(SNACKS).filter(k => SNACKS[k].t === 'c');
 const ST = { city: 0, boulevard: 1, mountain: 2, hilltown: 3, gorge: 4, coast: 5, paddy: 6, harbor: 7 };
 const REG = {
   taipei: { en: 'Taipei', zh: '臺北', lon: 121.52, lat: 25.05, next: ['taichung'], st: ST.city, hw: 30, twist: .15, lanes: 'w',
-    spec: ['xiaolongbao', 'guabao', 'hujiaobing', 'yansuji'], haz: { scooters: 3, dog: 1 }, lm: 'lm_101',
+    spec: ['xiaolongbao', 'guabao', 'hujiaobing', 'yansuji'], haz: { scooters: 2, dog: 1 }, lm: 'lm_101',
     props: [['roof_a', 3, 10, 70], ['roof_b', 3, 10, 70], ['tank', 1, 10, 60], ['shop', 1, 7, 9], ['scooterpark', 1.5, 6, 8], ['tree_round', 2, 4, 6], ['betelstand', .4, 6, 9], ['stall', .8, 6, 9], ['temple', .3, 14, 40]] },
   taichung: { en: 'Taichung', zh: '臺中', lon: 120.68, lat: 24.15, next: ['wuling'], st: ST.boulevard, hw: 32, twist: .2, lanes: 'w',
     spec: ['taiyangbing', 'dachang'], haz: { scooters: 1.5, dog: 1 }, lm: 'lm_theater', rareMul: 3,
