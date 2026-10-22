@@ -2,6 +2,7 @@
 
 Read this first if you are picking the work up (any agent, any provider).
 
+- **License:** GPL-3.0-or-later (`LICENSE`), for code and pixel art. The embedded Cubic 11 font stays OFL-1.1.
 - **Ship target:** `games/taiwan-treats-trip/index.html` (one self-contained file, vanilla Canvas 2D, no CDN).
 - **Branch:** `feat/taiwan-treats-trip`. Do not merge or push without asking Caleb. Caleb authorized running `deploy.sh` (FTP mirror to calebjay.com) and checking the live URL afterwards: https://www.calebjay.com/games/taiwan-treats-trip/
 - **Dev workspace:** this folder (`dev/`, excluded from deploy via `-X dev/` in deploy.sh).
