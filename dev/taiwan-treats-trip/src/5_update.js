@@ -79,7 +79,8 @@ function updatePlayer(dt, ts) {
   const maxV = 230 * dt, dx = clamp(p.tx - p.x, -maxV, maxV) * (p.spin > 0 ? .3 : 1);
   p.x += dx;
   p.lean += (clamp(dx / dt / 90, -1, 1) - p.lean) * Math.min(1, dt * 10);
-  const cx = clampToRoad(p.x, p.d, V.pw);
+  // once a branch is chosen, stay on it (a fast swerve could otherwise hop the thin new median)
+  const cx = clampToRoad(p.x, p.d, V.pw, p.f && p.f.chosen >= 0 ? pathX(p.f, p.f.chosen, p.d) : p.x);
   if (Math.abs(cx - p.x) > .3) {
     p.x = cx;
     if ((p.scrapeT -= dt) < 0) { p.scrapeT = .12; SFX.scrape(); spark(p.x, p.d); G.stats.scrapes++; }
@@ -108,7 +109,8 @@ function commit(f, i) {
 }
 // clamp x to the road strip it is on (merging overlapping strips)
 const SP = [];
-function clampToRoad(x, d, m) {
+function clampToRoad(x, d, m, anchor) {
+  if (anchor === undefined) anchor = x;
   roadsAt(d);
   SP.length = 0;
   for (let i = 0; i < RN; i++) SP.push([RD[i * 3] - RD[i * 3 + 1], RD[i * 3] + RD[i * 3 + 1]]);
@@ -117,7 +119,7 @@ function clampToRoad(x, d, m) {
   const spans = [];
   for (const s of SP) { if (cur && s[0] <= cur[1]) cur[1] = Math.max(cur[1], s[1]); else { cur = [s[0], s[1]]; spans.push(cur); } }
   for (const s of spans) {
-    const dd = x < s[0] ? s[0] - x : x > s[1] ? x - s[1] : 0;
+    const dd = anchor < s[0] ? s[0] - anchor : anchor > s[1] ? anchor - s[1] : 0;
     if (dd < bd) { bd = dd; best = s; }
   }
   return clamp(x, best[0] + m, best[1] - m);
@@ -130,10 +132,11 @@ function updateSquad(dt) {
     const td = p.d - 15 * j;
     let tx = h[0].x;
     for (let i = h.length - 1; i > 0; i--) if (h[i - 1].d <= td) { const a = h[i - 1], b = h[i], t = (td - a.d) / Math.max(.01, b.d - a.d); tx = lerp(a.x, b.x, clamp(t, 0, 1)); break; }
-    const nx = s.x + (tx - s.x) * Math.min(1, dt * 7);
+    // follow the leader's recorded path with a little slack, but never onto a different road strip
+    const nx = clampToRoad(s.x + (tx - s.x) * Math.min(1, dt * (Math.abs(tx - s.x) > 10 ? 16 : 7)), td, 3, tx);
     s.lean = clamp((nx - s.x) / Math.max(dt, .001) / 90, -1, 1);
     s.d = td;
-    s.x = clampToRoad(nx, td, 3);
+    s.x = nx;
   });
 }
 
@@ -249,6 +252,7 @@ function updateEnts(dt, wdt) {
       else continue;
     }
     e.t += wdt;
+    if (e.hitT > 0) e.hitT -= dt;
     switch (e.type) {
       case 'npcscooter': e.d += e.vd * wdt; e.u = clamp(e.u + Math.sin(e.t * 2 + e.wob) * .2 * wdt, -.8, .8); break;
       case 'dog': if (e.cross) { if (!e.vu) e.vu = -Math.sign(e.u) * rf(.28, .42); e.u += e.vu * wdt; if (Math.abs(e.u) > 1.7) e.dead = true; } break;
@@ -257,7 +261,10 @@ function updateEnts(dt, wdt) {
         if (e.fall >= 0 && e.fall < 1) { e.fall = Math.min(1, e.fall + wdt / .9); if (e.fall >= 1) { G.shake = Math.max(G.shake, .12); AU.noise(.2, .15, 300); } }
         break;
       case 'bus': e.d += e.vd * wdt; e.u = -.45 + .32 * Math.max(0, Math.sin(e.t * 1.5 + 1)); break;
-      case 'gravel': e.d += e.vd * wdt; break;
+      case 'gravel':
+        if (e.pull) { e.u += clamp(e.pull * .95 - e.u, -1.3 * wdt, 1.3 * wdt); e.vd = Math.max(8, e.vd - 50 * wdt); }
+        e.d += e.vd * wdt;
+        break;
       case 'tourist': e.u += e.vu * wdt; if (Math.abs(e.u) > 1.8) e.dead = true; break;
       case 'monkey': {
         const hw = pathHW(e.f, e.bi, e.d);
@@ -284,7 +291,8 @@ function touch(e, s, ex) {
   const p = G.p;
   if (e.type === 'rescue') { rescue(e); return; }
   if (G.kung > 0) { kick(e, ex); return; }
-  if (p.iT > 0) return;
+  if (p.iT > 0 || e.hitT > 0) return;
+  e.hitT = 2.5;
   if (e.type === 'monkey') {
     if (G.eatLog.length) { spill(1, e); if (!G.demo) SFX.steal(); }
     e.state = 'flee'; e.vu = (e.u >= 0 ? 1 : -1) * 1.5; p.iT = .5;
@@ -299,6 +307,8 @@ function touch(e, s, ex) {
   if (!G.demo) SFX.hit();
   if (e.type === 'dog' || e.type === 'tourist') { e.vu = (ex > p.x ? 1 : -1) * 1.6; e.cross = true; }
   if (e.type === 'npcscooter') e.vd += 40;
+  if (e.type === 'gravel') e.pull = ex >= p.x ? 1 : -1;
+  if (e.type === 'bluetruck') e.state = 'gone';
   for (let i = 0; i < 8; i++) G.parts.push({ x: p.x, d: p.d + 6, vx: (mr() - .5) * 120, vd: (mr() - .5) * 80, z: 4, vz: 60 + mr() * 60, life: .5, col: PAL_HEX[mr() < .5 ? C.l : C.Y] });
 }
 function kick(e, ex) {
@@ -328,16 +338,16 @@ function truckAI(e, dt, wdt) {
   if (e.state === 'warn') {
     e.wt -= dt; e.d = p.d - (H - PY) - 34;
     if (e.f !== p.f) { e.f = p.f; e.bi = p.bi; }
-    if (e.wt <= 0) { e.state = 'go'; e.vd = p.v + 80; }
+    if (e.wt <= 0) { e.state = 'go'; e.vd = p.v + 80; e.uT = 1; e.tu = e.u; }
     return;
   }
   e.uT -= wdt;
   if (e.uT <= 0) {
     e.uT = rf(.4, 1);
     const hw = pathHW(e.f, e.bi, e.d), pu = (p.x - pathX(e.f, e.bi, e.d)) / hw;
-    e.tu = rnd() < .45 ? clamp(pu, -.6, .6) : rf(-.62, .62);
+    e.tu = rnd() < .35 ? clamp(pu, -.6, .6) : rf(-.62, .62);
   }
-  e.u += clamp(e.tu - e.u, -1.3 * wdt, 1.3 * wdt);
+  e.u += clamp(e.tu - e.u, -1 * wdt, 1 * wdt);
   const ahead = e.d - p.d;
   if (e.state === 'go' && ahead > 26 && ahead < 90 && rnd() < .7 * wdt) { e.state = 'brake'; e.bt = .7; }
   if (e.state === 'brake') { e.vd = p.v - 30; e.bt -= wdt; if (e.bt <= 0) e.state = 'gone'; }
@@ -353,7 +363,7 @@ function spawnTrucks(dt) {
   if ((G.truckT -= dt) > 0) return;
   G.truckT = Math.max(5.5, rf(10, 16) - G.k * .9);
   const p = G.p;
-  const e = addEnt({ type: 'bluetruck', d: p.d - (H - PY) - 34, u: rf(-.5, .5), w: 11, h: 23, f: p.f, bi: p.bi, state: 'warn', wt: 1.1, uT: 0, tu: 0, drops: 0,
+  const e = addEnt({ type: 'bluetruck', d: p.d - (H - PY) - 34, u: pick([-.6, .6]), w: 11, h: 23, f: p.f, bi: p.bi, state: 'warn', wt: 1.5, uT: 0, tu: 0, drops: 0,
     cargo: chance(.45) ? (REG[regionAt(p.d).id].cargo || pick(['gaolicai', 'xigua', 'fengli'])) : null });
   e.act = true;
   if (!G.demo) SFX.honk();

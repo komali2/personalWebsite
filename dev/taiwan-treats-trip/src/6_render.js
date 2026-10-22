@@ -210,9 +210,15 @@ function render() {
   if (G.cool > 0) { lctx.fillStyle = 'rgba(18,78,137,.18)'; lctx.fillRect(0, 0, W, H); }
   drawStorm();
   // blue truck warnings
-  for (const e of G.ents) if (e.type === 'bluetruck' && e.state === 'warn' && ((t * 8 | 0) & 1)) {
-    const x = clamp(SX(entX(e)), 8, W - 8);
-    dspr('ico_hazard', x, H - 10);
+  // blue truck incoming: big warning sign on the side it will come up, above the bottom HUD
+  for (const e of G.ents) if (e.type === 'bluetruck' && e.state === 'warn') {
+    const on = (t * 6 | 0) & 1, x = e.u < 0 ? 16 : W - 16, y = H - Math.round(104 * dpr / scale) - 14;
+    const c = spr('ico_hazard');
+    if (c) lctx.drawImage(c, x - 9, y - 9 - on, 18, 18);
+    lctx.fillStyle = PAL_HEX[on ? C.Y : C.o];
+    for (let i = 0; i < 4; i++) lctx.fillRect(x - 3 + i, y + 12 + i * 2, 7 - 2 * i, 2);
+    const tr = spr('bluetruck');
+    if (tr && on) { lctx.globalAlpha = .7; lctx.drawImage(tr, x - 4, y + 22, 7, 13); lctx.globalAlpha = 1; }
   }
   if (G.flash > 0 && !save.reduce) { lctx.fillStyle = `rgba(255,255,255,${Math.min(.5, G.flash * 3).toFixed(2)})`; lctx.fillRect(0, 0, W, H); }
 
