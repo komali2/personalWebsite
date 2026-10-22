@@ -113,69 +113,69 @@ SPR.fenglisu = [
 "............",
 ];
 
-// 蛋黃酥 egg-yolk pastry
+// 蛋黃酥 egg-yolk pastry: cut face shows bean paste around the golden yolk
 SPR.danhuangsu = [
 "............",
-"....kkkk....",
-"..kkyYyokk..",
-".kyYyookoMk.",
-".kYyoooMoMk.",
-"kyokooMMkMmk",
-"kooooMMMMmmk",
-"ktwttttTTTzk",
-"kttTtTtTzTzk",
-".kTTTTTzzzk.",
+"...kkkkk....",
+"..kyYyMMkk..",
+".kyYyMkkttk.",
+".kYyyktUrrtk",
+"kyyMMktrYYrk",
+"kyMMMkroYYok",
+"kMMMMktroork",
+".kMmmktUrrtk",
+".kmmUUktttk.",
 "..kkkkkkkk..",
 "............",
 ];
 
 // 珍珠奶茶 bubble milk tea (RARE golden)
 SPR.zhenzhu = [
-"......kk....",
-".....kspk...",
-".....kspk...",
-"kkkkkkspkkkk",
-"kwwllwsplllk",
-"kGlllllllGGk",
-"kwSTTTTTTTzk",
-"kwSTTTTTTzzk",
+".......kp...",
+".......kp...",
+"......kpk...",
+"..kkkkpkkk..",
+".kwllwpwllk.",
 ".kwTTTTTTzk.",
-".kGkkGkkGkk.",
-".kkGkkGkkkk.",
-"..kkkkkkkk..",
+".kwTTTTTTzk.",
+".kwkvTTkvzk.",
+".kwvvTTvvzk.",
+"..kwTkvTzk..",
+"..kwTvvTzk..",
+"...kkkkkk...",
 ];
 
 // ---------- TAIPEI ----------
 // 小籠包 soup dumplings in bamboo steamer
 SPR.xiaolongbao = [
-"...kk...kk..",
-"..kwTk.kwTk.",
-".kwlwTkwlwTk",
-".kwwlTkwwlTk",
-".kwwwlkwwwlk",
-"kkkkkkkkkkkk",
-"kyTyTTyTTTuk",
-"kuuuuuuuuuUk",
-"kTUTTUTTUTUk",
-".kUTTUTTUUk.",
-"..kkkkkkkk..",
 "............",
+"...k....k...",
+"..kwk..kwk..",
+".kwtwkkwtwk.",
+"kwtllkkwtllk",
+"kwwllkkwwllk",
+"kykkkTTkkkyk",
+"kYyyyyyyyyuk",
+"kTuTyTuTyUuk",
+"kTuTyTuTyUuk",
+".kTTTTTTUUk.",
+"..kkkkkkkk..",
 ];
 
 // 刈包 gua bao
 SPR.guabao = [
 "............",
-"..kkkkkkk...",
-".kwwwwwwwkk.",
-"kwwlllllllGk",
-"kwlUtUuyeEek",
-"kwlUuUTyEeEk",
+"....kkkk....",
+"..kkwwwwkk..",
+".kwwwwwwwlk.",
+"kwwwwwwllllk",
+"kwlkeeEeeEek",
+"kwlkUttUttUk",
+"kwlkMUmMUUuk",
 "kwwwwwwwwwlk",
-"kGlllllllGGk",
-".kGGGGGGGGk.",
-"..kkkkkkkk..",
-"............",
-"............",
+".kwlllllllk.",
+"..kkGGGGkk..",
+"....kkkk....",
 ];
 
 // 胡椒餅 pepper bun
@@ -295,17 +295,17 @@ SPR.gaoshancha = [
 // 烤鱒魚 salt-grilled trout
 SPR.zunyu = [
 "............",
-"............",
-"..kkkkkkk.kk",
-".kgGgGgGgkGk",
-"kwkssssssgGk",
-"kGtssssssgkk",
-".ktttttttkGk",
-"..kkkkTkk.kk",
-".....kTk....",
-".....kTk....",
-".....kTk....",
-".....kkk....",
+".........Tk.",
+"...kkkkkTk..",
+".kklllGgkk.k",
+"klkltMUggkGk",
+"kwllUtUUgGGk",
+".klttMUugkGk",
+"..kkggggkk.k",
+"...kTkkk....",
+"..kTk.......",
+".kTk........",
+".kk.........",
 ];
 
 // ---------- JIUFEN ----------
@@ -341,37 +341,37 @@ SPR.caozaiguo = [
 "............",
 ];
 
-// 花生捲冰淇淋 peanut ice cream roll
+// 花生捲冰淇淋 peanut ice cream roll: scoops, coriander, peanut-speckled crepe
 SPR.huasheng = [
-"..kkk.kkk...",
-".kqqPkkYyk..",
-".kqPPkYyok..",
-"kekPPeyoekk.",
-"kwttkkkkttwk",
-"kwtTttTtTtzk",
-".kwtTtttTzk.",
-".kwttTtTtzk.",
-"..kwtTtTzk..",
-"..kwttTtzk..",
-"...kwTtzk...",
-"....kkkk....",
+"...kk.kk....",
+"..kwskwtk...",
+".kwsskYttk..",
+".kssqkttTk..",
+".kEekeeEekk.",
+"kwtttMttttzk",
+"kwtMtttTttzk",
+"kwtttTttMtzk",
+".kwtMtTttzk.",
+".kwtttTttzk.",
+"..kTTTTTzzk.",
+"...kkkkkkk..",
 ];
 
 // ---------- TAROKO ----------
 // 竹筒飯 bamboo tube rice
 SPR.zhutongfan = [
 "............",
-"............",
-".kkkkkkkkkk.",
-"kEwwwtwwtwEk",
-"kEtwttwtttfk",
-"keEEEEEEEEfk",
-"kEeEEEEEEEfk",
-"kEEfEEEEfEFk",
-"kfffffffffFk",
-".kkkkkkkkkk.",
-"............",
-"............",
+"...kkkkkk...",
+"..kYwttweEk.",
+".kEwtwttweEk",
+".kEttwtwttfk",
+".keEttwttEfk",
+".keEEEEEEffk",
+".kYeYeeeeEFk",
+".keEEEEEEffk",
+".keEEEEEEffk",
+"..kfffffFFk.",
+"...kkkkkkk..",
 ];
 
 // 山豬香腸 wild boar sausage
@@ -411,15 +411,15 @@ SPR.bianshi = [
 SPR.mashu = [
 "............",
 "....kkkk....",
-"...kYeeek...",
-"...keeeEk...",
-"...keeeEk...",
-".kkkkeEkkkk.",
-"kwsssklwllGk",
-"kssssklwllGk",
-"ksssqklllGGk",
-"kssqqklllGGk",
-".kkkk.kkkk..",
+"...kteeEk...",
+"..kweeeeEk..",
+"..keeeeEEk..",
+"...kEEffk...",
+"..kk....kk..",
+".kwssk.kwwk.",
+"kwssqkkwwwlk",
+".ksqqk.kwlk.",
+"..kk....kk..",
 "............",
 ];
 
@@ -428,15 +428,15 @@ SPR.zhadan = [
 "............",
 "...kkkkkk...",
 "..kyYyyyMk..",
-".kyYyeyyMMk.",
-"kyykkkkkkMmk",
-"kyMkYwYYkMmk",
-"kMykYYYykemk",
-"kyekkYykkMmk",
-"kMyMkYykMmmk",
-".kMMkYkmmmk.",
-"..kkkYkkkk..",
-"....kkk.....",
+".kyYwewwMMk.",
+"kyywwwwwwMmk",
+"kyewwYYwwMmk",
+"kywwYwYywwmk",
+"kMywwYywwemk",
+"kMyMwwywwmmk",
+".kMMMwymmmk.",
+"..kkkkykkk..",
+"......kk....",
 ];
 
 // ---------- TAITUNG ----------
@@ -512,13 +512,13 @@ SPR.xiaojuan = [
 "...ksSSzk...",
 "..ksStSSzk..",
 ".ksSStSzzzk.",
-"..kkStSzkk..",
+"..kStmSSzk..",
 "...kStSzk...",
-"...kSmSzk...",
-"...kkwkwk...",
-"..ksksSkzk..",
-"..k.kTk.k...",
-".....k......",
+"..kSkSSkzk..",
+".kssSzzSzzk.",
+".kSkSkSkSkSk",
+"kSkSk.kSkSk.",
+".kk.k..kk.k.",
 ];
 
 // 黑輪 oden fish cake skewer

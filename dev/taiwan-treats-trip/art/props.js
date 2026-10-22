@@ -141,8 +141,8 @@ SPR.flowers = [
 
 SPR.cabbage = [
 ".FFFF.",
-"FewEeF",
-"FelEeF",
+"FeeEeF",
+"FeEeeF",
 "FEeEfF",
 ".FFFF.",
 ];
@@ -727,6 +727,6 @@ SPR.lm_85 = [
 ".nlbbbbbGb......blbbbbbgn.",
 ".nGGGGGGGG......ggggggggn.",
 "..GGGGGGGG......gggggggg..",
-"lllllllllllnnnnGGGGGGGGGGG",
+"lllllllllll....GGGGGGGGGGG",
 "nnnnnnnnnnn....nnnnnnnnnnn",
 ];
