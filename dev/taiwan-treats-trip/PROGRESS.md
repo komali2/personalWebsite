@@ -55,8 +55,9 @@ Read this first if you are picking the work up (any agent, any provider).
 - [ ] Prop and landmark sprites (`art/props.js`), not started (the Opus agent died). Spec: see "Art spec: props" below
 - [x] `src/6_render.js`, `src/7_ui.js`, `tools/build.py`, `tools/shot.js`
 - [x] First headless run: no console errors; title, play, regions, storm and game over all work (2026-10-22)
-- [ ] Balance pass with bot (`G.bot = true; G.botSkill`)
-- [ ] Commit on branch, deploy, curl the live URL
+- [x] Balance pass: `node tools/sim.js 8 .8 car` → about 230 s and 4 regions on average (target: a typical run is 3–4 min); scooters last longer
+- [x] Committed on branch, deployed, live verified with curl (2026-10-22, before props art)
+- [ ] Redeploy once art/props.js and the actor polish land (missing sprites are invisible; `?debug` shows them as magenta)
 - [ ] Polish: art review, sounds, landmarks, music (stretch)
 
 ## Agent log
