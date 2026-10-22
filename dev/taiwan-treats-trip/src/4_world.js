@@ -24,6 +24,7 @@ function newRun(o) {
     regIdx: 0, route: [], over: false, overT: 0, k: 0,
     tally: {}, eatLog: [], fTally: {}, stats: { snacks: 0, hits: 0, kicked: 0, rare: 0, rescued: 0, lostAt: {}, stolen: 0, scrapes: 0 },
     camX: 0, bannerT: 0,
+    cutin: null, fx: [], fxA: 0, fxAcc: 0,
   };
   CREW.forEach(c => G.fTally[c] = {});
   // squad order: leader first, then everyone else

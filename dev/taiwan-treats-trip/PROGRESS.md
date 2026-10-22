@@ -41,6 +41,7 @@ Read this first if you are picking the work up (any agent, any provider).
 | `src/4_world.js` | road geometry (base centerline, forks/branches), region and content generation, props |
 | `src/5_update.js` | simulation: player, items, hazards, trucks, storm, abilities, bot |
 | `src/6_render.js` | per-pixel ground and road renderer, sprites, signs, storm and Hangry's face |
+| `src/6b_fx.js` | ability cut-in (portrait burst at the top center, 0.14 s hit-stop) + per-character screen effects while a power is active (rain dissolves before mid-screen) |
 | `src/7_ui.js` | screens, HUD, input, minimap and route map, share, snack log, main loop, boot |
 | `art/*.js` | sprites as `SPR.id = ["..k..", ...];` grids. Palette: `art/palette.json` (Endesga-32, one char per color; digits 1-4 are recolor slots) |
 | `tools/preview.py` | `python3 tools/preview.py art/X.js 6` renders a PNG sheet and validates the grids |
@@ -63,6 +64,7 @@ Read this first if you are picking the work up (any agent, any provider).
 - [x] Redeployed with props, turning frames and polished actors/snacks (2026-10-22). `?debug` shows missing sprites as magenta.
 - [x] UI language switch EN/中文 (auto-detected from `navigator.languages[0]`; the choice is saved), About popup (bio, 508.dev hiring note, Why), GPL-3.0-or-later
 - [x] Saves are incremental (every 2 s, and on pagehide/hidden), plus a redirect from calebjay.com → www.calebjay.com so localStorage isn't split across origins
+- [~] `feat/ability-cutin` branch: anime cut-in + power rain/filters, deployed for Caleb to try (2026-10-22); merge to master if approved
 - [ ] Polish: art review, sounds, landmarks, music (stretch)
 
 ## Agent log

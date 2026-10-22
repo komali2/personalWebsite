@@ -220,6 +220,8 @@ function render() {
     const tr = spr('bluetruck');
     if (tr && on) { lctx.globalAlpha = .7; lctx.drawImage(tr, x - 4, y + 22, 7, 13); lctx.globalAlpha = 1; }
   }
+  drawPowerFx();
+  drawCutin();
   if (G.flash > 0 && !save.reduce) { lctx.fillStyle = `rgba(255,255,255,${Math.min(.5, G.flash * 3).toFixed(2)})`; lctx.fillRect(0, 0, W, H); }
 
   // blit

@@ -10,6 +10,8 @@ const VEH = { car: { hw: 5, hh: 9, pw: 6 }, scooter: { hw: 3, hh: 6, pw: 3 } };
 function update(dt) {
   const p = G.p;
   if (G.over) { G.overT += dt; G.storm.d += 160 * dt; updateParts(dt); return; }
+  updateFx(dt);
+  if (G.cutin && G.cutin.t < .14) dt *= .25; // a beat of hit-stop when a power fires
   G.t += dt;
   const ts = G.cool > 0 ? .5 : 1, wdt = dt * ts;
   for (const k of ['drone', 'cool', 'whimsy', 'kung']) if (G[k] > 0) G[k] = Math.max(0, G[k] - dt);
@@ -388,6 +390,7 @@ function useAbility() {
     case 'lauren': G.whimsy = 5; for (const e of G.ents) if (!e.dead && e.act && SOLID[e.type]) whimsyPop(e); if (!G.demo) SFX.sparkle(); break;
     case 'rachel': G.kung = 2.6; G.p.iT = Math.max(G.p.iT, .2); break;
   }
+  startCutin();
   if (!G.demo) SFX.ability();
 }
 function whimsyPop(e) {
