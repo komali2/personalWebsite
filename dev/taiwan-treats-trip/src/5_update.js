@@ -388,7 +388,7 @@ function useAbility() {
     case 'riley': G.storm.d -= 170; G.storm.freeze = 3; G.storm.glitch = 3.4; if (!G.demo) SFX.glitch(); break;
     case 'caleb': G.cool = 6; G.shades = 0; break;
     case 'lauren': G.whimsy = 5; for (const e of G.ents) if (!e.dead && e.act && SOLID[e.type]) whimsyPop(e); if (!G.demo) SFX.sparkle(); break;
-    case 'rachel': G.kung = 2.6; G.p.iT = Math.max(G.p.iT, .2); break;
+    case 'rachel': G.kung = 4.6; G.p.iT = Math.max(G.p.iT, .2); break;
   }
   startCutin();
   if (!G.demo) SFX.ability();

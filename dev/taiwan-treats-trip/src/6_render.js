@@ -311,16 +311,24 @@ function drawSign(f) {
   const d = f.d0 - 6, y0 = SY(d);
   if (y0 < -40 || y0 > H + 20) return;
   const bx = baseX(d);
+  // gate boards are packed edge to edge (centered on the fork) so 3-way gates fit the screen
+  let gx = null;
+  if (f.gate) {
+    const ws = f.br.map(b => Math.max(textSpr(SIGN_NAME[b.dest], 'w').width, textSpr(REG[b.dest].zh, 'Y').width) + 6);
+    const tot = ws.reduce((a, w) => a + w, 0) + 3 * (f.n - 1);
+    let x = SX(bx) - tot / 2;
+    gx = ws.map(w => { const c = Math.round(x + w / 2); x += w + 3; return [c, w]; });
+  }
   for (let i = 0; i < f.n; i++) {
     const b = f.br[i];
-    const x = SX(bx + (i - (f.n - 1) / 2) * (f.gate ? (f.n === 3 ? 52 : 50) : 42));
+    const x = gx ? gx[i][0] : SX(bx + (i - (f.n - 1) / 2) * 42);
     if (f.gate) {
       const en = textSpr(SIGN_NAME[b.dest], 'w'), zh = textSpr(REG[b.dest].zh, 'Y');
-      const w = Math.max(en.width, zh.width + 14) + 4, h = 30, y = y0 - h - 6;
+      const w = gx[i][1], h = 30, y = y0 - h - 6 - (f.n === 3 && i === 1 ? 5 : 0);
       board(x, y, w, h);
       lctx.drawImage(en, x - (en.width >> 1), y + 1);
-      lctx.drawImage(zh, x - ((zh.width + 13) >> 1), y + 14);
-      dspr(b.spec, x + ((zh.width + 13) >> 1) - 6, y + 21);
+      lctx.drawImage(zh, x - (zh.width >> 1), y + 14);
+      dspr(b.spec, x, y - 4);
     } else {
       const w = 36, h = 24, y = y0 - h - 6;
       board(x, y, w, h);

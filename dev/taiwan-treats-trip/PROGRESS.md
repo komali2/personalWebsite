@@ -18,10 +18,10 @@ Read this first if you are picking the work up (any agent, any provider).
 - **Score:** snack points × combo (combo resets on a hit and decays after about 2 s without a pickup). Distance is shown but not scored.
 - **Hits never end a run:** spin-out, belly drain, and 2 snacks spill onto the road (they can be re-grabbed). Macaques steal a snack instead.
 - **Endless run, ~60 s per region:**
-  - Region graph: Taipei → Taichung → Wuling Farm → {Jiufen, Taroko Gorge, Taitung}. Jiufen → {Taipei, Taroko}. Taroko → Hualien → Taitung → Kaohsiung → Taichung.
+  - Region graph: every run starts in Taipei; every region ends in a gate fork with 2-3 exits (`REG[id].next` in src/2_data.js): Taipei → {Taichung, Jiufen}; Taichung → {Kaohsiung, Wuling}; Wuling → {Jiufen, Taroko, Taitung}; Jiufen → {Taipei, Wuling, Taroko}; Taroko → {Wuling, Hualien}; Hualien → {Taitung, Jiufen}; Taitung → {Kaohsiung, Hualien}; Kaohsiung → {Taichung, Taitung}.
   - The gate at the end of a region is a fork whose signs show the destination names.
   - Difficulty scales with regions cleared.
-- **Crew:** Jeremy (drone, magnet + reveal), Riley (hack: knocks Hangry back and freezes it), Caleb (too cool: slow motion), Lauren (whimsy: hazards become snacks), Rachel (kung fu: invulnerable dash that kicks hazards). The leader's ability charges by eating.
+- **Crew:** Jeremy (drone, magnet + reveal), Riley (hack: knocks Hangry back and freezes it), Caleb (too cool: slow motion), Lauren (whimsy: hazards become snacks), Rachel (kung fu: 4.6 s invulnerable dash that kicks hazards). The leader's ability charges by eating.
 - **Vehicles:**
   - **Hatchback:** caught = game over.
   - **Scooter squad:** five scooters in a conga line. Hangry eats the rear scooter (that friend is lost), and the run ends when only the leader is left and gets caught. A lost friend rarely waits at a bus stop to rejoin.
