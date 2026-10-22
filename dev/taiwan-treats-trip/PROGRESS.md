@@ -51,18 +51,19 @@ Read this first if you are picking the work up (any agent, any provider).
 - [x] Font: Cubic 11 downloaded, tone glyphs patched
 - [x] src 1–5 written (not yet run)
 - [x] Snack sprites: 42 done (`art/snacks.js`, first pass; the Opus agent died mid-polish)
-- [~] Actor sprites: 29 done (`art/actors.js`); **missing `car_l`, `car_r`, `scooter_l`, `scooter_r`**
+- [x] Actor sprites: 33 done (`art/actors.js`), including all four car/scooter turning frames; portraits and blue truck polished, sheet visually reviewed
 - [x] Prop and landmark sprites (`art/props.js`): 34 done, exact sizes/palette validated; three visual passes and terrain contrast check
 - [x] `src/6_render.js`, `src/7_ui.js`, `tools/build.py`, `tools/shot.js`
 - [x] First headless run: no console errors; title, play, regions, storm and game over all work (2026-10-22)
 - [x] Balance pass: `node tools/sim.js 8 .8 car` → about 230 s and 4 regions on average (target: a typical run is 3–4 min); scooters last longer
 - [x] Committed on branch, deployed, live verified with curl (2026-10-22, before props art)
-- [ ] Redeploy once art/props.js and the actor polish land (missing sprites are invisible; `?debug` shows them as magenta)
+- [x] Redeployed with props, turning frames and polished actors/snacks (2026-10-22). `?debug` shows missing sprites as magenta.
 - [ ] Polish: art review, sounds, landmarks, music (stretch)
 
 ## Agent log
 - 2026-10-22: Opus subagents for art hit the Claude session limit. Art is moving to opencode `openai/gpt-6.1-sol`.
 - props.js done by opencode/gpt-6.1-sol: 34 sprites, including 8 landmarks; preview has zero grid errors; weak: theater curves are simplified at 30×22.
+- 2026-10-22: opencode/gpt-6.1-sol added four turning frames, sharpened crew portraits and the blue farm truck, and polished 10 snacks (danhuangsu, zhenzhu, xiaolongbao, guabao, zunyu, huasheng, zhutongfan, mashu, zhadan, xiaojuan). Regenerated and visually reviewed actors.png/snacks.png; all 75 grids pass ID, size and palette checks, vehicle recolor slots preserved, JS syntax checks pass.
 
 ## Art spec: props (for whoever draws them)
 Style: top-down with a 3/4 oblique view (Zelda ALttP / Stardew), light from the top-left, selective outline, Endesga-32 palette chars only. Props sit beside the road on grass, gray city ground, sand or rock.
