@@ -47,7 +47,9 @@ def main():
     lic_js = lic.replace('\\', '\\\\').replace('`', "'").replace('${', '$ {')
     font_js = ('<script>\n/* Cubic 11 (OFL-1.1) subset with added pinyin tone vowels; regenerate with dev/taiwan-treats-trip/tools/build.py */\n'
                f'const LICENSE_TEXT = `{lic_js}`;\nconst FONT_B64 = "{b64}";\n</script>\n')
-    html = page + font_js + '</body>\n</html>\n'
+    # site-wide GoatCounter analytics, same snippet as the rest of calebjay.com (loads async; fails quietly offline)
+    goat = ('<script\n  data-goatcounter="https://calebjay_com.goatcounter.com/count"\n  async\n  src="//gc.zgo.at/count.js"\n></script>\n')
+    html = page + font_js + goat + '</body>\n</html>\n'
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     open(OUT, 'w', encoding='utf-8').write(html)
     print(f'wrote {OUT}: {len(html)//1024} KB (font {len(b64)//1024} KB, {len(art)} sprites)')

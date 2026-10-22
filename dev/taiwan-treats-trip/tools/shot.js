@@ -12,7 +12,8 @@ fs.mkdirSync(out, { recursive: true });
   const b = await chromium.launch({ executablePath: '/usr/bin/chromium', args: ['--autoplay-policy=no-user-gesture-required'] });
   const pg = await b.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, hasTouch: true, locale: arg('locale', 'en-US') });
   const errs = [];
-  pg.on('console', m => { if (m.type() === 'error' || m.type() === 'warning') errs.push(m.type() + ': ' + m.text()); });
+  // (the protocol-relative GoatCounter script can't load from file://, which is expected)
+  pg.on('console', m => { if ((m.type() === 'error' || m.type() === 'warning') && !/ERR_INVALID_URL/.test(m.text())) errs.push(m.type() + ': ' + m.text()); });
   pg.on('pageerror', e => errs.push('pageerror: ' + e.message + '\n' + (e.stack || '').split('\n').slice(0, 4).join('\n')));
   await pg.addInitScript(() => localStorage.setItem('taiwan-treats-trip-v1', JSON.stringify({ mute: true })));
   await pg.goto('file://' + page);
