@@ -35,6 +35,8 @@ Read this first if you are picking the work up (any agent, any provider).
 |---|---|
 | `src/1_head.html` | `<head>`, CSS, DOM for HUD and screens |
 | `src/2_data.js` | palette, utils, SNACKS, REG (regions), FRIENDS, Taiwan polygon, save |
+| `src/2b_zh.js` | Taiwan Mandarin snack and crew descriptions (ZH_SNACK, ZH_FRIEND), by opencode/gpt-6.1-sol |
+| `src/2c_i18n.js` | UI strings `STR.en`/`STR.zh`, `T(key, args)`, quips, `applyLang()`. Static DOM text uses `data-i` / `data-ih` attributes |
 | `src/3_gfx.js` | sprite cache `spr()`, pixel text, tiny digits, WebAudio `AU`/`SFX` |
 | `src/4_world.js` | road geometry (base centerline, forks/branches), region and content generation, props |
 | `src/5_update.js` | simulation: player, items, hazards, trucks, storm, abilities, bot |
@@ -59,12 +61,16 @@ Read this first if you are picking the work up (any agent, any provider).
 - [x] Balance pass: `node tools/sim.js 8 .8 car` → about 230 s and 4 regions on average (target: a typical run is 3–4 min); scooters last longer
 - [x] Committed on branch, deployed, live verified with curl (2026-10-22, before props art)
 - [x] Redeployed with props, turning frames and polished actors/snacks (2026-10-22). `?debug` shows missing sprites as magenta.
+- [x] UI language switch EN/中文 (auto-detected from `navigator.languages[0]`; the choice is saved), About popup (bio, 508.dev hiring note, Why), GPL-3.0-or-later
+- [x] Saves are incremental (every 2 s, and on pagehide/hidden), plus a redirect from calebjay.com → www.calebjay.com so localStorage isn't split across origins
 - [ ] Polish: art review, sounds, landmarks, music (stretch)
 
 ## Agent log
 - 2026-10-22: Opus subagents for art hit the Claude session limit. Art is moving to opencode `openai/gpt-6.1-sol`.
 - props.js done by opencode/gpt-6.1-sol: 34 sprites, including 8 landmarks; preview has zero grid errors; weak: theater curves are simplified at 30×22.
 - 2026-10-22: opencode/gpt-6.1-sol added four turning frames, sharpened crew portraits and the blue farm truck, and polished 10 snacks (danhuangsu, zhenzhu, xiaolongbao, guabao, zunyu, huasheng, zhutongfan, mashu, zhadan, xiaojuan). Regenerated and visually reviewed actors.png/snacks.png; all 75 grids pass ID, size and palette checks, vehicle recolor slots preserved, JS syntax checks pass.
+
+- 2026-10-22: opencode/gpt-6.1-sol added `src/2b_zh.js`: 36 snack descriptions and 5 pronoun-free friend abilities in playful Taiwan Mandarin. Source unchanged; Node parse/count check prints 36 and 5; snack order, friend IDs, and all snack lengths (≤45 characters) verified.
 
 ## Art spec: props (for whoever draws them)
 Style: top-down with a 3/4 oblique view (Zelda ALttP / Stardew), light from the top-left, selective outline, Endesga-32 palette chars only. Props sit beside the road on grass, gray city ground, sand or rock.

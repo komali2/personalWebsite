@@ -1,5 +1,7 @@
 <script>
 'use strict';
+// one canonical origin, so localStorage (high scores, snack log) is shared
+if (location.hostname === 'calebjay.com') location.replace('https://www.calebjay.com' + location.pathname + location.search + location.hash);
 /* =========================================================================
    Taiwan Treats Trip 吃飽逃颱: constants, utils, data
    ========================================================================= */
@@ -125,8 +127,15 @@ const TW_POLY = [[121.51, 25.30], [121.64, 25.22], [121.74, 25.14], [121.92, 25.
 
 /* ------------------------------ save ------------------------------ */
 const SAVE_KEY = 'taiwan-treats-trip-v1';
-let save = { best: 0, bests: {}, eaten: {}, runs: 0, mute: false, reduce: null, veh: 'car', lead: 'caleb' };
+let save = { best: 0, bests: {}, eaten: {}, runs: 0, mute: false, reduce: null, veh: 'car', lead: 'caleb', lang: null };
 try { Object.assign(save, JSON.parse(localStorage.getItem(SAVE_KEY) || '{}')); } catch (e) { }
 if (save.reduce === null) save.reduce = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
 function persist() { try { localStorage.setItem(SAVE_KEY, JSON.stringify(save)); } catch (e) { } }
+// progress is saved as you play (mobile tabs often get closed mid-run, never reaching game over)
+let saveDirty = false;
+const dirty = () => { saveDirty = true; };
+function flushSave() { if (saveDirty) { saveDirty = false; persist(); } }
+setInterval(flushSave, 2000);
+addEventListener('pagehide', flushSave);
+document.addEventListener('visibilitychange', () => { if (document.hidden) flushSave(); });
 </script>

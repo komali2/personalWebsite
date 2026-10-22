@@ -10,7 +10,7 @@ const out = path.resolve(process.argv[2] && !process.argv[2].startsWith('--') ? 
 fs.mkdirSync(out, { recursive: true });
 (async () => {
   const b = await chromium.launch({ executablePath: '/usr/bin/chromium', args: ['--autoplay-policy=no-user-gesture-required'] });
-  const pg = await b.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, hasTouch: true });
+  const pg = await b.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, hasTouch: true, locale: arg('locale', 'en-US') });
   const errs = [];
   pg.on('console', m => { if (m.type() === 'error' || m.type() === 'warning') errs.push(m.type() + ': ' + m.text()); });
   pg.on('pageerror', e => errs.push('pageerror: ' + e.message + '\n' + (e.stack || '').split('\n').slice(0, 4).join('\n')));
@@ -18,6 +18,9 @@ fs.mkdirSync(out, { recursive: true });
   await pg.goto('file://' + page);
   await pg.waitForTimeout(1800);
   await pg.screenshot({ path: path.join(out, '1_title.png') });
+  await pg.click('#aboutBtn'); await pg.waitForTimeout(200);
+  await pg.screenshot({ path: path.join(out, '1b_about.png') });
+  await pg.click('#aboutBack'); await pg.waitForTimeout(200);
   await pg.click('#playBtn');
   await pg.evaluate(([v, l]) => { save.veh = v; save.lead = l; buildSelect(); }, [arg('veh', 'car'), arg('lead', 'caleb')]);
   await pg.waitForTimeout(300);

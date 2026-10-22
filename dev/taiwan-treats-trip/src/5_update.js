@@ -190,6 +190,13 @@ function collect(it, s, x) {
   if (!(G.drone || G.cool || G.whimsy || G.kung)) G.charge = Math.min(100, G.charge + tr.chg);
   G.tally[it.id] = (G.tally[it.id] || 0) + 1;
   G.stats.snacks++;
+  if (!G.demo) {
+    save.eaten[it.id] = (save.eaten[it.id] || 0) + 1;
+    if (G.score > save.best) save.best = G.score;
+    const key = G.veh + '-' + G.lead;
+    if (G.score > (save.bests[key] || 0)) save.bests[key] = G.score;
+    dirty();
+  }
   if (sn.t === 'r') { G.stats.rare++; G.flash = Math.max(G.flash, .15); }
   const who = G.veh === 'scooter' ? s.id : G.crew[Math.floor(mr() * G.crew.length)];
   G.fTally[who][it.id] = (G.fTally[who][it.id] || 0) + 1;
@@ -209,6 +216,7 @@ function spill(n, thief) {
     const e = G.eatLog.pop();
     G.score = Math.max(0, G.score - e.pts);
     G.tally[e.id]--; G.fTally[e.who][e.id]--; G.stats.snacks--;
+    if (!G.demo && save.eaten[e.id] > 0) { save.eaten[e.id]--; dirty(); }
     if (thief) { thief.carry = e.id; G.stats.stolen++; G.pops.push({ x: p.x, d: p.d + 12, txt: '-' + e.pts, col: PAL_HEX[C.R], t: 0 }); }
     else {
       const hw = pathHW(p.f, p.bi, p.d), u = clamp((p.x - pathX(p.f, p.bi, p.d)) / hw, -.8, .8);
@@ -313,7 +321,7 @@ function rescue(e) {
   G.squad.push({ id, x: last.x, d: last.d - 15, lean: 0 });
   G.stats.rescued++;
   G.pops.push({ x: entX(e), d: e.d + 12, txt: '+1', col: PAL_HEX[C.e], t: 0 });
-  if (!G.demo) { SFX.rescue(); toast(FRIENDS[id].name + ' is back!'); refreshCrew(); }
+  if (!G.demo) { SFX.rescue(); toast(T('isBack', [FRIENDS[id].name])); refreshCrew(); }
 }
 function truckAI(e, dt, wdt) {
   const p = G.p;
@@ -420,7 +428,7 @@ function caught() {
     s.d -= 80; s.munch = 2.2;
     G.rescueT = rf(26, 40);
     G.parts.push({ kind: 'blown', id: f.id, x: f.x, d: f.d, vx: (mr() - .5) * 60, vd: -30, z: 0, vz: 120, life: 1.6 });
-    if (!G.demo) { SFX.lost(); toast(FRIENDS[f.id].name + ' got blown away!'); refreshCrew(); }
+    if (!G.demo) { SFX.lost(); toast(T('blown', [FRIENDS[f.id].name])); refreshCrew(); }
     return;
   }
   if (G.demo) { startDemo(); return; }

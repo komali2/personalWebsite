@@ -134,8 +134,9 @@ h3{font-size:12px;font-weight:normal;color:var(--Y);margin:12px 0 6px;text-trans
 #logDetail{text-align:center}
 #logDetail img{width:72px;height:72px}
 #logDetail .zh{font-size:24px;line-height:28px;color:var(--Y)}
-#credits p{margin:8px 0;color:var(--l)}
-#credits a{color:var(--c)}
+#credits p,#aboutS p{margin:8px 0;color:var(--l)}
+#credits a,#aboutS a{color:var(--c)}
+#aboutS b{font-weight:normal;color:var(--Y)}
 pre.lic{white-space:pre-wrap;font:inherit;font-size:12px;color:var(--G);margin-top:8px;max-height:220px;overflow:auto;touch-action:pan-y}
 </style>
 </head>
@@ -166,85 +167,99 @@ pre.lic{white-space:pre-wrap;font:inherit;font-size:12px;color:var(--G);margin-t
     <div id="toggles">
       <button class="tgl" id="tglSound" aria-label="Sound"><img class="px" alt=""></button>
       <button class="tgl" id="tglMotion" aria-label="Reduced motion">≈</button>
+      <button class="tgl" id="tglLang" aria-label="Language / 語言">中</button>
     </div>
     <div id="logo">
       <div class="en">TAIWAN TREATS TRIP</div>
       <div class="zh">吃飽逃颱</div>
-      <div class="sub">Eat your fill. Outrun Typhoon Hangry.</div>
+      <div class="sub" data-i="sub">Eat your fill. Outrun Typhoon Hangry.</div>
     </div>
     <div id="titleBtns">
-      <button class="btn" id="playBtn">PLAY</button>
+      <button class="btn" id="playBtn" data-i="play">PLAY</button>
       <div class="row">
-        <button class="btn alt sm" id="logBtn">SNACK LOG 圖鑑</button>
-        <button class="btn alt sm" id="credBtn">CREDITS</button>
+        <button class="btn alt sm" id="logBtn" data-i="log">SNACK LOG 圖鑑</button>
+        <button class="btn alt sm" id="credBtn" data-i="credits">CREDITS</button>
+        <button class="btn alt sm" id="aboutBtn" data-i="about">ABOUT</button>
       </div>
       <div id="bestLine"></div>
     </div>
   </div>
 
   <div id="select" class="screen scrim">
-    <h2>Pick your ride</h2>
+    <h2 data-i="pickRide">Pick your ride</h2>
     <div class="cards" id="vehCards"></div>
-    <h2 style="margin-top:16px">Who's leading?</h2>
+    <h2 style="margin-top:16px" data-i="whoLeads">Who's leading?</h2>
     <div class="cards" id="leadCards"></div>
-    <div id="goBar"><button class="btn" id="goBtn">GO!</button></div>
+    <div id="goBar"><button class="btn" id="goBtn" data-i="go">GO!</button></div>
   </div>
 
   <div id="pause" class="screen scrim" style="justify-content:center">
     <div class="panel" style="text-align:center">
-      <h2>Paused</h2>
+      <h2 data-i="paused">Paused</h2>
       <div class="row" style="flex-direction:column;align-items:center;gap:14px">
-        <button class="btn" id="resumeBtn">RESUME</button>
+        <button class="btn" id="resumeBtn" data-i="resume">RESUME</button>
         <div class="row">
           <button class="btn alt sm" id="pSound">SOUND</button>
           <button class="btn alt sm" id="pMotion">MOTION</button>
+          <button class="btn alt sm" id="pLang">中文</button>
         </div>
-        <button class="btn alt sm" id="quitBtn">QUIT TO MENU</button>
+        <button class="btn alt sm" id="quitBtn" data-i="quit">QUIT TO MENU</button>
       </div>
     </div>
   </div>
 
   <div id="over" class="screen scrim">
     <div class="panel">
-      <h2 id="overTitle">HANGRY CAUGHT YOU</h2>
+      <h2 id="overTitle" data-i="caught">HANGRY CAUGHT YOU</h2>
       <div id="caughtAt"></div>
       <canvas id="routeMap" class="px"></canvas>
       <div id="routeTxt"></div>
     </div>
     <div class="panel">
-      <div class="stats"><div>SCORE<b id="oScore">0</b></div><div>SNACKS<b id="oSnacks">0</b></div><div>BEST<b id="oBest">0</b></div></div>
-      <div id="newBest" class="hide">NEW BEST!</div>
-      <h3>Snacks eaten</h3>
+      <div class="stats"><div><span data-i="score">SCORE</span><b id="oScore">0</b></div><div><span data-i="snacks">SNACKS</span><b id="oSnacks">0</b></div><div><span data-i="best">BEST</span><b id="oBest">0</b></div></div>
+      <div id="newBest" class="hide" data-i="newBest">NEW BEST!</div>
+      <h3 data-i="eaten">Snacks eaten</h3>
       <div id="tally"></div>
-      <h3>The crew says</h3>
+      <h3 data-i="crewSays">The crew says</h3>
       <div id="quips"></div>
     </div>
     <div class="row" style="margin-top:4px">
-      <button class="btn" id="againBtn">AGAIN</button>
-      <button class="btn alt" id="shareBtn">SHARE</button>
+      <button class="btn" id="againBtn" data-i="again">AGAIN</button>
+      <button class="btn alt" id="shareBtn" data-i="share">SHARE</button>
     </div>
-    <button class="btn alt sm" id="menuBtn" style="margin-top:14px">MENU</button>
+    <button class="btn alt sm" id="menuBtn" style="margin-top:14px" data-i="menu">MENU</button>
   </div>
 
   <div id="log" class="screen scrim">
-    <h2>Snack Log 圖鑑</h2>
+    <h2 data-i="logTitle">Snack Log 圖鑑</h2>
     <div id="logCount" class="dim" style="margin-bottom:8px"></div>
     <div class="panel hide" id="logDetail" style="margin-bottom:12px"></div>
     <div id="logGrid"></div>
-    <button class="btn alt sm" id="logBack" style="margin-top:16px">BACK</button>
+    <button class="btn alt sm" id="logBack" style="margin-top:16px" data-i="back">BACK</button>
   </div>
 
   <div id="credits" class="screen scrim">
-    <h2>Credits</h2>
+    <h2 data-i="credTitle">Credits</h2>
     <div class="panel">
-      <p>Made for the crew's 2026 road trip through the middle of Taiwan: Jeremy, Riley, Caleb, Lauren &amp; Rachel.</p>
-      <p>Design, code, pixel art and sound synthesized by Caleb with Claude.</p>
-      <p>Font: Cubic 11 俐方體11號 by ACh &amp; the Cubic 11 Project Authors, derived from JF Dot M+H 12 and M+ Bitmap Fonts. Licensed under the SIL Open Font License 1.1. Tone vowels added for pinyin. <a href="https://github.com/ACh-K/Cubic-11" target="_blank" rel="noopener">github.com/ACh-K/Cubic-11</a></p>
-      <p>Taiwan Treats Trip is free software under the GNU General Public License v3 or later. Source: <a href="https://github.com/komali2/personalWebsite" target="_blank" rel="noopener">github.com/komali2/personalWebsite</a></p>
-      <p>No typhoons were harmed. Several snacks were.</p>
+      <p data-ih="cred1"></p>
+      <p data-ih="cred2"></p>
+      <p data-ih="cred4"></p>
+      <p data-ih="cred5"></p>
+      <p data-ih="cred6"></p>
       <pre class="lic" id="licText"></pre>
     </div>
-    <button class="btn alt sm" id="credBack" style="margin-top:16px">BACK</button>
+    <button class="btn alt sm" id="credBack" style="margin-top:16px" data-i="back">BACK</button>
+  </div>
+
+  <div id="aboutS" class="screen scrim">
+    <h2 data-i="aboutTitle">About</h2>
+    <div class="panel">
+      <p data-ih="about1"></p>
+      <p data-ih="about2"></p>
+      <h3 data-i="whyTitle">Why?</h3>
+      <p data-ih="why"></p>
+    </div>
+    <button class="btn alt sm" id="aboutBack" style="margin-top:16px" data-i="back">BACK</button>
   </div>
 
   <div id="toast"></div>

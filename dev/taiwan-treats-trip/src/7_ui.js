@@ -5,7 +5,7 @@
    ========================================================================= */
 const $ = id => document.getElementById(id);
 let state = 'boot', lastTs = 0, drag = null;
-const SCREENS = ['title', 'select', 'pause', 'over', 'log', 'credits'];
+const SCREENS = ['title', 'select', 'pause', 'over', 'log', 'credits', 'aboutS'];
 function show(id) { SCREENS.forEach(s => $(s).classList.toggle('on', s === id)); }
 function toast(msg) { const t = $('toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toast.h); toast.h = setTimeout(() => t.classList.remove('on'), 1800); }
 
@@ -16,6 +16,7 @@ function startDemo() {
 function startGame() {
   AU.init();
   newRun({ veh: save.veh, lead: save.lead });
+  G.prevBest = save.best;
   state = 'play';
   show(null);
   $('hud').classList.remove('hide');
@@ -27,7 +28,7 @@ function toTitle() {
   $('hud').classList.add('hide');
   AU.setWind(0);
   startDemo();
-  $('bestLine').textContent = save.best ? 'BEST ' + fmt(save.best) : '';
+  $('bestLine').textContent = save.best ? T('bestLine', [fmt(save.best)]) : '';
   show('title');
 }
 
@@ -57,7 +58,7 @@ function updateHUD() {
   if (hc.b !== b) { hc.b = b; const f = $('bellyFill'); f.style.width = b + '%'; f.classList.toggle('low', b < 25); }
   const gap = Math.max(0, G.gap || 0), sf = Math.round(clamp(1 - gap / 500, 0, 1) * 100);
   if (hc.sf !== sf) { hc.sf = sf; $('stormBar').firstElementChild.style.left = sf + '%'; }
-  setTxt('stormTxt', 'Hangry ' + (gap / 100).toFixed(1) + ' km');
+  setTxt('stormTxt', T('hangryKm', [(gap / 100).toFixed(1)]));
   const ch = Math.round(G.charge);
   if (hc.ch !== ch) { hc.ch = ch; $('abilityBtn').style.setProperty('--p', ch + '%'); $('abilityBtn').classList.toggle('ready', ch >= 100); }
   const act = !!(G.drone || G.cool || G.whimsy || G.kung || G.storm.glitch);
@@ -129,48 +130,44 @@ function drawMinimap(cnv, big) {
 function onGameOver() {
   if (G.demo) return;
   const key = G.veh + '-' + G.lead;
-  G.newBest = G.score > save.best && G.score > 0;
+  G.newBest = G.score > (G.prevBest || 0);
   save.best = Math.max(save.best, G.score);
   save.bests[key] = Math.max(save.bests[key] || 0, G.score);
-  for (const k in G.tally) if (G.tally[k] > 0) save.eaten[k] = (save.eaten[k] || 0) + G.tally[k];
   save.runs++;
   persist();
 }
 function favOf(id) { const t = G.fTally[id]; let best = null, n = 0; for (const k in t) if (t[k] > n) { n = t[k]; best = k; } return [best, n]; }
+const QUIPS = { jeremy: [['n', 'q_j1'], ['', 'q_j2'], ['', 'q_j3']], riley: [['n', 'q_r1'], ['', 'q_r2'], ['', 'q_r3']], caleb: [['', 'q_c1'], ['', 'q_c2'], ['n', 'q_c3']],
+  lauren: [['', 'q_l1'], ['n', 'q_l2'], ['r', 'q_l3']], rachel: [['k', 'q_a1'], ['n', 'q_a2'], ['', 'q_a3']] };
 function quipFor(id) {
-  const name = FRIENDS[id].name, [fav, n] = favOf(id), fs = fav ? SNACKS[fav].py + ' ' + SNACKS[fav].zh : '';
-  if (G.lost.includes(id)) return `${name} got blown away near ${REG[G.stats.lostAt[id]].en}. Still waving at the bus stop.`;
-  const km = Math.max(1, Math.round(G.p.d / 100));
-  const pool = {
-    jeremy: [n >= 2 && `${name} ate ${n} ${fs} while flying the drone one-handed.`, `${name}'s drone got 4K footage of Hangry eating us.`, `${name} says the drone saw Hangry coming. Nobody listened.`],
-    riley: [n >= 2 && `${name} ate ${n} ${fs} and blamed it on a race condition.`, `${name} tried to hack the typhoon's firmware. Typhoons don't have firmware.`, `${name} is still picking crumbs out of the keyboard.`],
-    caleb: [`${name}'s hair survived. That's what matters.`, `${name} never took the sunglasses off. Not even inside the typhoon.`, n >= 2 && `${name} ate ${n} ${fs}. Very coolly.`],
-    lauren: [`${name} wants to adopt a stray dog and name it Hangry Jr.`, n >= 2 && `${name} ate ${n} ${fs} and called it a spiritual experience.`, G.stats.rare > 0 && `${name} saw the golden bubble tea and screamed.`],
-    rachel: [G.stats.kicked > 0 && `${name} kicked ${G.stats.kicked} things off the road.`, n >= 2 && `${name} ate ${n} ${fs}. Kung fu burns calories.`, `${name} says Hangry fights dirty.`],
-  }[id].filter(Boolean);
-  if (G.stats.hits >= 6) pool.push(`${name} would like a different driver next time.`);
-  if (km > 150) pool.push(`${name} says ${km} km is a personal record for snacking.`);
-  const fresh = pool.filter(q => !quipFor.used.has(q.replace(name, '')));
-  const q = (fresh.length ? fresh : pool)[Math.random() * (fresh.length || pool.length) | 0];
-  quipFor.used.add(q.replace(name, ''));
-  return q;
+  const [fav, n] = favOf(id);
+  const o = { name: FRIENDS[id].name, n, k: G.stats.kicked, km: Math.max(1, Math.round(G.p.d / 100)),
+    fav: fav ? (LANG === 'zh' ? SNACKS[fav].zh : SNACKS[fav].py + ' ' + SNACKS[fav].zh) : '' };
+  if (G.lost.includes(id)) return T('q_lost', { ...o, region: rName(G.stats.lostAt[id]) });
+  const ok = { '': true, n: n >= 2, k: G.stats.kicked > 0, r: G.stats.rare > 0 };
+  const keys = QUIPS[id].filter(([c]) => ok[c]).map(q => q[1]);
+  if (G.stats.hits >= 6) keys.push('q_hits');
+  if (o.km > 150) keys.push('q_km');
+  const fresh = keys.filter(k => !quipFor.used.has(k)), from = fresh.length ? fresh : keys;
+  const k = from[Math.random() * from.length | 0];
+  quipFor.used.add(k);
+  return T(k, o);
 }
 quipFor.used = new Set();
 function showOver() {
   state = 'over';
   $('hud').classList.add('hide');
   AU.setWind(.25);
-  const where = REG[G.caughtAt];
-  $('caughtAt').textContent = `near ${where.en} ${where.zh}`;
+  $('caughtAt').textContent = T('near', [rBoth(G.caughtAt)]);
   const rm = $('routeMap'); rm.width = 72; rm.height = 117; rm.style.width = '144px'; rm.style.height = '234px';
   drawMinimap(rm, true);
-  $('routeTxt').textContent = G.route.map(id => REG[id].en).join(' → ') + ' 🌀';
+  $('routeTxt').textContent = G.route.map(rName).join(' → ') + ' 🌀';
   $('oScore').textContent = fmt(G.score);
   $('oSnacks').textContent = G.stats.snacks;
   $('oBest').textContent = fmt(save.best);
   $('newBest').classList.toggle('hide', !G.newBest);
   const ids = Object.keys(G.tally).filter(k => G.tally[k] > 0).sort((a, b) => G.tally[b] - G.tally[a]);
-  $('tally').innerHTML = ids.length ? ids.map(k => `<span title="${SNACKS[k].en}"><img class="px" src="${sprURL(k)}" alt="${SNACKS[k].en}">×${G.tally[k]}</span>`).join('') : '<span class="dim">Nothing. Hangry is proud of you.</span>';
+  $('tally').innerHTML = ids.length ? ids.map(k => `<span title="${sName(k)}"><img class="px" src="${sprURL(k)}" alt="${sName(k)}">×${G.tally[k]}</span>`).join('') : `<span class="dim">${T('nothing')}</span>`;
   quipFor.used.clear();
   $('quips').innerHTML = G.crew.map(id => `<div><img class="px" src="${sprURL('por_' + id)}" alt=""><span>${quipFor(id)}</span></div>`).join('');
   show('over');
@@ -178,44 +175,46 @@ function showOver() {
 }
 async function share() {
   const url = location.href.split(/[?#]/)[0];
-  const txt = `🌀 Taiwan Treats Trip 吃飽逃颱\n${G.route.map(id => REG[id].en).join(' → ')} 🌀\n🥟 ${G.stats.snacks} snacks · ${fmt(G.score)} pts · best combo ${G.bestCombo}\nLeader: ${FRIENDS[G.lead].name} · ${G.veh === 'car' ? '🚗 Hatchback' : '🛵 Scooter Squad'}\n${url}`;
+  const txt = T('shareTxt', { route: G.route.map(rName).join(' → '), n: G.stats.snacks, score: fmt(G.score), combo: G.bestCombo, lead: FRIENDS[G.lead].name, veh: T(G.veh === 'car' ? 'vehCar' : 'vehScooter'), url });
   if (navigator.share) { try { await navigator.share({ text: txt }); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
-  try { await navigator.clipboard.writeText(txt); toast('Copied! Paste it in the group chat'); }
+  try { await navigator.clipboard.writeText(txt); toast(T('copiedChat')); }
   catch (e) {
     const ta = document.createElement('textarea'); ta.value = txt; document.body.appendChild(ta); ta.select();
-    try { document.execCommand('copy'); toast('Copied!'); } catch (e2) { toast('Could not copy'); }
+    try { document.execCommand('copy'); toast(T('copied')); } catch (e2) { toast(T('noCopy')); }
     ta.remove();
   }
 }
 
 /* ---------- select screen ---------- */
 function buildSelect() {
-  const veh = [['car', 'Hatchback', 'Steady and quick. One car, one chance.', sprURL('car', 'RRR'), 42, 66],
-    ['scooter', 'Scooter Squad', 'Five scooters, wide sweeps, chaos. Hangry eats the back one first.', sprURL('scooter', 'RfY'), 32, 56]];
+  const veh = [['car', T('hatch'), T('hatchD'), sprURL('car', 'RRR'), 42, 66],
+    ['scooter', T('squad'), T('squadD'), sprURL('scooter', 'RfY'), 32, 56]];
   $('vehCards').innerHTML = veh.map(([id, n, d, src, w, h]) => `<button class="card${save.veh === id ? ' sel' : ''}" data-veh="${id}"><img class="px" src="${src}" width="${w}" height="${h}" alt=""><b>${n}</b><small>${d}</small></button>`).join('');
-  $('leadCards').innerHTML = CREW.map(id => { const f = FRIENDS[id]; return `<button class="card${save.lead === id ? ' sel' : ''}" data-lead="${id}"><img class="px" src="${sprURL('por_' + id)}" width="48" height="48" alt=""><span><b>${f.name}</b><em>${f.ab} ${f.zh}</em><small>${f.desc}</small></span></button>`; }).join('');
+  $('leadCards').innerHTML = CREW.map(id => { const f = FRIENDS[id]; return `<button class="card${save.lead === id ? ' sel' : ''}" data-lead="${id}"><img class="px" src="${sprURL('por_' + id)}" width="48" height="48" alt=""><span><b>${f.name}</b><em>${fAbility(id)}</em><small>${fDesc(id)}</small></span></button>`; }).join('');
 }
 
 /* ---------- snack log ---------- */
 function openLog() {
-  const groups = [['Everywhere 到處都有', COMMON.concat(['zhenzhu'])]];
-  for (const id of ['taipei', 'taichung', 'wuling', 'jiufen', 'taroko', 'hualien', 'taitung', 'kaohsiung']) groups.push([`${REG[id].en} ${REG[id].zh}`, REG[id].spec]);
-  groups.push(['Fell off a blue truck 藍色小貨車', ['gaolicai', 'xigua', 'fengli']]);
+  const groups = [[T('everywhere'), COMMON.concat(['zhenzhu'])]];
+  for (const id of ['taipei', 'taichung', 'wuling', 'jiufen', 'taroko', 'hualien', 'taitung', 'kaohsiung']) groups.push([rBoth(id), REG[id].spec]);
+  groups.push([T('truckGroup'), ['gaolicai', 'xigua', 'fengli']]);
   let found = 0, total = 0;
   $('logGrid').innerHTML = groups.map(([name, ids]) => `<div class="rg">${name}</div>` + ids.map(id => {
     total++; const n = save.eaten[id] || 0; if (n) found++;
     return `<button data-snack="${id}"><img class="px" src="${sprURL(id, null, n ? '' : 'sil')}" alt=""><span>${n ? '×' + n : '?'}</span></button>`;
   }).join('')).join('');
-  $('logCount').textContent = `${found} / ${total} discovered`;
+  $('logCount').textContent = T('discovered', [found, total]);
   $('logDetail').classList.add('hide');
   state = 'log'; show('log'); $('log').scrollTop = 0;
 }
 function logDetail(id) {
   const s = SNACKS[id], n = save.eaten[id] || 0, el = $('logDetail');
-  const where = s.t === 'c' ? 'everywhere' : s.t === 'r' ? 'anywhere, rarely (most in Taichung)' : s.t === 'g' ? 'the back of blue trucks' : REG[Object.keys(REG).find(r => REG[r].spec.includes(id))].en;
+  const reg = Object.keys(REG).find(r => REG[r].spec.includes(id));
+  const where = s.t === 'c' ? T('whereC') : s.t === 'r' ? T('whereR') : s.t === 'g' ? T('whereG') : rName(reg);
+  const hint = s.t === 's' ? T('notYetS', [rName(reg)]) : T('notYet' + s.t.toUpperCase());
   el.innerHTML = n
-    ? `<img class="px" src="${sprURL(id)}" alt=""><div class="zh">${s.zh}</div><div>${s.py}</div><div class="dim">${s.en}</div><p style="margin:8px 0">${s.d}</p><div class="dim">Eaten ×${n} · found ${where}</div>`
-    : `<img class="px" src="${sprURL(id, null, 'sil')}" alt=""><div class="zh">？？？</div><p style="margin:8px 0">Not eaten yet. Look ${s.t === 'c' || s.t === 'r' || s.t === 'g' ? '' : 'around '}${where}.</p>`;
+    ? `<img class="px" src="${sprURL(id)}" alt=""><div class="zh">${s.zh}</div><div>${s.py}</div><div class="dim">${s.en}</div><p style="margin:8px 0">${sDesc(id)}</p><div class="dim">${T('eatenFound', [n, where])}</div>`
+    : `<img class="px" src="${sprURL(id, null, 'sil')}" alt=""><div class="zh">？？？</div><p style="margin:8px 0">${hint}</p>`;
   el.classList.remove('hide');
   $('log').scrollTop = 0;
 }
@@ -226,11 +225,19 @@ function syncToggles() {
   $('tglSound').classList.toggle('off', save.mute);
   $('tglMotion').classList.toggle('off', save.reduce);
   $('tglMotion').textContent = save.reduce ? '—' : '≈';
-  $('pSound').textContent = save.mute ? 'SOUND: OFF' : 'SOUND: ON';
-  $('pMotion').textContent = save.reduce ? 'MOTION: LOW' : 'MOTION: FULL';
+  $('pSound').textContent = T(save.mute ? 'soundOff' : 'soundOn');
+  $('pMotion').textContent = T(save.reduce ? 'motionLow' : 'motionFull');
+  $('tglLang').textContent = LANG === 'zh' ? 'EN' : '中';
+  $('pLang').textContent = T('langSwitch');
 }
 function toggleSound() { AU.init(); AU.setMute(!save.mute); syncToggles(); }
 function toggleMotion() { save.reduce = !save.reduce; persist(); syncToggles(); }
+function toggleLang() {
+  LANG = LANG === 'zh' ? 'en' : 'zh'; save.lang = LANG; persist();
+  applyLang(); syncToggles(); buildSelect();
+  if (state === 'log') openLog();
+  $('bestLine').textContent = save.best ? T('bestLine', [fmt(save.best)]) : '';
+}
 
 /* ---------- input ---------- */
 function bindInput() {
@@ -265,6 +272,8 @@ function bindInput() {
   click('goBtn', startGame);
   click('logBtn', openLog);
   click('credBtn', () => { state = 'credits'; show('credits'); });
+  click('aboutBtn', () => { state = 'about'; show('aboutS'); });
+  click('aboutBack', toTitle);
   click('logBack', toTitle);
   click('credBack', toTitle);
   click('resumeBtn', resumeGame);
@@ -276,6 +285,8 @@ function bindInput() {
   $('tglMotion').addEventListener('click', toggleMotion);
   $('pSound').addEventListener('click', toggleSound);
   $('pMotion').addEventListener('click', toggleMotion);
+  $('tglLang').addEventListener('click', toggleLang);
+  $('pLang').addEventListener('click', toggleLang);
   $('vehCards').addEventListener('click', e => { const b = e.target.closest('[data-veh]'); if (!b) return; save.veh = b.dataset.veh; persist(); SFX.ui(); buildSelect(); });
   $('leadCards').addEventListener('click', e => { const b = e.target.closest('[data-lead]'); if (!b) return; save.lead = b.dataset.lead; persist(); SFX.ui(); buildSelect(); });
   $('logGrid').addEventListener('click', e => { const b = e.target.closest('[data-snack]'); if (b) logDetail(b.dataset.snack); });
@@ -303,6 +314,7 @@ async function boot() {
   }
   if (typeof LICENSE_TEXT === 'string') $('licText').textContent = LICENSE_TEXT;
   bindInput();
+  applyLang();
   syncToggles();
   toTitle();
   requestAnimationFrame(t => { lastTs = t; requestAnimationFrame(frame); });
