@@ -37,7 +37,7 @@ const fmt = n => Math.round(n).toLocaleString('en-US');
 const STATS = ['atk', 'spa', 'hp', 'spd'];
 
 /* ------------------------------ playable bugs ------------------------------
-   size: rough log-scale body size, drives on-screen scale and Intimidate.
+   size: rough log-scale body size, drives on-screen scale and how easily the beetle's Intimidate works.
    base: level-1 stats. grow: what one stat point adds. pref: the bot's (and demo's) build. */
 const BUGS = {
   beetle: { en: 'Rhino Beetle', zh: '獨角仙', sci: 'Trypoxylus dichotomus', size: 4.5, col: 'v', col2: 'y',
@@ -45,7 +45,7 @@ const BUGS = {
     basic: { en: 'Shove', zh: '頂撞' },
     sp: { id: 'hornflip', cd: 6, en: 'Horn Flip', zh: '挑角', d: 'Hit and knock the enemy gauge back 40%.', dz: '攻擊並把對手的行動條打退 40%。' },
     su: { id: 'sumo', en: 'Sumo Throw', zh: '相撲', d: 'Huge hit and a 2 s stun.', dz: '超大傷害，再暈眩 2 秒。' },
-    tr: { en: 'Intimidate', zh: '威嚇', d: 'Smaller guards sometimes flee.', dz: '比較小的守衛有時會直接逃跑。' },
+    tr: { en: 'Intimidate', zh: '威嚇', d: 'Enemy bugs sometimes freeze in fear, delaying their first move (smaller ones more often).', dz: '敵方的蟲有時會被嚇呆，第一招延後出手（越小隻越容易）。' },
     pref: ['atk', 'hp', 'atk', 'spd', 'hp', 'spa'] },
   mantis: { en: 'Giant Asian Mantis', zh: '寬腹螳螂', sci: 'Hierodula patellifera', size: 4.4, col: 'e', col2: 'Y',
     base: { hp: 38, atk: 11, spa: 9, spd: 12 }, grow: { hp: 6, atk: 2.5, spa: 2, spd: 1.4 },

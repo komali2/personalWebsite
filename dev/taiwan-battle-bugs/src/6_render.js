@@ -246,7 +246,7 @@ function drawNear(c, t) {
     c.globalAlpha = 1;
   }
   const gd = node.guard;
-  if (gd && (G.phase === 'arrive' || G.phase === 'fight' || G.phase === 'flee')) drawFoe(c, t, gd);
+  if (gd && (G.phase === 'arrive' || G.phase === 'fight')) drawFoe(c, t, gd);
 }
 function drawFoe(c, t, gd) {
   const B = G.B, f = B && B.foe, id = 'fr_' + gd.id, im = spr(id);
@@ -256,8 +256,6 @@ function drawFoe(c, t, gd) {
   if (G.phase === 'arrive') {
     const k = easeOut(G.pt / .45);
     if (gd.hidden) y -= (1 - k) * H * .6; else { s *= lerp(.4, 1, k); alpha = k; }
-  } else if (G.phase === 'flee') {
-    const k = G.pt / .8; x += k * k * W; y -= k * 10;
   }
   if (f) {
     if (f.wind > 0) { x += (mr() - .5) * 2; s *= 1.06; if ((t * 10 | 0) % 2) mode = 'red'; }
@@ -278,6 +276,8 @@ function drawFoe(c, t, gd) {
 
 /* ---------- Auntie ---------- */
 const auntS = () => clamp(3 + (4.6 - BUGS[G.bug].size) * .45, 3, 4.5);
+// 0 while she's here, 1 once she has given up and left
+const auntGone = () => G.phase === 'won' ? 1 : G.phase === 'fOut' ? ss((G.pt - 1.6) / 1.2) : 0;
 function fistPos(t) {
   const B = G.B, f = B && B.foe;
   let p = [W * .82, H * .5];
@@ -290,7 +290,7 @@ function fistPos(t) {
       p = [lerp(W * .88, target[0], k), lerp(H * .36, target[1], k)];
     }
   }
-  if (G.phase === 'fOut') p = [W * .7 + Math.sin(t * 9) * 4, H * .3];
+  if (G.phase === 'fOut') { const g = auntGone(); p = [W * .7 + Math.sin(t * 9) * 4 * (1 - g), lerp(H * .3, H + 8 * auntS(), g)]; }
   return p;
 }
 function drawAunt(c, t) {
@@ -300,11 +300,12 @@ function drawAunt(c, t) {
   let fy = H * .3 - 22 * S + Math.sin(t * 1.2) * 2;
   if (G.phase === 'fIntro') fy = lerp(-48 * S - 20, fy, easeOut(G.pt / 1.1));
   fy = Math.min(fy, H * .12);
-  if (G.phase === 'fOut') fy -= ss((G.pt - 1.6) / 1.2) * S * 30;
-  const face = G.phase === 'fOut' ? 'au_tired' : (f && (f.rage || f.wind > 0)) || G.phase === 'dead' ? 'au_mad' : 'au_face';
+  const gone = auntGone();
+  fy = lerp(fy, -48 * S - 10, gone);
+  const face = G.phase === 'fOut' || G.phase === 'won' ? 'au_tired' : (f && (f.rage || f.wind > 0)) || G.phase === 'dead' ? 'au_mad' : 'au_face';
   // her shadow darkens the whole bush
-  c.fillStyle = 'rgba(24,20,37,.28)'; c.fillRect(0, 0, W, H);
-  dspr(face, W / 2 - 28 * S + (f && f.flash > 0 ? 2 : 0), fy, S, null, false, c);
+  c.fillStyle = `rgba(24,20,37,${(.28 * (1 - gone)).toFixed(3)})`; c.fillRect(0, 0, W, H);
+  if (gone < 1) dspr(face, W / 2 - 28 * S + (f && f.flash > 0 ? 2 : 0), fy, S, null, false, c);
 }
 function drawArm(c, t) {
   if (G.phase !== 'fight' && G.phase !== 'fOut' && !(G.phase === 'fIntro' && G.pt > .8) && G.phase !== 'dead') return;

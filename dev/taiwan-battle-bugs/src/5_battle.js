@@ -32,6 +32,10 @@ function startBattle(kind) {
   foe.hp = foe.max;
   G.B = { me, foe, kind, t: 0, sched: [], over: null, endT: 0 };
   pickMove(foe);
+  // the beetle's Intimidate: enemy bugs sometimes freeze up, delaying their first move
+  if (G.bug === 'beetle' && kind !== 'farmer' && chance(sizeOf(foe.id) < BUGS.beetle.size - 1 ? .6 : .3)) {
+    foe.g = 0; foe.stun = 1.5; floatTxt(foe, T('scared'), C.Y); SFX.stance();
+  }
 }
 function pickMove(f) {
   if (f.farmer) f.move = wpick(f.rage ? f.farmer.p2 : f.farmer.p1);

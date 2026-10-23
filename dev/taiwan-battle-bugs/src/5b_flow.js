@@ -52,16 +52,9 @@ function update(dt) {
       if (G.pt < .5) break;
       const gd = G.node.guard;
       if (!gd) { setPhase('eat'); break; }
-      if (G.bug === 'beetle' && !gd.elite && sizeOf(gd.id) < BUGS.beetle.size - 1 && chance(.4)) {
-        G.node.fought = true; setPhase('flee'); banner(T('fled', [N(who(gd.id))])); SFX.miss();
-        break;
-      }
       startBattle('bug'); setPhase('fight');
       break;
     }
-    case 'flee':
-      if (G.pt >= .8) { gainXP(Math.round(foeXP(G.node.guard) / 2)); setPhase('eat'); }
-      break;
     case 'fight': {
       battleStep(dt);
       const B = G.B;
