@@ -305,7 +305,11 @@ function drawBoardOf(b, g, o) {
       const r = drawRider(face, c, 1, dy + (solvedNow ? -Math.round(Math.abs(Math.sin(t * 8)) * 3) : 0), null, jig);
       if (!r) continue;
       if (bad) dspr(Math.floor(G.t * 3) % 2 ? 'fx_angry' : 'fx_sweat', r[0] + r[2] - 3, r[1] - 2, 1, null, o.alpha);
-      if (!ov && G.R.lost && c === G.R.lost.cell) dspr('fx_q', r[0] + r[2] / 2 - 2, r[1] - 8 + Math.round(Math.sin(G.t * 4)), 1, null, o.alpha);
+      // a lost rider bobs a "?"; once their own line's area reaches them, a heart
+      if (!ov && G.R.lost && c === G.R.lost.cell) {
+        const home = b.reg[c] === G.R.lost.line;
+        dspr(home ? 'fx_heart' : 'fx_q', r[0] + r[2] / 2 - 2, r[1] - 8 + Math.round(Math.sin(G.t * (home ? 8 : 4))), 1, null, o.alpha);
+      }
       if (G.byHint[c]) dspr('fx_star', r[0] - 2, r[1] - 2, 1, null, o.alpha * (.5 + .5 * Math.sin(G.t * 6)));
     }
   }

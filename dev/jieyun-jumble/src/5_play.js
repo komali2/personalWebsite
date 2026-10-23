@@ -16,6 +16,7 @@ function newGame(o) {
   G = { R, demo: !!o.demo, bot: !!o.demo, botWait: 1.2, phase: 'play', pt: 0, t: 0, undo: [], drag: null, hint: null, clash: null,
     old: null, tick: { msgs: [], over: null, x: 0 }, newStamps: [], crowdShow: R.crowd, warned: false, cheer: 0, pops: [], parts: [] };
   setBoard(R.b, null);
+  if (o.snap && o.snap.newStamps) G.newStamps = o.snap.newStamps.slice();
   if (o.snap && o.snap.marks) { o.snap.marks.forEach((m, c) => { if (!G.lock[c]) G.marks[c] = m; }); if (o.snap.face) o.snap.face.forEach((f, c) => { if (f && G.marks[c] === 2) G.face[c] = f; }); refresh(); }
   if (!G.demo && !o.snap) stampBoard(R.b);
   return G;
@@ -182,9 +183,11 @@ function hintPlace() {
 
 /* ---------- lost riders ---------- */
 function lostSpeak(which) {
-  if (!G.R.lost && which === 'ask') return;
-  const who = lostOf(which === 'thanks' && G.lastDelivered ? G.lastDelivered : G.R.lost.id), line = who[which];
-  if (G.demo) return;
+  // (may run from a timer after the player has left the run)
+  if (!G || G.demo || state !== 'play') return;
+  const id = which === 'thanks' ? G.lastDelivered : G.R.lost && G.R.lost.id;
+  if (!id) return;
+  const who = lostOf(id), line = who[which];
   if (who.voice === 'tw') showMsg(line.tw, 'lost', 4, N(line));
   else if (who.voice === 'en') showMsg(line.en, 'lost', 4, LANG === 'zh' ? line.zh : '');
   else showMsg(line.zh, 'lost', 4, LANG === 'zh' ? '' : line.en);

@@ -299,7 +299,8 @@ function resumeGame() { state = 'play'; show(null); }
 function frame(ts) {
   const dt = Math.min(.05, Math.max(0, (ts - lastTs) / 1000));
   lastTs = ts;
-  if (G && state !== 'pause' && state !== 'over' && state !== 'boot') updateGame(dt);
+  // the real day only runs while you're playing (not paused, not reading the rules); the title demo always runs
+  if (G && (state === 'play' || G.demo)) updateGame(dt);
   if (state === 'play' && G && !G.demo) updateHUD();
   render(state === 'pause' ? 0 : dt);
   requestAnimationFrame(frame);
