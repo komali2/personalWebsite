@@ -65,7 +65,7 @@ Read this first if you are picking the work up (any agent, any provider).
 - [x] Text: `src/2b_text.js` (Auntie's 台語 lines await Caleb's proofreading, table at the end)
 - [x] Code: src 1–7, build, headless smoke test (`node tools/shot.js`: every phase, no console errors)
 - [x] Balance sim, first pass (`node tools/sim.js 16 all`): bot win rate beetle 50%, mantis 44%, stink 50%, hopper 38%, spider 31%; regular fights 6–11 s; Auntie fights 20–60 s; bot win runs ~4–5 min (humans are slower at forks and stat picks)
-- [ ] Deploy + live check
+- [x] Deployed 2026-10-23; live page byte-identical to the build, smoke test passes against the live URL
 - [ ] Next: Caleb plays it on a phone; tune feel (fork readability, button feel, Auntie difficulty); maybe BELLY 9–10 if runs feel short; music (stretch); later events (dialog, augmentations), tea regions
 
 ## Balance knobs
