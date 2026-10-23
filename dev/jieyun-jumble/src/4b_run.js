@@ -10,11 +10,15 @@ const DAY = {
   seconds: 600,          // real seconds from 06:00 to 24:00
   cap: 60,               // people on the platform at 客滿
   start: 8,              // people waiting when the first train is due
-  load: .45,             // a train boards load * n * n people
-  hint1: 5, hint2: 10,   // people who pile in while you take a hint
+  load: .55,             // a train boards load * n * n people
+  hint1: 3, hint2: 6,    // people who pile in while you take a hint
   clearBonus: 5,         // × board size, for emptying a platform that held at least clearMin people
   clearMin: 12,
   rushMul: 2,            // score multiplier at rush hour
+  fillMul: .85,          // scales every arrival rate below
+  // on a crowded platform some people give up and grab a YouBike or a bus:
+  // above leaveFrom × cap, leaveRate × (the excess) people leave per second
+  leaveFrom: .5, leaveRate: .02,
   // arrivals per real second through the day [game minute from 06:00, rate]; linear in between
   fill: [[0, .2], [50, .27], [70, .85], [170, .85], [200, .38], [360, .38], [420, .45], [470, .38], [640, .4], [660, .85], [780, .85], [810, .36], [960, .27], [1080, .16]],
 };
@@ -119,7 +123,14 @@ function runTick(R, dt) {
   if (R.over) return;
   const m0 = R.m;
   R.m = Math.min(1080, R.m + dt * 1080 / DAY.seconds);
-  R.crowd += fillRate(R.m) * dt;
+  R.crowd += fillRate(R.m) * DAY.fillMul * dt;
+  const excess = R.crowd - DAY.leaveFrom * DAY.cap;
+  if (excess > 0) {
+    const gone = excess * DAY.leaveRate * dt;
+    R.crowd -= gone; R.gaveUp = (R.gaveUp || 0) + gone;
+    // one event per person who walks off, so the UI can show them leaving
+    if (Math.floor(R.gaveUp) > Math.floor(R.gaveUp - gone)) R.ev.push({ t: 'gaveUp' });
+  }
   if (R.crowd > R.peak) R.peak = R.crowd;
   if (!isRush(m0) && isRush(R.m)) R.ev.push({ t: 'rush' });
   if (isRush(m0) && !isRush(R.m)) R.ev.push({ t: 'rushEnd' });

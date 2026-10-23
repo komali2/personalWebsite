@@ -175,6 +175,8 @@ function drawPlatform() {
     const px = 3 + ((i * 37 + 11) % span), py = y + h - 13 - row * 2 + (G.phase === 'play' && (i + Math.floor(G.t * 2)) % 9 === 0 ? -1 : 0);
     dspr('c_' + (1 + i % 6), px, py, 1, [SHIRT[i % SHIRT.length], PANTS[(i * 3) % PANTS.length]]);
   }
+  // people giving up on the crowd ride off on a shared bike
+  for (const k of G.bikes) dspr('st_bike', k.x - k.t * 60, y + h - 18, 1, null, 1 - clamp((k.t - 1.6) / .6, 0, 1));
   // crowd gauge: people / capacity, red near 客滿
   const f = G.crowdShow / DAY.cap, gx = W - 21, gy = y + 3;
   rect(P('k'), gx - 1, gy - 1, 20, 9);

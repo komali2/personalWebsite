@@ -1,11 +1,12 @@
 // Day balance sim (no browser): simulated players of different speeds play seeded days.
 // usage: node tools/balance.js [days=40]
 // A player needs sec/cell × n² × (1 + 0.15 × logic level) + 2 s per board, ±30% noise, and takes a hint
-// on boards that run past 2.2× their usual time. Targets (PROGRESS.md): average players usually see
-// the last train with a tense evening rush; fast players clear the platform often; slow ones fill up.
+// on boards that run past 2.2× their usual time. Targets (PROGRESS.md, retuned 2026-10-23 after Caleb found
+// it too hard): everyone who keeps solving sees the last train, first-timers (1.2 s/cell) with a tense evening
+// rush; only players stuck for minutes fill the platform.
 const core = require('./core');
 const days = +(process.argv[2] || 40);
-const SKILL = { fast: .32, avg: .55, slow: .85 };
+const SKILL = { fast: .32, avg: .55, slow: .85, first: 1.2 };
 const avg = a => a.length ? a.reduce((x, y) => x + y, 0) / a.length : 0;
 for (const sk in SKILL) {
   const res = [];
@@ -27,5 +28,5 @@ for (const sk in SKILL) {
   }
   const won = res.filter(r => r.won).length;
   const ends = res.filter(r => !r.won).map(r => core.clockStr(r.m)).sort();
-  console.log(`${sk.padEnd(4)} last train ${Math.round(won / days * 100)}%  boards ${avg(res.map(r => r.k)).toFixed(1)}  score ${Math.round(avg(res.map(r => r.score)))}  clears ${avg(res.map(r => r.clears)).toFixed(1)}  peak ${avg(res.map(r => r.peak)).toFixed(0)}/${core.DAY.cap}  lost ${res.reduce((a, r) => a + r.spawned, 0)} spawned ${res.reduce((a, r) => a + r.deliv, 0)} delivered ${res.reduce((a, r) => a + r.left, 0)} left  stations ${avg(res.map(r => r.st)).toFixed(0)}  full at ${ends.slice(0, 6).join(' ')}${ends.length > 6 ? ' …' : ''}`);
+  console.log(`${sk.padEnd(5)} last train ${Math.round(won / days * 100)}%  boards ${avg(res.map(r => r.k)).toFixed(1)}  score ${Math.round(avg(res.map(r => r.score)))}  clears ${avg(res.map(r => r.clears)).toFixed(1)}  peak ${avg(res.map(r => r.peak)).toFixed(0)}/${core.DAY.cap}  lost ${res.reduce((a, r) => a + r.spawned, 0)} spawned ${res.reduce((a, r) => a + r.deliv, 0)} delivered ${res.reduce((a, r) => a + r.left, 0)} left  stations ${avg(res.map(r => r.st)).toFixed(0)}  full at ${ends.slice(0, 6).join(' ')}${ends.length > 6 ? ' …' : ''}`);
 }

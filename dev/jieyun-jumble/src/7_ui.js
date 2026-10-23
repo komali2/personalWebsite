@@ -82,6 +82,7 @@ function showOver() {
   const bits = [];
   if (G.newStamps.length) bits.push(T('newStamps', [G.newStamps.map(stnName).join(LANG === 'zh' ? '、' : ', ')]));
   if (G.newLost) bits.push(T('newLost', [G.newLost]));
+  if (R.gaveUp >= 1) bits.push(T('bikes', [Math.floor(R.gaveUp)]));
   $('overNew').textContent = bits.join(' · ');
   show('over'); $('over').scrollTop = 0;
 }

@@ -62,6 +62,7 @@ const TICKER = {
   full: { en: 'Platform filling up. Make some room!', zh: '月台快客滿了，幫忙找位子！' },
   last: { en: 'Last train. Night owls, this is yours.', zh: '末班車，夜貓子請上車。' },
   open: { en: '{line} opens! {year}', zh: '{line}通車！{year}年' },
+  bike: { en: 'Too crowded! Some riders grabbed a YouBike.', zh: '月台太擠，有人改騎 YouBike 了。' },
 };
 
 /* Clash jokes: shown (one at random) when two commuters break a rule.

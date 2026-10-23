@@ -14,7 +14,7 @@ function newGame(o) {
   o = o || {};
   const R = o.snap ? restoreRun(o.snap.R) : newRun({ seed: o.seed, daily: o.daily });
   G = { R, demo: !!o.demo, bot: !!o.demo, botWait: 1.2, phase: 'play', pt: 0, t: 0, undo: [], drag: null, hint: null, clash: null,
-    old: null, tick: { msgs: [], over: null, x: 0 }, newStamps: [], crowdShow: R.crowd, warned: false, cheer: 0, pops: [], parts: [] };
+    old: null, tick: { msgs: [], over: null, x: 0 }, newStamps: [], crowdShow: R.crowd, warned: false, cheer: 0, pops: [], parts: [], bikes: [] };
   setBoard(R.b, null);
   if (o.snap && o.snap.newStamps) G.newStamps = o.snap.newStamps.slice();
   if (o.snap && o.snap.marks) { o.snap.marks.forEach((m, c) => { if (!G.lock[c]) G.marks[c] = m; }); if (o.snap.face) o.snap.face.forEach((f, c) => { if (f && G.marks[c] === 2) G.face[c] = f; }); refresh(); }
@@ -234,6 +234,8 @@ function updateGame(dt) {
   G.t += dt; G.pt += dt;
   const R = G.R;
   for (const p of G.pops) p.t += dt; G.pops = G.pops.filter(p => p.t < .4);
+  for (const k of G.bikes) k.t += dt; G.bikes = G.bikes.filter(k => k.t < 2.2);
+  if (G.R.crowd < DAY.leaveFrom * DAY.cap * .8) G.bikeSaid = false;
   if (G.hint) G.hint.t += dt;
   if (G.phase === 'play') {
     // background: plan the next board a few ms per frame
@@ -242,6 +244,8 @@ function updateGame(dt) {
     G.crowdShow = R.crowd;
     for (const e of R.ev.splice(0)) {
       if (e.t === 'rush' && !G.demo) { SFX.rush(); banner(T('rushBanner'), T('rushSub')); tickerEvent('rush'); }
+      // someone gives up on the crowded platform and rides off
+      if (e.t === 'gaveUp') { G.bikes.push({ x: 4 + mr() * (W - 30), t: 0 }); if (!G.bikeSaid && !G.demo) { G.bikeSaid = true; tickerEvent('bike'); } }
       if (e.t === 'full' || e.t === 'lastTrain') { G.phase = 'end'; G.pt = 0; G.endWon = e.t === 'lastTrain';
         if (!G.demo) { if (G.endWon) { SFX.last(); banner(T('lastTrain'), '末班車'); tickerEvent('last'); } else { SFX.full(); banner(T('overFull'), '客滿'); } } }
     }
@@ -279,7 +283,7 @@ function botMove() {
 function serializeRun(R) {
   const b = R.b;
   return { seed: R.seed, daily: R.daily, k: R.k, m: R.m, crowd: R.crowd, score: R.score, carried: R.carried, seated: R.seated, clears: R.clears, hints: R.hints,
-    delivered: R.delivered, stations: R.stations, lost: R.lost, peak: R.peak,
+    delivered: R.delivered, stations: R.stations, lost: R.lost, peak: R.peak, gaveUp: R.gaveUp || 0,
     b: { n: b.n, pos: b.pos, dir: b.dir, reg: Array.from(b.reg), sol: b.sol, givens: b.givens, k: b.k, lv: b.lv, steps: b.steps, fresh: b.fresh } };
 }
 function restoreRun(s) {
