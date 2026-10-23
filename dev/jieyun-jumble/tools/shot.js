@@ -1,53 +1,75 @@
-// Headless smoke test + screenshots.  usage: node tools/shot.js [outdir] [--bug=beetle] [--locale=en-US]
-// Drives every phase (fork, rush, fight, Auntie, win, death, log) and prints console errors.
+// Headless smoke test + screenshots.  usage: node tools/shot.js [outdir] [--locale=en-US] [--w=390 --h=844]
+// Drives the title demo, a real day (play by hand and by bot, clash, hints, solve → depart, line opening,
+// lost riders, rush hour, platform full, last train), the stamp book and resume. Prints console errors.
 const { chromium } = require('./node_modules/playwright-core');
 const path = require('path');
 const fs = require('fs');
 const DEV = path.dirname(__dirname);
-const page = path.join(DEV, '..', '..', 'games', 'taiwan-battle-bugs', 'index.html');
+const page = path.join(DEV, '..', '..', 'games', 'jieyun-jumble', 'index.html');
 const arg = (k, d) => { const a = process.argv.find(s => s.startsWith('--' + k + '=')); return a ? a.split('=')[1] : d; };
 const out = path.resolve(process.argv[2] && !process.argv[2].startsWith('--') ? process.argv[2] : path.join(DEV, 'shots'));
 fs.mkdirSync(out, { recursive: true });
 (async () => {
   const b = await chromium.launch({ executablePath: '/usr/bin/chromium', args: ['--autoplay-policy=no-user-gesture-required'] });
-  const pg = await b.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, hasTouch: true, locale: arg('locale', 'en-US') });
+  const pg = await b.newPage({ viewport: { width: +arg('w', 390), height: +arg('h', 844) }, deviceScaleFactor: 1, hasTouch: true, locale: arg('locale', 'en-US') });
   const errs = [];
-  pg.on('console', m => { if ((m.type() === 'error' || m.type() === 'warning') && !/ERR_INVALID_URL|ERR_FILE_NOT_FOUND/.test(m.text())) errs.push(m.type() + ': ' + m.text()); });
+  pg.on('console', m => { if ((m.type() === 'error' || m.type() === 'warning') && !/ERR_INVALID_URL|ERR_FILE_NOT_FOUND|net::/.test(m.text())) errs.push(m.type() + ': ' + m.text()); });
   pg.on('pageerror', e => errs.push('pageerror: ' + e.message + '\n' + (e.stack || '').split('\n').slice(0, 4).join('\n')));
-  await pg.addInitScript(() => localStorage.setItem('taiwan-battle-bugs-v1', JSON.stringify({ mute: true })));
+  await pg.addInitScript(() => localStorage.setItem('jieyun-jumble-v1', JSON.stringify({ mute: true })));
   await pg.goto('file://' + page);
   const snap = async n => { await pg.screenshot({ path: path.join(out, n + '.png') }); };
   const ev = (fn, a) => pg.evaluate(fn, a);
-  await pg.waitForTimeout(2200); await snap('01_title');
-  await pg.click('#playBtn'); await ev(id => { save.bug = id; buildSelect(); }, arg('bug', 'beetle')); await pg.waitForTimeout(200); await snap('02_select');
-  await pg.click('#goBtn'); await pg.waitForTimeout(1600);
-  await ev(() => { G.pts = 2; G.fork.br[0].guard = { id: 'mirid', E: 2, elite: false, hidden: false }; G.fork.br[1].guard = { id: 'hornet', E: 6, elite: true, hidden: false }; });
-  await pg.waitForTimeout(300); await snap('03_fork');
-  await ev(() => choose(1)); await pg.waitForTimeout(280); await snap('04_rush');
-  await pg.waitForTimeout(1400); await snap('05_fight');
-  await ev(() => { G.B.me.sup = 100; playerAct('super'); }); await pg.waitForTimeout(350); await snap('06_super');
-  await ev(() => { G.bot = true; }); await pg.waitForTimeout(9000);
-  console.log('after fight', JSON.stringify(await ev(() => ({ phase: G.phase, hp: Math.round(G.hp), lv: G.lv, belly: G.belly, pts: G.pts, beaten: G.stats.beaten }))));
-  await snap('07_after');
-  // Auntie
-  await ev(() => { G.bot = false; G.belly = BELLY; G.node = G.node || { stars: 1 }; setPhase('fIntro'); });
-  await pg.waitForTimeout(1600); await snap('08_auntie_intro');
-  await pg.waitForTimeout(2200); await snap('09_auntie_fight');
-  await ev(() => { G.B.foe.wind = 0; G.B.foe.g = 1; G.B.foe.move = 'smack'; }); await pg.waitForTimeout(700); await snap('10_auntie_smack');
-  await ev(() => { G.B.foe.hp = G.B.foe.max * .45; }); await pg.waitForTimeout(600); await snap('11_auntie_mad');
-  await ev(() => { G.B.foe.hp = 1; G.bot = true; }); await pg.waitForTimeout(3600); await snap('12_auntie_out');
-  await pg.waitForTimeout(3000); await snap('13_next_bush');
-  // win: skip to the last bush and beat her
-  await ev(() => { G.bush = 2; G.belly = BELLY; G.bot = false; setPhase('fIntro'); }); await pg.waitForTimeout(3200);
-  await ev(() => { G.B.foe.hp = 1; G.bot = true; }); await pg.waitForTimeout(7000); await snap('14_win');
-  // death
-  await pg.click('#wAgainBtn'); await pg.waitForTimeout(1200);
-  await ev(() => { G.fork.br[0].guard = { id: 'hornet', E: 30, elite: true, hidden: true }; choose(0); });
-  await pg.waitForTimeout(1300); await snap('15_ambush');
-  await ev(() => { G.B.me.hp = 1; }); await pg.waitForTimeout(6000); await snap('16_over');
+  const info = () => ev(() => ({ phase: G.phase, n: G.R.b.n, k: G.R.k, clock: clockStr(G.R.m), crowd: Math.round(G.R.crowd), score: G.R.score, lost: G.R.lost && G.R.lost.id }));
+  await pg.waitForTimeout(3500); await snap('01_title');
+  await pg.click('#playBtn'); await pg.waitForTimeout(1200); await snap('02_board');
+  // tap a few blocks by hand: one ✕ and one commuter, then a clash
+  const tapCell = async c => { const [x, y] = await ev(c => { const g = geo(G.R.b.n), r = $('game').getBoundingClientRect(); return [r.left + (g.x + (c % g.n + .5) * g.cs) / W * r.width, r.top + (g.y + (Math.floor(c / g.n) + .5) * g.cs) / H * r.height]; }, c); await pg.mouse.click(x, y); };
+  const free = await ev(() => { const a = []; G.marks.forEach((v, c) => { if (!v) a.push(c); }); return a; });
+  await tapCell(free[0]); await tapCell(free[1]); await tapCell(free[1]);
+  await pg.waitForTimeout(200); await snap('03_marks');
+  // force a clash: two commuters in one row
+  await ev(() => { const n = G.R.b.n, row = []; for (let x = 0; x < n; x++) if (!G.lock[x]) row.push(x); setMarks([[row[0], 2], [row[row.length - 1], 2]]); });
+  await pg.waitForTimeout(300); await snap('04_clash');
+  await ev(() => clearMarks()); await pg.waitForTimeout(100);
+  await pg.click('#hintBtn'); await pg.waitForTimeout(400); await snap('05_hint');
+  await pg.click('#hintBtn'); await pg.waitForTimeout(400); await snap('06_hint2');
+  // let the bot finish the board, catch the depart animation
+  await ev(() => { G.bot = true; G.botSpeed = .05; });
+  for (let i = 0; i < 60; i++) { if (await ev(() => G.phase !== 'play')) break; await pg.waitForTimeout(100); }
+  await pg.waitForTimeout(700); await snap('07_depart');
+  await pg.waitForTimeout(1300); await snap('08_flood');
+  for (let i = 0; i < 40; i++) { if (await ev(() => G.phase === 'play')) break; await pg.waitForTimeout(100); }
+  console.log('after board 1', JSON.stringify(await info()));
+  // play on to a line opening
+  for (let i = 0; i < 80; i++) { if (await ev(() => G.phase === 'open')) break; await pg.waitForTimeout(100); }
+  await pg.waitForTimeout(1500); await snap('09_open');
+  // jump ahead to 9x9 with rush hour on
+  await ev(() => { G.bot = false; });
+  for (let i = 0; i < 40; i++) { if (await ev(() => G.phase === 'play')) break; await pg.waitForTimeout(100); }
+  await ev(() => { G.R.m = 680; G.R.k = 8; G.R.b = runIt(makeBoardIt(G.R.seed, 8, null, null)); setBoard(G.R.b, null); G.R.crowd = 40; });
+  await pg.waitForTimeout(800); await snap('10_nine_rush');
+  // a lost rider
+  await ev(() => { const b = G.R.b; G.R.lost = spawnLost(b, rng32(5)) || { id: 'ama', cell: b.givens[0], line: 4, boards: 0 }; setBoard(b, null); lostSpeak('ask'); });
+  await pg.waitForTimeout(500); await snap('11_lost');
+  await ev(() => { G.bot = true; G.botSpeed = .03; });
+  for (let i = 0; i < 6; i++) { for (let j = 0; j < 60; j++) { if (await ev(() => G.phase === 'play' && G.clash.count < 3)) break; await pg.waitForTimeout(100); } await pg.waitForTimeout(400); }
+  console.log('after bot run', JSON.stringify(await info()));
+  await snap('12_later');
+  // pause hides the board; resume by snapshot
+  await pg.click('#pauseBtn'); await pg.waitForTimeout(200); await snap('13_pause');
+  await pg.click('#quitBtn'); await pg.waitForTimeout(600);
+  await pg.click('#contBtn'); await pg.waitForTimeout(800); console.log('resumed', JSON.stringify(await info())); await snap('14_resumed');
+  // platform full
+  await ev(() => { G.bot = false; G.R.crowd = 59.9; }); await pg.waitForTimeout(3200); await snap('15_full');
+  // stamp book
   await pg.click('#menuBtn'); await pg.waitForTimeout(300);
-  await pg.click('#logBtn'); await ev(() => logDetail('aunt')); await pg.waitForTimeout(200); await snap('17_log');
-  const perf = await ev(() => { const t0 = performance.now(); for (let i = 0; i < 60; i++) render(); return ((performance.now() - t0) / 60).toFixed(2) + ' ms/render'; });
+  await pg.click('#bookBtn'); await pg.waitForTimeout(300); await snap('16_book');
+  await ev(() => bookDetail(Object.keys(save.stamps)[0])); await pg.waitForTimeout(200); await snap('17_stamp');
+  await pg.click('#tabLost'); await pg.waitForTimeout(200); await snap('18_lost');
+  await pg.click('#bookBack'); await pg.waitForTimeout(200);
+  // last train
+  await pg.click('#todayBtn'); await pg.waitForTimeout(600); await ev(() => { G.R.m = 1079; }); await pg.waitForTimeout(3000); await snap('19_last_train');
+  const perf = await ev(() => { const t0 = performance.now(); for (let i = 0; i < 60; i++) render(0); return ((performance.now() - t0) / 60).toFixed(2) + ' ms/render'; });
   console.log('perf', perf);
   console.log(errs.length ? 'ERRORS:\n' + [...new Set(errs)].slice(0, 20).join('\n') : 'no console errors');
   await b.close();

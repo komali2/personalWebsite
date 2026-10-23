@@ -55,10 +55,10 @@ const STN = {
 const MAPS = {
   5: {
     BR: 'e4:liuzhangli d4:techBldg d3:daan d2:zxFuxing d1:njFuxing d0:zsJHS e0:songshanAirport',
-    R: 'b0:minquanW b1:zhongshan b2:tpe b3:cks c3:dongmen d3:daan e3:tpe101',
-    G: 'e1:arena d1:njFuxing c1:sjNanjing b1:zhongshan a1:beimen a2:ximen a3:xiaonanmen b3:cks b4:guting c4:gongguan',
+    R: 'b0:minquanW b1:zhongshan b2:tpe b3:cks c3:dongmen d3:daan e3:xinyiAnhe',
+    G: 'e1:arena d1:njFuxing c1:sjNanjing b1:zhongshan a1:beimen a2:ximen a3:xiaonanmen b3:cks b4:guting c4:taipower',
     O: 'b4:guting c3:dongmen c2:zxXinsheng c1:sjNanjing c0:xingtian b0:minquanW a0:daqiaotou',
-    BL: 'a2:ximen b2:tpe c2:zxXinsheng d2:zxFuxing e2:cityHall',
+    BL: 'a2:ximen b2:tpe c2:zxXinsheng d2:zxFuxing e2:zxDunhua',
   },
   6: {
     BR: 'f5:liuzhangli e5:techBldg e4:daan e3:zxFuxing e2:njFuxing e1:songshanAirport e0:dazhi f0:neihu',

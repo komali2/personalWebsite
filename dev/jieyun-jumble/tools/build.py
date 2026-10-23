@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Assemble games/taiwan-battle-bugs/index.html from src/*, art/*.js and a font subset.
+"""Assemble games/jieyun-jumble/index.html from src/*, content.js, art/*.js and a font subset.
 
 usage: python3 tools/build.py            (run from anywhere)
 The font subset contains only the characters used in the page, so rebuild after text changes.
@@ -10,7 +10,7 @@ from fontTools.ttLib import TTFont
 
 DEV = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REPO = os.path.dirname(os.path.dirname(DEV))
-OUT = os.path.join(REPO, 'games', 'taiwan-battle-bugs', 'index.html')
+OUT = os.path.join(REPO, 'games', 'jieyun-jumble', 'index.html')
 FONT_SRC = os.path.join(DEV, 'font', 'Cubic_11.ttf')
 FONT = os.path.join(DEV, 'font', 'Cubic_11_tones.ttf')
 FONT_URL = 'https://raw.githubusercontent.com/ACh-K/Cubic-11/main/fonts/ttf/Cubic_11.ttf'
@@ -22,9 +22,18 @@ def ensure_font():
     subprocess.check_call([sys.executable, os.path.join(DEV, 'tools', 'patch_font.py'), FONT_SRC, FONT])
 
 def main():
-    parts = [open(p, encoding='utf-8').read() for p in sorted(glob.glob(os.path.join(DEV, 'src', '*')))]
+    # editable content goes right after the map data
+    r = subprocess.run(['node', os.path.join(DEV, 'tools', 'check_content.js')], capture_output=True, text=True)
+    print(r.stdout.strip())
+    if r.returncode != 0:
+        print(r.stderr.strip()); sys.exit('content.js has problems (see above); nothing was written')
+    parts = []
+    for p in sorted(glob.glob(os.path.join(DEV, 'src', '*'))):
+        parts.append(open(p, encoding='utf-8').read())
+        if os.path.basename(p) == '2a_map.js':
+            parts.append(open(os.path.join(DEV, 'content.js'), encoding='utf-8').read())
     art = []
-    for name in ('bugs', 'foes', 'scene'):
+    for name in ('riders', 'scene'):
         p = os.path.join(DEV, 'art', name + '.js')
         if os.path.exists(p):
             src = open(p, encoding='utf-8').read()
@@ -45,7 +54,7 @@ def main():
     bio = io.BytesIO(); font.flavor = 'woff2'; font.save(bio)
     b64 = base64.b64encode(bio.getvalue()).decode()
     lic_js = lic.replace('\\', '\\\\').replace('`', "'").replace('${', '$ {')
-    font_js = ('<script>\n/* Cubic 11 (OFL-1.1) subset with added pinyin tone vowels; regenerate with dev/taiwan-battle-bugs/tools/build.py */\n'
+    font_js = ('<script>\n/* Cubic 11 (OFL-1.1) subset with added pinyin tone vowels; regenerate with dev/jieyun-jumble/tools/build.py */\n'
                f'const LICENSE_TEXT = `{lic_js}`;\nconst FONT_B64 = "{b64}";\n</script>\n')
     # site-wide GoatCounter analytics, same snippet as the rest of calebjay.com (loads async; fails quietly offline)
     goat = ('<script\n  data-goatcounter="https://calebjay_com.goatcounter.com/count"\n  async\n  src="//gc.zgo.at/count.js"\n></script>\n')

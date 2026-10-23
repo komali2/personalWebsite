@@ -52,17 +52,22 @@ Read this first if you are picking the work up (any agent, any provider).
 - [x] Feasibility: catchment maps are rarely unique on their own (9×9 ≈ 0.5%), but with 1–3 locked commuters 34–72% of maps work; chained boards with regulars find a board in ~50 ms (9×9 worst ≈ 0.35 s in node)
 - [x] Real layouts 5×5 → 9×9 (`src/2a_map.js`), all transfers real
 - [x] Generator + run logic + sims (30 days: no failures; 5×5 lv0–1, 7×7+ mostly lv3)
-- [ ] Balance: crowd load/fill sweep (in progress)
-- [ ] Art (dispatched to opencode/openai): `art/riders.js`, `art/scene.js`
-- [ ] Text (dispatched): `content.js` facts, clash jokes, more lost riders
-- [ ] Code: play UI, rendering, HUD, title/attract demo, stamp book, daily, share
-- [ ] Headless smoke test, deploy, push
+- [x] Balance, first pass (`node tools/balance.js 40`): carload 0.45·n², arrivals 0.2–0.4/s (0.85/s at rush), cap 60, 月台淨空 needs ≥ 12 people. Simulated players: fast 100% reach the last train (~19 boards, ~10 clears), average ~85–92% (~12 boards, ~5 clears, peak crowd ~53/60 in the evening rush), slow fill up around 12:00–16:00. Real players will tell; tune `DAY`
+- [x] Art (opencode/openai): `art/riders.js` (9 riders, 6 lost riders, 6 crowd people), `art/scene.js` (skyline + night lights, platform door + train, 22 stamp icons, UI icons, marks, fx)
+- [x] Text (opencode/openai): `content.js` (64 verified station facts, 20 clash jokes, 6 lost riders, ticker lines). 台語 lines await Caleb's proofreading (table below)
+- [x] Code: play, rendering, HUD, title with attract demo, hints, depart/flood and line-opening animations, stamp book + Lost & Found, daily day + streak, share, pause/resume
+- [x] Headless smoke test (`node tools/shot.js`): every screen, no console errors, 0.3 ms/render
+- [ ] Next: Caleb plays it on a phone; tune crowd pace, hint costs, difficulty bands (`WANT`); polish station facts (some are dry); Hard Mode (keep every commuter and repair); maybe the Sanying line (opened 2026-06-30) as a 10×10 endgame; music (stretch)
 
 ## Generator and balance knobs
 `CATCH` (walk vs track cost), `lay.reach` per line, `GEN` (tries, solutions examined) in `src/4_puzzle.js`; `WANT` (difficulty band and regulars per size), `DAY` (day length, crowd cap, carload, hint costs, arrivals by time), `LOST_RULE` in `src/4b_run.js`.
 
 ## Agent log
+- 2026-10-23: completed `content.js` with all 64 bilingual station facts and per-entry verification URLs, 5 clashes per kind, kid/abo and 5 ticker additions; Node parse/coverage/schema/length checks pass (zero missing facts). Verified facts via Wikipedia and official transit/park sources; MOE checked for 台語 vocabulary/place names, but all four 台語 lines still need Caleb's fluent-speaker proofreading. Avoided outdated stand-right/walk-left escalator advice; no unverified station claims retained.
+- 2026-10-23: drew `art/riders.js` (9 line riders, 6 lost riders, 6 recolorable crowd people); exact IDs/dimensions/palette/slots verified with zero errors, two visual review passes at 8× and 1×; enlarged lost traveler's suitcase and separated schoolkid's khaki bag; tiny glasses, floral patterns and toast are necessarily abstract at 1×. Preview: `art/riders.png` (8×).
 - 2026-10-23: workspace created; generator feasibility proven; layouts written; art and text dispatched to opencode/openai/gpt-6.1-sol via paseo.
+- 2026-10-23 (Claude): first playable build: play/render/UI modules, content checker in the build, smoke test, README; 5×5 uses 信義安和/忠孝敦化/台電大樓 (closer to the grid than 101/市政府/公館).
+- 2026-10-23: created all 48 scenery/icon sprites in art/scene.js and the 6× scene.png preview; exact sizes/palette/slot use checked, preview validation has zero errors, reviewed twice at 1×/6× and composited night lights (foreground occlusion fixed). Tiny cutlet/bridge details are intentionally simplified at 1×; no blocking weak spots.
 
 ---
 
@@ -107,3 +112,16 @@ Plain JS inside `<script>` like the existing file; keep every existing key and c
 - `LOST`: keep the four, add `kid` (wants `BR`, to the zoo; voice `zh`) and `abo` (wants `O`, to 行天宮 Xingtian Temple; voice `tw`). `ask`/`thanks` ≤ 48 chars EN, `tw` ≤ 14 Han characters. Note: `want` must be a line id; `need` optional.
 - `TICKER`: add `rush` (`{en, zh}`, e.g. 尖峰時段 notice), `clear` (platform cleared), `full` (platform full warning when crowd is high), `last` (last train announcement), `open` (`{line}` opens, `{year}`), each ≤ 40 chars EN.
 - Append a proofreading table (台語 lines: key | 台語 | Tâi-lô | English) as a comment at the end of `content.js` and in this file under "Lines for proofreading".
+
+## Lines for proofreading
+
+All four 台語 lines await Caleb's naturalness/dialect check; romanization uses citation tones, not written-out tone sandhi.
+
+| key | 台語 | Tâi-lô | English |
+|---|---|---|---|
+| ama.ask | 龍山寺欲按怎去？ | Liông-san-sī beh án-tsuánn khì? | How do I get to Longshan Temple? |
+| ama.thanks | 多謝，好心有好報！ | To-siā, hó-sim ū hó-pò! | Thanks! May your kindness come back to you! |
+| abo.ask | 行天宮欲按怎去？ | Hîng-thian-kiong beh án-tsuánn khì? | How do I get to Xingtian Temple? |
+| abo.thanks | 多謝！來泡茶！ | To-siā! Lâi phàu-tê! | Thanks! Come over for tea! |
+
+阿伯's tea line is an invitation to visit, not permission to drink on the MRT. MOE references: [按怎](https://sutian.moe.edu.tw/zh-hant/su/5022/), [多謝](https://sutian.moe.edu.tw/zh-hant/su/2415/), [好心](https://sutian.moe.edu.tw/zh-hant/su/2297/), [龍山寺](https://sutian.moe.edu.tw/zh-hant/su/21329/), [行天宮](https://sutian.moe.edu.tw/zh-hant/su/21402/), [泡茶](https://sutian.moe.edu.tw/zh-hant/su/4356/). Station verification URLs are comments directly above their `FACTS` entries in `content.js`.

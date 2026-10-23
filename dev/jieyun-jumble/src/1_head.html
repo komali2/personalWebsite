@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Jieyun Jumble 捷運大風吹</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#181425">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="捷運大風吹">
+<meta name="description" content="A Queens-style logic puzzle on the Taipei MRT map. Seat the commuters, then watch the trains pull out and reshuffle the board.">
+<!--
+  Jieyun Jumble 捷運大風吹
+  SPDX-License-Identifier: GPL-3.0-or-later (code and pixel art; the embedded font is OFL-1.1, see below)
+  Copyright (C) 2026 Caleb Rogers. Free software under the GNU General Public License v3 or later.
+  Source and build tools: https://github.com/komali2/personalWebsite/tree/master/dev/jieyun-jumble
+
+  Single self-contained file: vanilla Canvas 2D, pixel art authored as text grids (SPR, near the end),
+  WebAudio synth sound. Sister game of Taiwan Treats Trip 吃飽逃颱 and Taiwan Battle Bugs 台灣鬥蟲.
+
+  Font: Cubic 11 / 俐方體11號 (OFL-1.1, https://github.com/ACh-K/Cubic-11), subset to the characters
+  used here. It lives base64-encoded in the last <script>. Rebuild with tools/build.py after text changes.
+-->
+<style>
+:root{--k:#181425;--n:#262b44;--N:#3a4466;--g:#5a6988;--G:#8b9bb4;--l:#c0cbdc;--w:#fff;--r:#a22633;--R:#e43b44;--o:#f77622;--y:#feae34;--Y:#fee761;--e:#63c74d;--E:#3e8948;--f:#265c42;--b:#124e89;--B:#0099db;--c:#2ce8f5;--q:#b55088;--s:#f6757a;--P:#68386c;--t:#ead4aa;
+  --st:env(safe-area-inset-top,0px);--sb:env(safe-area-inset-bottom,0px);}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#0e0b16;overflow:hidden;touch-action:none;overscroll-behavior:none;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
+body{font-family:Cubic11,"Noto Sans TC","PingFang TC","Microsoft JhengHei",monospace;color:var(--w);font-size:12px;line-height:14px;-webkit-font-smoothing:none;font-smooth:never}
+#frame{position:fixed;top:0;left:50%;transform:translateX(-50%);width:min(100vw,calc(100vh * 0.5625));width:min(100vw,calc(100dvh * 0.5625));height:100vh;height:100dvh;overflow:hidden;background:var(--k)}
+@media (max-aspect-ratio:3/4){#frame{width:100vw}}
+#game{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
+img.px,canvas.px{image-rendering:pixelated;image-rendering:crisp-edges}
+.dim{color:var(--G)}
+.hide{display:none!important}
+
+/* ---------- HUD ---------- */
+#hud{position:absolute;inset:0;pointer-events:none}
+#top{position:absolute;left:6px;right:6px;top:calc(var(--st) + 6px);display:flex;align-items:center;gap:6px}
+.chip{background:rgba(24,20,37,.78);box-shadow:0 0 0 2px var(--k);padding:3px 6px;height:30px;display:flex;align-items:center;gap:5px;white-space:nowrap}
+#clock{font-size:24px;line-height:24px;letter-spacing:1px}
+#rush{color:var(--k);background:var(--o);padding:1px 4px 2px;animation:blink .6s steps(2) infinite}
+#daily{color:var(--c)}
+#scoreBox{margin-left:auto}
+#scoreBox img,#clockBox img{width:24px;height:24px}
+#score{font-size:24px;line-height:24px}
+#pauseBtn{pointer-events:auto;width:34px;height:34px;border:0;background:var(--N);box-shadow:0 0 0 2px var(--k),inset 0 -3px 0 var(--n);display:flex;align-items:center;justify-content:center;flex:none}
+#pauseBtn img{width:24px;height:24px}
+#banner{position:absolute;left:0;right:0;top:calc(var(--st) + 46px);text-align:center;opacity:0;transition:opacity .25s,transform .25s;transform:translateY(-8px);z-index:3}
+#banner.on{opacity:1;transform:none}
+#banner .big{font-size:36px;line-height:42px;color:var(--Y);text-shadow:3px 3px 0 var(--k),-2px -2px 0 var(--k),2px -2px 0 var(--k),-2px 2px 0 var(--k)}
+#banner .s{margin-top:4px;font-size:24px;line-height:28px;color:var(--w);text-shadow:2px 2px 0 var(--k),-1px -1px 0 var(--k),1px -1px 0 var(--k),-1px 1px 0 var(--k)}
+#banner .s2{margin-top:2px;color:var(--l);text-shadow:1px 1px 0 var(--k),-1px -1px 0 var(--k)}
+#bottom{position:absolute;left:0;right:0;bottom:0;padding:0 8px calc(var(--sb) + 8px)}
+#msg{position:absolute;left:8px;right:8px;bottom:calc(100% + 6px);background:var(--w);color:var(--k);box-shadow:0 0 0 3px var(--k),3px 3px 0 3px rgba(24,20,37,.5);padding:6px 9px;text-align:center;opacity:0;transition:opacity .2s;pointer-events:none}
+#msg.on{opacity:1}
+#msg .tw{font-size:24px;line-height:28px}
+#msg .sub{color:var(--N);margin-top:3px}
+#msg.hint{background:var(--Y)}
+#msg.clash{background:#ffd9dc}
+#rules{display:flex;justify-content:space-between;gap:4px;margin-bottom:8px}
+.rule{flex:1;display:flex;align-items:center;justify-content:center;gap:3px;background:rgba(24,20,37,.8);box-shadow:0 0 0 2px var(--k);padding:3px 2px;color:var(--l);white-space:nowrap;overflow:hidden}
+.rule img{width:24px;height:24px;flex:none}
+.rule.ok{color:var(--e);box-shadow:0 0 0 2px var(--k),inset 0 0 0 2px var(--E)}
+.rule.bad{color:var(--w);background:var(--r);box-shadow:0 0 0 2px var(--k),inset 0 0 0 2px var(--R);animation:shake .3s}
+#acts{display:flex;gap:8px;justify-content:center}
+.act{pointer-events:auto;font:inherit;color:var(--w);flex:1;max-width:130px;height:50px;border:0;background:var(--N);box-shadow:0 0 0 3px var(--k),inset 0 -4px 0 var(--n);display:flex;align-items:center;justify-content:center;gap:5px;font-size:12px}
+.act img{width:24px;height:24px}
+.act:active{transform:translateY(2px);box-shadow:0 0 0 3px var(--k),inset 0 -2px 0 var(--n)}
+.act.hint{background:var(--y);color:var(--k);box-shadow:0 0 0 3px var(--k),inset 0 -4px 0 var(--o)}
+.act.hint.lv2{background:var(--o)}
+.act:disabled{opacity:.45}
+#toast{position:absolute;left:50%;top:calc(var(--st) + 48px);transform:translateX(-50%);background:var(--k);padding:6px 10px;box-shadow:0 0 0 2px var(--G);opacity:0;transition:opacity .2s;white-space:nowrap;pointer-events:none;z-index:9;max-width:94%;overflow:hidden;text-overflow:ellipsis}
+#toast.on{opacity:1}
+@keyframes blink{50%{opacity:.35}}
+@keyframes shake{25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+#frame.calm .rule.bad{animation:none}
+#frame.calm #rush{animation:none}
+
+/* ---------- screens ---------- */
+.screen{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding:calc(var(--st) + 16px) 14px calc(var(--sb) + 18px)}
+.screen.on{display:flex}
+.scrim{background:rgba(24,20,37,.86)}
+.panel{background:var(--n);box-shadow:0 0 0 3px var(--k),inset 0 0 0 2px var(--N);padding:10px 12px;width:100%;max-width:400px}
+.btn{font:inherit;font-size:24px;line-height:26px;color:var(--k);background:var(--Y);border:0;padding:8px 18px 11px;box-shadow:0 0 0 3px var(--k),inset 0 -4px 0 var(--o);cursor:pointer;min-width:120px}
+.btn:active{transform:translateY(2px);box-shadow:0 0 0 3px var(--k),inset 0 -2px 0 var(--o)}
+.btn.alt{background:var(--l);box-shadow:0 0 0 3px var(--k),inset 0 -4px 0 var(--G)}
+.btn.grn{background:var(--e);box-shadow:0 0 0 3px var(--k),inset 0 -4px 0 var(--E)}
+.btn.cy{background:var(--c);box-shadow:0 0 0 3px var(--k),inset 0 -4px 0 var(--B)}
+.btn.sm{font-size:12px;line-height:14px;padding:6px 10px 8px;min-width:0}
+.btn img{width:24px;height:24px;vertical-align:middle;margin:-4px 4px 0 0}
+.row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;width:100%}
+h2{font-size:24px;line-height:28px;font-weight:normal;text-align:center;margin:4px 0 10px;text-shadow:2px 2px 0 var(--k)}
+h3{font-size:12px;font-weight:normal;color:var(--Y);margin:12px 0 6px;text-transform:uppercase;letter-spacing:1px}
+
+#title{justify-content:space-between;padding-top:calc(var(--st) + 54px)}
+#logo{text-align:center;background:rgba(24,20,37,.78);box-shadow:0 0 0 3px rgba(24,20,37,.78);padding:8px 14px 10px}
+#logo .en{font-size:24px;line-height:28px;letter-spacing:2px;text-shadow:2px 2px 0 var(--k)}
+#logo .zh{font-size:48px;line-height:56px;color:var(--Y);text-shadow:4px 4px 0 var(--r),-2px -2px 0 var(--k),2px -2px 0 var(--k),-2px 2px 0 var(--k),6px 6px 0 var(--k)}
+#logo .sub{margin-top:6px;color:var(--l);text-shadow:1px 1px 0 var(--k)}
+#titleBtns{display:flex;flex-direction:column;align-items:center;gap:14px;background:rgba(24,20,37,.7);box-shadow:0 0 0 8px rgba(24,20,37,.7);padding:4px 0}
+#bestLine{text-shadow:1px 1px 0 var(--k);color:var(--l)}
+#toggles{position:absolute;right:10px;top:calc(var(--st) + 8px);display:flex;gap:8px}
+.tgl{font:inherit;width:40px;height:40px;border:0;background:var(--N);box-shadow:0 0 0 2px var(--k),inset 0 -3px 0 var(--n);color:var(--w);display:flex;align-items:center;justify-content:center;pointer-events:auto}
+.tgl img{width:24px;height:24px}
+.tgl.off{opacity:.55}
+
+.stats{display:flex;justify-content:space-around;text-align:center;margin:4px 0;flex-wrap:wrap;gap:8px}
+.stats>div{min-width:30%}
+.stats b{display:block;font-weight:normal;font-size:24px;line-height:28px}
+#newBest{color:var(--Y);text-align:center;animation:blink .5s steps(2) infinite;margin-top:6px}
+#overSub{text-align:center;color:var(--l);margin-bottom:6px}
+#overTitle.won{color:var(--Y)}
+#overTitle.full{color:var(--s)}
+#overPic{display:block;margin:6px auto}
+#overNew{margin-top:8px;text-align:center;color:var(--c)}
+
+#bookTabs{display:flex;gap:8px;margin-bottom:10px}
+#bookTabs button.on{background:var(--Y);box-shadow:0 0 0 3px var(--k),inset 0 -4px 0 var(--o)}
+#bookGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%;max-width:400px}
+#bookGrid button{font:inherit;color:var(--w);border:0;background:var(--n);box-shadow:0 0 0 2px var(--k),inset 0 0 0 2px var(--N);padding:4px 2px 4px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;font-size:12px;line-height:13px;min-height:84px;overflow:hidden}
+#bookGrid img{width:64px;height:64px}
+#bookGrid .rg{grid-column:1/-1;color:var(--Y);margin-top:6px;font-size:12px}
+#bookGrid button.no{color:var(--g)}
+#bookDetail{text-align:center}
+#bookDetail img{width:128px;height:128px}
+#bookDetail .zh{font-size:24px;line-height:28px;color:var(--Y)}
+#bookDetail p{margin:8px 0;color:var(--l)}
+#bookDetail .lines{display:flex;gap:4px;justify-content:center;margin-top:4px}
+.lc{display:inline-block;padding:1px 4px 2px;color:var(--w);text-shadow:1px 1px 0 rgba(0,0,0,.4);box-shadow:0 0 0 1px var(--k)}
+#credits p,#aboutS p{margin:8px 0;color:var(--l)}
+#credits a,#aboutS a{color:var(--c)}
+#aboutS b{font-weight:normal;color:var(--Y)}
+#aboutS ol{margin:6px 0 6px 22px;color:var(--w)}
+#aboutS li{margin:4px 0}
+pre.lic{white-space:pre-wrap;font:inherit;font-size:12px;color:var(--G);margin-top:8px;max-height:220px;overflow:auto;touch-action:pan-y}
+</style>
+</head>
+<body>
+<div id="frame">
+  <canvas id="game"></canvas>
+
+  <div id="hud" class="hide">
+    <div id="top">
+      <div class="chip" id="clockBox"><img class="px" id="clockIco" alt=""><span id="clock">06:00</span><span id="rush" class="hide"></span><span id="daily" class="hide"></span></div>
+      <div class="chip" id="scoreBox"><img class="px" id="scoreIco" alt=""><span id="score">0</span></div>
+      <button id="pauseBtn" aria-label="Pause"><img class="px" id="pauseIco" alt=""></button>
+    </div>
+    <div id="banner"></div>
+    <div id="bottom">
+      <div id="msg"></div>
+      <div id="rules">
+        <div class="rule" id="ruleRow"><img class="px" alt=""><span></span></div>
+        <div class="rule" id="ruleCol"><img class="px" alt=""><span></span></div>
+        <div class="rule" id="ruleLine"><img class="px" alt=""><span></span></div>
+        <div class="rule" id="ruleSpace"><img class="px" alt=""><span></span></div>
+      </div>
+      <div id="acts">
+        <button class="act" id="undoBtn"><img class="px" alt=""><span data-i="undo">UNDO</span></button>
+        <button class="act" id="clearBtn"><img class="px" alt=""><span data-i="clear">CLEAR</span></button>
+        <button class="act hint" id="hintBtn"><img class="px" alt=""><span id="hintLbl">HINT</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div id="title" class="screen">
+    <div id="toggles">
+      <button class="tgl" id="tglSound" aria-label="Sound"><img class="px" alt=""></button>
+      <button class="tgl" id="tglMotion" aria-label="Reduced motion">≈</button>
+      <button class="tgl" id="tglLang" aria-label="Language / 語言">中</button>
+    </div>
+    <div id="logo">
+      <div class="en">JIEYUN JUMBLE</div>
+      <div class="zh">捷運大風吹</div>
+      <div class="sub" data-i="sub">One commuter per row, column and line.</div>
+    </div>
+    <div id="titleBtns">
+      <button class="btn grn hide" id="contBtn" data-i="cont">CONTINUE</button>
+      <button class="btn" id="playBtn" data-i="play">PLAY</button>
+      <button class="btn cy" id="todayBtn"><img class="px" id="todayIco" alt=""><span data-i="today">TODAY 今日</span></button>
+      <div class="row">
+        <button class="btn alt sm" id="bookBtn" data-i="book">STAMPS 紀念章</button>
+        <button class="btn alt sm" id="aboutBtn" data-i="about">HOW TO PLAY</button>
+        <button class="btn alt sm" id="credBtn" data-i="credits">CREDITS</button>
+      </div>
+      <div id="bestLine"></div>
+    </div>
+  </div>
+
+  <div id="pause" class="screen scrim" style="justify-content:center">
+    <div class="panel" style="text-align:center">
+      <h2 data-i="paused">Paused</h2>
+      <div class="row" style="flex-direction:column;align-items:center;gap:14px">
+        <button class="btn" id="resumeBtn" data-i="resume">RESUME</button>
+        <div class="row">
+          <button class="btn alt sm" id="pSound">SOUND</button>
+          <button class="btn alt sm" id="pMotion">MOTION</button>
+          <button class="btn alt sm" id="pLang">中文</button>
+          <button class="btn alt sm" id="pAuto">AUTO ✕</button>
+        </div>
+        <button class="btn alt sm" id="pRules" data-i="about">HOW TO PLAY</button>
+        <button class="btn alt sm" id="quitBtn" data-i="quit">SAVE &amp; QUIT TO MENU</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="over" class="screen scrim">
+    <div class="panel" style="text-align:center">
+      <h2 id="overTitle"></h2>
+      <div id="overSub"></div>
+      <canvas id="overPic" class="px"></canvas>
+    </div>
+    <div class="panel" style="margin-top:12px">
+      <div class="stats" id="overStats"></div>
+      <div id="newBest" class="hide" data-i="newBest">NEW BEST!</div>
+      <div id="overNew"></div>
+    </div>
+    <div class="row" style="margin-top:14px">
+      <button class="btn" id="againBtn" data-i="again">AGAIN</button>
+      <button class="btn alt" id="shareBtn" data-i="share">SHARE</button>
+    </div>
+    <button class="btn alt sm" id="menuBtn" style="margin-top:14px" data-i="menu">MENU</button>
+  </div>
+
+  <div id="book" class="screen scrim">
+    <h2 data-i="bookTitle">Stamp Book 紀念章</h2>
+    <div id="bookTabs">
+      <button class="btn alt sm" id="tabStn" data-i="tabStations">STATIONS</button>
+      <button class="btn alt sm" id="tabLost" data-i="tabLost">LOST &amp; FOUND</button>
+    </div>
+    <div id="bookCount" class="dim" style="margin-bottom:8px"></div>
+    <div class="panel hide" id="bookDetail" style="margin-bottom:12px"></div>
+    <div id="bookGrid"></div>
+    <button class="btn alt sm" id="bookBack" style="margin-top:16px" data-i="back">BACK</button>
+  </div>
+
+  <div id="credits" class="screen scrim">
+    <h2 data-i="credTitle">Credits</h2>
+    <div class="panel">
+      <p data-ih="cred1"></p>
+      <p data-ih="cred2"></p>
+      <p data-ih="cred3"></p>
+      <p data-ih="cred4"></p>
+      <pre class="lic" id="licText"></pre>
+    </div>
+    <button class="btn alt sm" id="credBack" style="margin-top:16px" data-i="back">BACK</button>
+  </div>
+
+  <div id="aboutS" class="screen scrim">
+    <h2 data-i="aboutTitle">How to play</h2>
+    <div class="panel">
+      <p data-ih="rules0"></p>
+      <ol>
+        <li data-ih="rules1"></li>
+        <li data-ih="rules2"></li>
+        <li data-ih="rules3"></li>
+        <li data-ih="rules4"></li>
+      </ol>
+      <p data-ih="rules5"></p>
+      <p data-ih="rules6"></p>
+      <h3 data-i="aboutHead">About</h3>
+      <p data-ih="about1"></p>
+      <p data-ih="about2"></p>
+      <h3 data-i="whyTitle">Why?</h3>
+      <p data-ih="why"></p>
+    </div>
+    <button class="btn alt sm" id="aboutBack" style="margin-top:16px" data-i="back">BACK</button>
+  </div>
+
+  <div id="toast"></div>
+</div>
