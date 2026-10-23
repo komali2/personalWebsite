@@ -256,17 +256,7 @@ function drawBoardOf(b, g, o) {
     if (big) { rect(P('k'), x - 3, y - 3, 6, 6); rect(P('w'), x - 2, y - 2, 4, 4); }
     else { rect(LINES[b.lay.ids[l]].col, x - 2, y - 2, 4, 4); rect(P('w'), x - 1, y - 1, 2, 2); }
   }));
-  // ✕ marks (and the faint auto-✕ helper)
-  const marks = ov ? G.old.marks : G.marks, mS = cs >= 30 ? 2 : 1;
-  const xAlpha = dep ? 1 - ss(t / .5) : 1;
-  const om = dep ? G.old.marks : marks;
-  for (let c = 0; c < N2; c++) if (om[c] === 1) { const [x, y] = cellXY(g, c); dspr('mk_x', x + (cs - 7 * mS) / 2, y + (cs - 7 * mS) / 2, mS, null, o.alpha * xAlpha); }
-  if (!ov && !dep && save.auto && G.phase === 'play') {
-    const att = new Uint8Array(N2);
-    marks.forEach((v, c) => { if (v === 2) for (const d of G.B.seen[c]) att[d] = 1; });
-    for (let c = 0; c < N2; c++) if (att[c] && !marks[c]) { const [x, y] = cellXY(g, c); dspr('mk_x', x + (cs - 7 * mS) / 2, y + (cs - 7 * mS) / 2, mS, null, o.alpha * .3); }
-  }
-  // trains: line-code badges riding the tracks
+  // trains: line-code badges riding the tracks (under the marks and commuters)
   b.lay.tracks.forEach((tr, l) => {
     let x, y;
     if (dep) {
@@ -277,6 +267,26 @@ function drawBoardOf(b, g, o) {
     } else [x, y] = ctr(tr[b.pos[l]]);
     drawTrain(b.lay.ids[l], x, y, cs);
   });
+  // ✕ marks (and the faint auto-✕ helper): above the map, trains and stations
+  const marks = ov ? G.old.marks : G.marks, mS = cs >= 30 ? 2 : 1;
+  const xAlpha = dep ? 1 - ss(t / .5) : 1;
+  const om = dep ? G.old.marks : marks;
+  // each ✕ sits on a little plate of its block's color, so tracks, stations and train badges never show through it
+  const trainCell = new Set(b.lay.tracks.map((tr, l) => tr[b.pos[l]]));
+  for (let c = 0; c < N2; c++) if (om[c] === 1) {
+    const [x, y] = cellXY(g, c), px = x + (cs - 7 * mS) / 2, py = y + (cs - 7 * mS) / 2;
+    // on a train's block the plate also covers the whole badge
+    const pw = Math.max(7 * mS + 2, !dep && trainCell.has(c) ? 13 : 0), ph = Math.max(7 * mS + 2, !dep && trainCell.has(c) ? 9 : 0);
+    lctx.globalAlpha = o.alpha * xAlpha;
+    rect(mixHex(TINT[b.lay.ids[regAt(c)]], '#ffffff', .3), Math.round(x + (cs - pw) / 2), Math.round(y + (cs - ph) / 2), pw, ph);
+    lctx.globalAlpha = o.alpha;
+    dspr('mk_x', px, py, mS, null, xAlpha);
+  }
+  if (!ov && !dep && save.auto && G.phase === 'play') {
+    const att = new Uint8Array(N2);
+    marks.forEach((v, c) => { if (v === 2) for (const d of G.B.seen[c]) att[d] = 1; });
+    for (let c = 0; c < N2; c++) if (att[c] && !marks[c]) { const [x, y] = cellXY(g, c); dspr('mk_x', x + (cs - 7 * mS) / 2, y + (cs - 7 * mS) / 2, mS, null, o.alpha * .3); }
+  }
   // commuters
   const rS = cs >= 34 ? 2 : 1, solvedNow = G.phase !== 'play' && !ov;
   const drawRider = (face, c, a, dy, mode, dx = 0) => {
