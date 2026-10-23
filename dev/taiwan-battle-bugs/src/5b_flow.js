@@ -66,7 +66,7 @@ function update(dt) {
       battleStep(dt);
       const B = G.B;
       if (!B.over || B.endT < (B.over === 'win' ? 1 : 1.2)) break;
-      if (B.over === 'lose') { if (B.foe.farmer) auntSay(pick(['win', 'win2', 'win3'])); setPhase('dead'); SFX.over(); break; }
+      if (B.over === 'lose') { if (B.foe.farmer) auntSay(['win', 'win2', 'win3'][G.bush]); setPhase('dead'); SFX.over(); break; }
       if (B.kind === 'farmer') {
         G.B = null; setPhase('fOut');
         G.hp = G.st.hp; gainPts(3); G.stats.farmers++; G.score += 500 * (G.bush + 1);
