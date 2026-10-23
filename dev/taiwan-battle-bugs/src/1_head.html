@@ -157,6 +157,20 @@ h3{font-size:12px;font-weight:normal;color:var(--Y);margin:12px 0 6px;text-trans
 #logGrid button{font:inherit;color:var(--w);border:0;background:var(--n);box-shadow:0 0 0 2px var(--k),inset 0 0 0 2px var(--N);padding:6px 2px 4px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer}
 #logGrid img{width:48px;height:40px}
 #logGrid .rg{font-size:12px;color:var(--Y);grid-column:1/-1;margin-top:6px}
+/* bugs you've won with: gold frame, corner studs, a sheen and Auntie's hat */
+#logGrid button{position:relative;overflow:visible}
+#logGrid button.won{color:var(--Y);
+  background:linear-gradient(var(--w),var(--w)) 5px 5px/2px 2px no-repeat,linear-gradient(var(--w),var(--w)) calc(100% - 5px) 5px/2px 2px no-repeat,
+    linear-gradient(var(--w),var(--w)) 5px calc(100% - 5px)/2px 2px no-repeat,linear-gradient(var(--w),var(--w)) calc(100% - 5px) calc(100% - 5px)/2px 2px no-repeat,
+    linear-gradient(var(--N),var(--n));
+  box-shadow:0 0 0 2px var(--k),inset 0 0 0 2px var(--Y),inset 0 0 0 3px var(--o),inset 0 0 0 4px var(--k),0 0 10px 1px rgba(254,231,97,.45);
+  animation:glint 1.8s steps(1) infinite}
+#logGrid button.won:after{content:"";position:absolute;inset:4px;pointer-events:none;background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.4) 50%,transparent 58%) no-repeat;background-size:260% 100%;animation:sheen 2.6s steps(14) infinite}
+#logGrid img.hat{position:absolute;top:-8px;right:-6px;width:28px;height:18px;filter:drop-shadow(1px 1px 0 var(--k)) drop-shadow(-1px -1px 0 var(--k))}
+#logDetail img.won{box-shadow:0 0 0 3px var(--k),0 0 0 5px var(--Y),0 0 0 6px var(--o),0 0 14px 4px rgba(254,231,97,.4);margin:6px 0}
+#frame.calm #logGrid button.won,#frame.calm #logGrid button.won:after{animation:none}
+@keyframes glint{50%{box-shadow:0 0 0 2px var(--k),inset 0 0 0 2px var(--w),inset 0 0 0 3px var(--Y),inset 0 0 0 4px var(--k),0 0 14px 2px rgba(254,231,97,.6)}}
+@keyframes sheen{0%{background-position:160% 0}55%,100%{background-position:-60% 0}}
 #logDetail{text-align:center}
 #logDetail img{width:144px;height:120px}
 #logDetail .zh{font-size:24px;line-height:28px;color:var(--Y)}

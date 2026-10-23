@@ -196,7 +196,8 @@ function openLog() {
   let found = 0, total = 0;
   $('logGrid').innerHTML = LOG_GROUPS().map(([name, ids]) => `<div class="rg">${name}</div>` + ids.map(id => {
     total++; const n = save.seen[id] || 0; if (n) found++;
-    return `<button data-log="${id}"><img class="px" src="${sprURL(logPic(id), null, n ? '' : 'sil')}" alt=""><span>${n ? (LANG === 'zh' ? (LOG[id] || who(id)).zh : (LOG[id] || who(id)).en) : '?'}</span></button>`;
+    const won = BUGS[id] && save.wins[id];
+    return `<button data-log="${id}"${won ? ' class="won"' : ''}>${won ? `<img class="px hat" src="${sprURL('ic_douli')}" alt="">` : ''}<img class="px" src="${sprURL(logPic(id), null, n ? '' : 'sil')}" alt=""><span>${n ? (LANG === 'zh' ? (LOG[id] || who(id)).zh : (LOG[id] || who(id)).en) : '?'}</span></button>`;
   }).join('')).join('');
   $('logCount').textContent = T('discovered', [found, total]);
   $('logDetail').classList.add('hide');
@@ -206,7 +207,7 @@ function logDetail(id) {
   const L = (typeof LOG !== 'undefined' && LOG[id]) || {}, n = save.seen[id] || 0, el = $('logDetail');
   if (!n) { el.innerHTML = `<img class="px" src="${sprURL(logPic(id), null, 'sil')}" alt=""><div class="zh">？？？</div><p>${T('unknown')}</p>`; }
   else {
-    let html = `<img class="px" src="${sprURL(logPic(id))}" alt=""><div class="zh">${L.zh || ''}</div><div>${L.en || ''}</div>`
+    let html = `<img class="px${BUGS[id] && save.wins[id] ? ' won' : ''}" src="${sprURL(logPic(id))}" alt=""><div class="zh">${L.zh || ''}</div><div>${L.en || ''}</div>`
       + (L.sci ? `<div class="dim"><i>${L.sci}</i></div>` : '') + `<div class="dim">${T('size')}: ${LANG === 'zh' ? L.size_zh : L.size_en}</div>`
       + `<p>${LANG === 'zh' ? L.fact_zh : L.fact_en}</p>`;
     if (BUGS[id]) html += `<div class="dim">${T('played', [save.wins[id] || 0])}</div>`;
@@ -224,6 +225,7 @@ function logDetail(id) {
 
 /* ---------- toggles ---------- */
 function syncToggles() {
+  $('frame').classList.toggle('calm', !!save.reduce);
   $('tglSound').querySelector('img').src = sprURL(save.mute ? 'ic_mute' : 'ic_sound');
   $('tglSound').classList.toggle('off', save.mute);
   $('tglMotion').classList.toggle('off', save.reduce);
