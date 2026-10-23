@@ -100,132 +100,133 @@ const CLASH = {
 /* Station-stamp facts: one true, fun sentence per station (≤ 140 chars en). */
 const FACTS = {
   // Verification links (2026-10-23) are editorial notes, not displayed text.
-  // https://en.wikipedia.org/wiki/Tamsui_metro_station
-  tamsui: { en: 'Before MRT trains arrived, Tamsui was already a stop on the old Tamsui railway.', zh: '捷運來之前，淡水就已經是舊台鐵淡水線的車站。', icon: 'st_train' },
+  // https://newtaipei.travel/en/shop/detail/208384
+  tamsui: { en: 'Tamsui hides glass noodles inside fried tofu for a-gei, then seals the delicious parcel with fish paste.', zh: '淡水阿給把冬粉藏進油豆腐，再用魚漿封口，是能吃的小包裹。', icon: 'st_cutlet' },
   // https://en.wikipedia.org/wiki/Hongshulin_station
   hongshulin: { en: 'Hongshulin takes its name from the protected mangrove habitat beside the station.', zh: '紅樹林站的名字，就來自站旁受保護的紅樹林。', icon: 'st_tree' },
-  // https://en.wikipedia.org/wiki/Tamsui%E2%80%93Xinyi_line
-  beitou: { en: 'Beitou is where you change to the Xinbeitou branch for the hot-spring neighborhood.', zh: '去新北投溫泉區，要在北投站換搭新北投支線。', icon: 'st_spring' },
+  // https://www.travel.taipei/en/attraction/details/538
+  beitou: { en: 'Beitou\'s hot-spring district also has Taiwan\'s first green library, where the warm welcome comes from wood, not steam.', zh: '北投溫泉區還有臺灣首座綠建築圖書館，用木造空間暖暖地迎接讀者。', icon: 'st_books' },
   // https://parks.gov.taipei/parks/en/en_parks.php?pmsid=245
   shilin: { en: 'Shilin Residence Park is a garden escape reached from this station, not from Jiantan.', zh: '想逛士林官邸公園，要從士林站出發，不是劍潭站。', icon: 'st_tree' },
-  // https://en.wikipedia.org/wiki/Minquan_West_Road_metro_station
-  minquanW: { en: 'At Minquan W. Rd., the Red Line runs beneath a park while the Orange Line runs beneath the road.', zh: '民權西路站的紅線在公園下，橘線則在民權西路下。', icon: 'st_tree' },
+  // https://www.travel.taipei/en/attraction/details/1690
+  minquanW: { en: 'Nearby Zhongshan North Road has a wedding-dress street, where even the window-shopping comes dressed for a big day.', zh: '附近中山北路有婚紗街，連櫥窗都盛裝打扮，準備迎接人生大事。', icon: 'st_market' },
   // https://en.wikipedia.org/wiki/Zhongshan_metro_station
   zhongshan: { en: 'Zhongshan sits in the middle of an underground shopping street: shopping need not wait for sunshine.', zh: '中山站就在中山地下街中段，逛街不用等天晴。', icon: 'st_market' },
   // https://en.wikipedia.org/wiki/Taipei_Main_Station
-  tpe: { en: 'Taipei Main Station links to the Airport MRT and Taipei Bus Station through underground passages.', zh: '台北車站能沿地下通道連到機場捷運與台北轉運站。', icon: 'st_train' },
+  tpe: { en: 'Taipei\'s first railway station opened in Dadaocheng, not on the site of today\'s Taipei Main Station.', zh: '臺北最早的火車站開在大稻埕，不在今天台北車站的位置。', icon: 'st_train' },
   // https://en.wikipedia.org/wiki/Chiang_Kai-shek_Memorial_Hall
   cks: { en: 'The nearby memorial hall wears a blue octagonal roof above its white walls.', zh: '附近的中正紀念堂，以白牆配上藍色八角屋頂。', icon: 'st_hall' },
-  // https://en.wikipedia.org/wiki/Dongmen_metro_station
-  dongmen: { en: 'Dongmen lets you swap between Red and Orange Line trains across the same platform.', zh: '東門站可在同一座月台兩側，換搭紅線與橘線。', icon: 'st_train' },
-  // https://en.wikipedia.org/wiki/Daan_metro_station
-  daan: { en: 'At Daan, the Brown Line rides above the street while the Red Line runs underground.', zh: '大安站的文湖線在高架上，紅線則在地下。', icon: 'st_train' },
-  // https://en.wikipedia.org/wiki/Xinyi_Anhe_metro_station
-  xinyiAnhe: { en: 'Xinyi Anhe was going to be called Anhe Road; its final name pinpoints the crossing streets.', zh: '信義安和原本預定叫安和路站，後來以兩條交會道路命名。', icon: 'st_train' },
+  // https://www.travel.taipei/en/news/details/7230
+  dongmen: { en: 'Yongkang Street near Dongmen is famous for mango shaved ice: a mountain worth climbing with a spoon.', zh: '東門站旁的永康街以芒果冰聞名，這座山要拿湯匙來爬。', icon: 'st_cutlet' },
+  // https://www.travel.taipei/en/attraction/details/2159
+  daan: { en: 'On weekends, the parking lot under the nearby Jianguo overpass blooms into a flower market.', zh: '週末一到，附近建國高架橋下的停車場，就開成一整座花市。', icon: 'st_tree' },
+  // https://www.travel.taipei/en/attraction/details/1688
+  xinyiAnhe: { en: 'Nearby Linjiang Street Night Market feeds night owls with oyster omelettes and Taiwanese pork buns.', zh: '附近臨江街夜市有蚵仔煎、刈包，夜貓子的晚餐不怕沒著落。', icon: 'st_cutlet' },
   // https://en.wikipedia.org/wiki/Taipei_101/World_Trade_Center_metro_station
   tpe101: { en: 'An underground exit connects straight into Taipei 101: the skyscraper visit starts below street level.', zh: '車站出口直通台北101地下樓層，逛摩天樓先從地下開始。', icon: 'st_101' },
-  // https://en.wikipedia.org/wiki/Xiangshan_metro_station
-  xiangshan: { en: 'Xiangshan station celebrates nearby tree-frog habitat with frog-themed artwork.', zh: '象山站以樹蛙藝術，呼應附近的臺北樹蛙棲地。', icon: 'st_mountain' },
-  // https://en.wikipedia.org/wiki/Ximen_metro_station
-  ximen: { en: 'Ximen is named for Taipei city wall\'s former west gate, which once stood near the station.', zh: '西門站以臺北城的舊西門命名，城門原址就在車站附近。', icon: 'st_lantern' },
-  // https://en.wikipedia.org/wiki/Zhongxiao_Xinsheng_metro_station
-  zxXinsheng: { en: 'Zhongxiao Xinsheng serves both Guang Hua Digital Plaza and Huashan 1914 Creative Park.', zh: '忠孝新生站附近，既有光華商場，也有華山1914文化創意產業園區。', icon: 'st_tower' },
+  // https://en.wikipedia.org/wiki/Xiangshan,_Taipei
+  xiangshan: { en: 'Elephant Mountain is named for its shape, but the trail\'s celebrity photo subject is Taipei 101.', zh: '象山因山形像大象而得名，但步道上的明星拍照主角是台北101。', icon: 'st_mountain' },
+  // https://en.wikipedia.org/wiki/Red_House_Theater
+  ximen: { en: 'Ximen\'s octagonal Red House began as a market, before trading groceries for theater and design.', zh: '西門紅樓的八角樓原本是市場，後來才從買菜變成看戲、逛設計。', icon: 'st_lantern' },
+  // https://en.wikipedia.org/wiki/Huashan_1914_Creative_Park
+  zxXinsheng: { en: 'Nearby Huashan 1914 Creative Park used to be a winery: these days it bottles up creativity instead.', zh: '附近華山1914文創園區以前是酒廠，現在釀的是創意。', icon: 'st_tower' },
   // https://en.wikipedia.org/wiki/Zhongxiao_Fuxing_metro_station
   zxFuxing: { en: 'Long escalators at Zhongxiao Fuxing link the underground Blue Line to the elevated Brown Line.', zh: '忠孝復興的長電扶梯，把地下藍線與高架文湖線串起來。', icon: 'st_train' },
   // https://en.wikipedia.org/wiki/Zhongxiao_Dunhua_metro_station
   zxDunhua: { en: 'The East Metro Mall connects Zhongxiao Dunhua to Zhongxiao Fuxing without going outdoors.', zh: '忠孝敦化可沿東區地下街走到忠孝復興，不用到戶外。', icon: 'st_market' },
-  // https://en.wikipedia.org/wiki/Taipei_City_Hall_metro_station
-  cityHall: { en: 'Taipei City Hall station connects to a bus terminal, shopping mall and hotel above it.', zh: '市政府站連著樓上的轉運站、商場與旅館，轉車也能順便逛街。', icon: 'st_tower' },
+  // https://en.wikipedia.org/wiki/Songshan_Cultural_and_Creative_Park
+  cityHall: { en: 'Nearby Songshan Cultural and Creative Park was a tobacco factory before its workshops filled with design.', zh: '附近松山文創園區以前是菸廠，如今廠房裡裝的是設計，不是菸草。', icon: 'st_tower' },
   // https://www.travel.taipei/en/media/audio-guide/details/47
   longshan: { en: 'Nearby Longshan Temple was founded in 1738, long before anyone could tap an EasyCard.', zh: '附近的龍山寺創建於1738年，比悠遊卡早了好幾個世紀。', icon: 'st_temple' },
   // https://en.wikipedia.org/wiki/Banqiao_station
-  banqiao: { en: 'Banqiao gathers conventional rail, high-speed rail and two metro lines at one transport hub.', zh: '板橋把台鐵、高鐵與兩條捷運線，集合在同一座轉運樞紐。', icon: 'st_train' },
+  banqiao: { en: 'Colorful rings on Banqiao\'s Blue Line platform rotate when a train arrives: even the art joins the rush.', zh: '板橋站藍線月台的彩色圓環，列車進站時會轉動，連藝術品都跟著忙。', icon: 'st_train' },
   // https://en.wikipedia.org/wiki/Tucheng_metro_station
   tucheng: { en: 'Tucheng\'s public art looks like an archaeological display, but the artifacts are deliberately invented.', zh: '土城站的公共藝術像考古展示，不過展出的文物是刻意創作的。', icon: 'st_books' },
-  // https://en.wikipedia.org/wiki/Dingpu_metro_station
-  dingpu: { en: 'Dingpu marks the western end of the Blue Line: blue trains turn back here.', zh: '頂埔是板南線的西端，藍線列車到這裡就要折返。', icon: 'st_train' },
+  // https://www.dorts.gov.taipei/cp.aspx?n=1E9E49BD7665CF2D&s=3D0A3BBDE3F705F9
+  dingpu: { en: 'Dingpu\'s station art links old coal mining with carbon nanotubes: carbon has quite a local career.', zh: '頂埔站的公共藝術把煤礦意象接上奈米碳管，碳在這裡也轉行做科技。', icon: 'st_tower' },
   // https://en.wikipedia.org/wiki/Taipei_Nangang_Exhibition_Center_metro_station
   nangangEx: { en: 'Both the Blue and Brown Lines end at Nangang Exhibition Center, one below ground and one above.', zh: '南港展覽館是藍線與文湖線的端點，一條在地下、一條在高架上。', icon: 'st_train' },
   // https://en.wikipedia.org/wiki/Songshan_station
   songshan: { en: 'Songshan puts Raohe Street Night Market just outside the station: save your appetite for the exit.', zh: '松山站旁就是饒河街觀光夜市，食慾留到出站再開動。', icon: 'st_cutlet' },
-  // https://en.wikipedia.org/wiki/Taipei_Arena_metro_station
-  arena: { en: 'Taipei Arena station was originally going to be called Taipei Stadium station.', zh: '台北小巨蛋站原本預定叫臺北體育場站。', icon: 'st_dome' },
+  // https://en.wikipedia.org/wiki/Taipei_Arena
+  arena: { en: 'Taipei Arena stands on the site of the old municipal baseball stadium: the cheers stayed, the roof arrived.', zh: '台北小巨蛋蓋在舊臺北市立棒球場原址，歡呼聲留下了，屋頂也來了。', icon: 'st_dome' },
   // https://en.wikipedia.org/wiki/Nanjing_Fuxing_metro_station
   njFuxing: { en: 'Nanjing Fuxing used to be Nanjing East Road, before the Green Line brought a new name.', zh: '南京復興以前叫南京東路站，綠線通車時才換了名字。', icon: 'st_train' },
   // https://en.wikipedia.org/wiki/Songjiang_Nanjing_metro_station
   sjNanjing: { en: 'Songjiang Nanjing is near the Miniatures Museum of Taiwan: a small world outside a big interchange.', zh: '松江南京站附近有袖珍博物館，大轉乘站旁藏著小小世界。', icon: 'st_tower' },
-  // https://en.wikipedia.org/wiki/Beimen_metro_station
-  beimen: { en: 'Beimen has an underground connection to Taipei Main Station through Taipei City Mall.', zh: '北門站可沿台北地下街，走到台北車站。', icon: 'st_train' },
+  // https://www.travel.taipei/zh-tw/attraction/details/88
+  beimen: { en: 'Nearby North Gate is Taipei\'s only surviving city gate still wearing its original Qing-era architectural style.', zh: '旁邊的北門，是臺北城門裡唯一保留清代建築原貌的一座。', icon: 'st_lantern' },
   // https://en.wikipedia.org/wiki/Xiaonanmen_metro_station
   xiaonanmen: { en: 'Xiaonanmen had a movie role: a scene in Au Revoir Taipei was filmed inside the station.', zh: '小南門站也演過電影：《一頁台北》曾在站內取景。', icon: 'st_train' },
   // https://en.wikipedia.org/wiki/Guting_metro_station
   guting: { en: 'Guting\'s public art uses face masks to explore opposites such as day and night, noise and quiet.', zh: '古亭站用人臉面具做公共藝術，表現晝夜與喧靜等對比。', icon: 'st_sunset' },
-  // https://en.wikipedia.org/wiki/Taipower_Building_metro_station
-  taipower: { en: 'Some Green Line trains turn back at Taipower Building using a pocket track south of the station.', zh: '部分綠線列車會利用台電大樓站南側的袋狀軌折返。', icon: 'st_train' },
-  // https://en.wikipedia.org/wiki/Gongguan_metro_station
-  gongguan: { en: 'Gongguan was once planned as two stations, then combined into one near National Taiwan University.', zh: '公館原本規劃成兩座車站，後來合成一座，設在臺大附近。', icon: 'st_books' },
-  // https://en.wikipedia.org/wiki/Dapinglin_metro_station
-  dapinglin: { en: 'At Dapinglin, changing between Green and Circular Lines means visiting the concourse first.', zh: '大坪林換搭綠線與環狀線，得先回到穿堂層再轉乘。', icon: 'st_train' },
-  // https://en.wikipedia.org/wiki/Xindian_metro_station
-  xindian: { en: 'Xindian\'s entrance sculptures are titled Heaven, Earth, and Man: art greets you at the end of the Green Line.', zh: '新店站出入口的雕塑名為「天、地、人」，在綠線端點迎接旅客。', icon: 'st_mountain' },
+  // https://en.wikipedia.org/wiki/Shida_Night_Market
+  taipower: { en: 'Nearby Shida Night Market pairs student-priced snacks with clothes shopping: dinner can turn into a wardrobe update.', zh: '附近師大夜市把學生價小吃和服飾放在一起，吃個晚餐也可能換一身行頭。', icon: 'st_market' },
+  // https://en.wikipedia.org/wiki/Treasure_Hill ; https://en.wikipedia.org/wiki/Gongguan_metro_station
+  gongguan: { en: 'Near Gongguan, Treasure Hill turned a veterans\' hillside settlement into an artist village, with residents still living there.', zh: '公館附近的寶藏巖，從退伍軍人聚落變成藝術村，老住戶也仍在這裡生活。', icon: 'st_lantern' },
+  // https://danlantrail.necoast-nsa.gov.tw/Towns-Content.aspx?a=3434&l=3&cat=3408&listid=3256&fromCnt=0
+  dapinglin: { en: 'Dapinglin\'s name remembers a broad, flat forest: trees claimed this busy neighborhood before commuters did.', zh: '大坪林的名字記著昔日平坦的大片樹林，通勤族來之前，這裡先有樹。', icon: 'st_tree' },
+  // https://en.wikipedia.org/wiki/Bitan
+  xindian: { en: 'Near Xindian station, Bitan offers pedal boats and a pedestrian suspension bridge: the next ride runs on leg power.', zh: '新店站旁的碧潭有腳踏船和吊橋，下一趟旅程換雙腳當動力。', icon: 'st_bridge' },
   // https://en.wikipedia.org/wiki/Luzhou_metro_station
   luzhou: { en: 'Luzhou is near the Lee Family Historic Estate, a historic home tucked into the city.', zh: '蘆洲站附近有李氏古宅，都市裡也藏著老宅。', icon: 'st_lantern' },
-  // https://en.wikipedia.org/wiki/Daqiaotou_metro_station
-  daqiaotou: { en: 'Daqiaotou is the last shared station before the Orange Line splits toward Luzhou and Huilong.', zh: '橘線往蘆洲與迴龍分岔前，最後一座共用車站就是大橋頭。', icon: 'st_bridge' },
-  // https://en.wikipedia.org/wiki/Xingtian_Temple_metro_station
-  xingtian: { en: 'Xingtian Temple station has ceramic public art inspired by the Eight Generals\' masks.', zh: '行天宮站的陶瓷公共藝術，靈感來自八家將臉譜。', icon: 'st_temple' },
+  // https://en.wikipedia.org/wiki/Dihua_Street ; https://en.wikipedia.org/wiki/Daqiaotou_metro_station
+  daqiaotou: { en: 'Nearby Dihua Street has traded tea, herbs and fabric for generations; before Lunar New Year, snacks steal the show.', zh: '附近迪化街做了好幾代的茶葉、藥材與布料生意，過年前則換年貨搶戲。', icon: 'st_market' },
+  // https://www.taiwan-panorama.com/en/Articles/Details?Guid=c9cb3e74-0023-4724-9006-dfe1efa603dd&CatId=10
+  // https://www.ht.org.tw/religion29.htm
+  xingtian: { en: 'At Xingtian Temple, blue-robed volunteers offer shoujing, a ritual for calming a startled spirit.', zh: '行天宮的藍衣効勞生替信眾收驚，忙碌城市裡，也有人照顧受驚的心。', icon: 'st_temple' },
   // https://en.wikipedia.org/wiki/Dingxi_metro_station
   dingxi: { en: 'Dingxi is near Lehua Night Market, so the next queue might be for a snack rather than a train.', zh: '頂溪站附近有樂華夜市，下一次排隊可能是在等小吃，不是等車。', icon: 'st_cutlet' },
   // https://en.wikipedia.org/wiki/Jingan_metro_station
-  jingan: { en: 'Jingan links deep underground Orange Line platforms to elevated Circular Line platforms.', zh: '景安把地下深處的橘線月台，接到高架上的環狀線月台。', icon: 'st_train' },
-  // https://en.wikipedia.org/wiki/Nanshijiao_metro_station
-  nanshijiao: { en: 'Nanshijiao stands on the site of the old Zhonghe railway station.', zh: '南勢角站就蓋在舊台鐵中和站的原址上。', icon: 'st_train' },
+  jingan: { en: 'Changing trains at Jingan takes you from deep underground to high above the street: a very vertical commute.', zh: '景安轉乘要從地下深處升到高架月台，別人橫向通勤，這裡還得縱向旅行。', icon: 'st_train' },
+  // https://newtaipei.travel/en/attractions/detail/111782
+  nanshijiao: { en: 'Near Nanshijiao, Huaxin Street is Little Burma, with Burmese signs and mohinga fish-noodle soup.', zh: '南勢角附近的華新街是「緬甸街」，看得到緬文招牌，也吃得到魚湯米線。', icon: 'st_cutlet' },
   // https://en.wikipedia.org/wiki/Taipei_Zoo_station
   zoo: { en: 'Taipei Zoo station connects a zoo visit with the nearby Maokong Gondola: rails first, cable next.', zh: '動物園站附近能接著搭貓空纜車，先走軌道，再上鋼纜。', icon: 'st_panda' },
-  // https://en.wikipedia.org/wiki/Liuzhangli_metro_station
-  liuzhangli: { en: 'Liuzhangli sits on the border of Daan and Xinyi districts, right where Heping and Keelung roads meet.', zh: '六張犁站位在大安與信義區交界，就在和平東路與基隆路口。', icon: 'st_tower' },
+  // https://www.ehanlin.com.tw/app/keyword/%E5%9C%8B%E4%B8%AD/%E5%9C%B0%E7%90%86/%E5%85%AD%E5%BC%B5%E7%8A%81.html
+  liuzhangli: { en: 'Liuzhangli\'s six ploughs measured farmland, not a tool collection: the name remembers the area\'s farming past.', zh: '六張犁不是收藏六把犁，而是用耕地面積取名，把農田時代留在站名裡。', icon: 'st_tree' },
   // https://en.wikipedia.org/wiki/Technology_Building_metro_station
   techBldg: { en: 'The Brown Line makes a right-angle turn between Technology Building and Liuzhangli.', zh: '文湖線在科技大樓與六張犁之間，會轉一個直角彎。', icon: 'st_train' },
   // https://en.wikipedia.org/wiki/Zhongshan_Junior_High_School_metro_station
   zsJHS: { en: 'Zhongshan Junior High School was the Brown Line\'s northern end before the Neihu section opened.', zh: '內湖段通車以前，中山國中曾是文湖線的北端終點。', icon: 'st_books' },
-  // https://en.wikipedia.org/wiki/Songshan_Airport_metro_station
-  songshanAirport: { en: 'Songshan Airport is one of the Brown Line\'s rare underground stops, with a passage into the airport.', zh: '松山機場是文湖線少見的地下站，還有通道直接連進機場。', icon: 'st_plane' },
-  // https://en.wikipedia.org/wiki/Dazhi_metro_station
-  dazhi: { en: 'Dazhi and Songshan Airport are the only underground stations on the Brown Line.', zh: '文湖線只有大直與松山機場兩站在地下。', icon: 'st_train' },
-  // https://en.wikipedia.org/wiki/Xihu_metro_station
-  xihu: { en: 'At Xihu, the concourse sits above the platforms, reversing the usual elevated-station arrangement.', zh: '西湖站的穿堂層在月台上方，和一般高架站的配置相反。', icon: 'st_train' },
+  // https://www.travel.taipei/en/attraction/details/2104
+  songshanAirport: { en: 'Songshan Airport has an observation deck for watching planes: daydreaming about takeoff needs no boarding pass.', zh: '松山機場有觀景台能看飛機，不用登機證，也能做個起飛的白日夢。', icon: 'st_plane' },
+  // https://nchdb.boch.gov.tw/assets/overview/historicalBuilding/20040719000001
+  dazhi: { en: 'Dazhi\'s Jiantan Temple kept its old name after moving here, so looking for it at Jiantan can lead you astray.', zh: '大直的劍潭古寺搬家後保留舊名，照名字跑去劍潭找，可就找錯地方了。', icon: 'st_temple' },
+  // https://www.tcma.gov.taipei/News_Content.aspx?n=4ED693CC533CE816&sms=8C519B9E702F08D3&s=7EE475E1BB366CAA
+  xihu: { en: 'Xihu station connects straight to a market food court: the transfer here can be from train to lunch.', zh: '西湖站直通市場二樓美食街，這裡也能從捷運轉乘午餐。', icon: 'st_market' },
   // https://en.wikipedia.org/wiki/Neihu_metro_station
   neihu: { en: 'Huguang Market is near Neihu station: an open-air market beside an elevated railway.', zh: '內湖站附近有湖光市場，高架捷運旁也能逛露天市場。', icon: 'st_market' },
   // https://en.wikipedia.org/wiki/Donghu_metro_station
   donghu: { en: 'Donghu station\'s music-themed design includes a dancing musical staff in the station square.', zh: '東湖站以音樂為主題，站前廣場也藏著舞動的五線譜。', icon: 'st_train' },
   // https://en.wikipedia.org/wiki/Nangang_Software_Park_metro_station
   nangangSoft: { en: 'Nangang Software Park station chose Digital as its public-art theme, fitting its techy neighbors.', zh: '南港軟體園區站的公共藝術主題是「數位」，和科技鄰居很合拍。', icon: 'st_tower' },
-  // https://en.wikipedia.org/wiki/Sanchong_station
-  sanchong: { en: 'Sanchong connects the underground Orange Line with the elevated Airport MRT.', zh: '三重站把地下的橘線，接到高架上的機場捷運。', icon: 'st_plane' },
-  // https://en.wikipedia.org/wiki/New_Taipei_Industrial_Park_station
-  xinbeiPark: { en: 'New Taipei Industrial Park brings two elevated lines together: the Airport MRT and Circular Line.', zh: '新北產業園區讓兩條高架路線相遇：機場捷運與環狀線。', icon: 'st_train' },
-  // https://en.wikipedia.org/wiki/Taishan_metro_station
-  taishan: { en: 'Taishan station stands on the boundary between Taishan and Xinzhuang districts.', zh: '泰山站就位在泰山區與新莊區的交界。', icon: 'st_tower' },
+  // https://newtaipei.travel/en/column/492
+  sanchong: { en: 'Outside Sanchong station, slides lead into New Taipei Metropolitan Park: the commute gets a playground ending.', zh: '三重站外有溜滑梯通往新北大都會公園，通勤也能接上遊樂場結局。', icon: 'st_tree' },
+  // https://www.tymetro.com.tw/tymetro-new/en/_pages/checkin/index.php
+  xinbeiPark: { en: 'New Taipei Industrial Park offers check-in for participating airlines: your suitcase can start its airport trip early.', zh: '新北產業園區提供合作航空公司的預辦登機，行李可以先一步去機場。', icon: 'st_plane' },
+  // https://newtaipei.travel/zh-tw/attractions/detail/110539
+  taishan: { en: 'Taishan once made Barbie dolls from start to finish, from the materials to the export box.', zh: '泰山以前能把芭比娃娃從材料一路做到裝箱出口，娃娃也曾是本地製造。', icon: 'st_market' },
   // https://www.taoyuan-airport.com/airport_mrt?lang=en
   airportT1: { en: 'Both express and commuter Airport MRT trains stop at Airport Terminal 1.', zh: '機場第一航廈站，直達車與普通車都會停靠。', icon: 'st_plane' },
-  // https://en.wikipedia.org/wiki/Tamkang_University_light_rail_station
-  tamkang: { en: 'Tamkang University light rail station sits above Provincial Highway 2, near Shuiyuan Road.', zh: '淡江大學輕軌站架在台2線上方，靠近水源路口。', icon: 'st_books' },
-  // https://en.wikipedia.org/wiki/Danhai_New_Town_light_rail_station
-  danhai: { en: 'Danhai New Town is a street-level light rail stop on Shalun Road, not an underground station.', zh: '淡海新市鎮站就在沙崙路的地面上，不用鑽到地下等輕軌。', icon: 'st_train' },
+  // https://epaper.vac.gov.tw/zh-tw/C/3396%7C21/33831/1/Publish.htm
+  tamkang: { en: 'At Tamkang University station, Jimmy Liao\'s giant cat sculpture cradles a napping girl: waiting looks cozy here.', zh: '淡江大學站有幾米的大貓雕塑，女孩窩在貓前臂上小睡，等車也想跟著打盹。', icon: 'st_cat' },
+  // https://epaper.vac.gov.tw/zh-tw/C/3396%7C21/33831/1/Publish.htm
+  danhai: { en: 'Danhai New Town displays miniature versions of the line\'s Jimmy Liao artworks: a whole art crawl, travel-sized.', zh: '淡海新市鎮站展示沿線幾米作品的迷你模型，一整趟藝術散步變成隨身版。', icon: 'st_cat' },
   // https://en.wikipedia.org/wiki/Taipei_University_of_Marine_Technology_light_rail_station
   oceanU: { en: 'Taipei University of Marine Technology is on the Blue Coast branch toward Tamsui Fisherman\'s Wharf.', zh: '台北海洋大學站在淡海輕軌藍海線上，列車開往淡水漁人碼頭。', icon: 'st_books' },
-  // https://en.wikipedia.org/wiki/Tamsui_Fisherman%27s_Wharf
-  wharf: { en: 'Tamsui Fisherman\'s Wharf is also officially called Tamsui Second Fishing Harbor.', zh: '淡水漁人碼頭的正式名稱，其實是淡水第二漁港。', icon: 'st_wharf' },
-  // https://en.wikipedia.org/wiki/Shisizhang_station
-  shisizhang: { en: 'Shisizhang is where the Ankeng light rail meets the Circular Line, beside the Circular Line depot.', zh: '十四張是安坑輕軌與環狀線的交會站，旁邊就是環狀線機廠。', icon: 'st_train' },
+  // https://newtaipei.travel/en/attractions/detail/403199
+  wharf: { en: 'Lover\'s Bridge at Tamsui Fisherman\'s Wharf opened on Valentine\'s Day: even its debut was a date.', zh: '淡水漁人碼頭的情人橋選在西洋情人節啟用，連出道日都在放閃。', icon: 'st_wharf' },
+  // https://www.dorts.ntpc.gov.tw/documentary/articleInfo/R9NdyYl4d0zL?page=193
+  shisizhang: { en: 'The zhang in Shisizhang was a farmland measure, not a sheet of paper: this station name remembers ploughs.', zh: '十四張的「張」不是紙張，而是從「張犁」簡化來的耕地面積單位。', icon: 'st_tree' },
   // https://en.wikipedia.org/wiki/Zhonghe_metro_station
   zhonghe: { en: 'Zhonghe station stands where Zhongshan Road meets Jingping Road, near Huazhong Bridge.', zh: '中和站位在中山路與景平路交會處，附近就是華中橋。', icon: 'st_bridge' },
   // https://en.wikipedia.org/wiki/Banxin_metro_station
   banxin: { en: 'Banxin has Minsheng Park nearby, a green pause along the Circular Line.', zh: '板新站附近有民生公園，是環狀線旁一處綠色休息站。', icon: 'st_tree' },
   // https://en.wikipedia.org/wiki/Touqianzhuang_metro_station
   touqianzhuang: { en: 'At Touqianzhuang, underground Orange Line trains meet the Circular Line\'s elevated platforms.', zh: '頭前庄讓地下的橘線列車，與高架上的環狀線月台相遇。', icon: 'st_train' },
-  // https://en.wikipedia.org/wiki/Sunshine_Sports_Park_light_rail_station
-  sunPark: { en: 'Sunshine Sports Park station is elevated above Anhe Road, near the park that gives it its name.', zh: '陽光運動公園站架在安和路上方，附近就是同名的運動公園。', icon: 'st_bike' },
+  // https://newtaipei.travel/en/attractions/detail/403605
+  sunPark: { en: 'Sunshine Sports Park has beach-volleyball courts beside the river: a beach day without a trip to the coast.', zh: '陽光運動公園在河邊就有沙灘排球場，不用跑海邊，也能來場沙灘對決。', icon: 'st_bike' },
   // https://en.wikipedia.org/wiki/Shuangcheng_light_rail_station
   shuangcheng: { en: 'Shuangcheng sits at street level on Anyi Road, near the Ankeng light rail depot.', zh: '雙城站就在安一路的地面上，附近就是安坑輕軌機廠。', icon: 'st_train' },
 };
