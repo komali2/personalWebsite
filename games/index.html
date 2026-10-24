@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Caleb Jay Rogers" />
+    <meta name="description" content="Browser games by Caleb Jay Rogers." />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta property="og:title" content="Caleb's Games" />
+    <meta property="og:url" content="https://calebjay.com/games/" />
+    <meta property="og:image" content="https://calebjay.com/games/jieyun-jumble/screenshot.webp" />
+    <meta name="twitter:card" content="summary" />
+    <link href="../styles.css" rel="stylesheet" />
+    <style>
+      .game {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+      }
+      .game img {
+        display: block;
+        width: 160px;
+        height: auto;
+        border: 1px solid black;
+        image-rendering: pixelated;
+      }
+      .game > a {
+        flex: none;
+      }
+      .game a + a {
+        margin-left: 8px;
+      }
+      header .name {
+        font-size: 2em;
+      }
+      @media only screen and (max-width: 40em) {
+        .game img {
+          width: 110px;
+        }
+      }
+    </style>
+    <title>Games - Caleb's Website</title>
+  </head>
+
+  <body>
+    <main>
+      <header>
+        <h1>
+          <small>Caleb's</small>
+          <div class="name">Games</div>
+        </h1>
+        <nav>
+          <ul>
+            <li><a href="/">Home</a></li>
+          </ul>
+        </nav>
+      </header>
+      <div class="projects">
+        <section class="game">
+          <a href="jieyun-jumble/"
+            ><img
+              src="jieyun-jumble/screenshot.webp"
+              alt="Jieyun Jumble: a puzzle board on the Taipei MRT map"
+              width="390"
+              height="844"
+              loading="lazy"
+          /></a>
+          <div>
+            <h2>
+              <a href="jieyun-jumble/">Jieyun Jumble 捷運大風吹</a>
+              <small>2026</small>
+            </h2>
+            <p>Queens-style logic puzzle on the Taipei MRT map.</p>
+            <a href="jieyun-jumble/">Play</a>
+            <a
+              href="https://github.com/komali2/personalWebsite/tree/master/dev/jieyun-jumble"
+              >Source</a
+            >
+          </div>
+        </section>
+
+        <section class="game">
+          <a href="taiwan-battle-bugs/"
+            ><img
+              src="taiwan-battle-bugs/screenshot.webp"
+              alt="Taiwan Battle Bugs: a bug facing the tea-farmer auntie"
+              width="390"
+              height="844"
+              loading="lazy"
+          /></a>
+          <div>
+            <h2>
+              <a href="taiwan-battle-bugs/">Taiwan Battle Bugs 台灣鬥蟲</a>
+              <small>2026</small>
+            </h2>
+            <p>Pick a Taiwanese bug, climb the tea bushes, beat the tea farmer.</p>
+            <a href="taiwan-battle-bugs/">Play</a>
+            <a
+              href="https://github.com/komali2/personalWebsite/tree/master/dev/taiwan-battle-bugs"
+              >Source</a
+            >
+          </div>
+        </section>
+
+        <section class="game">
+          <a href="taiwan-treats-trip/"
+            ><img
+              src="taiwan-treats-trip/screenshot.webp"
+              alt="Taiwan Treats Trip: a car on the highway through Kaohsiung"
+              width="390"
+              height="844"
+              loading="lazy"
+          /></a>
+          <div>
+            <h2>
+              <a href="taiwan-treats-trip/">Taiwan Treats Trip 吃飽逃颱</a>
+              <small>2026</small>
+            </h2>
+            <p>Road trip around Taiwan: eat snacks, outrun the typhoon.</p>
+            <a href="taiwan-treats-trip/">Play</a>
+            <a
+              href="https://github.com/komali2/personalWebsite/tree/master/dev/taiwan-treats-trip"
+              >Source</a
+            >
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
