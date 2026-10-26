@@ -4,7 +4,7 @@ Read this first if you are picking the work up (any agent, any provider).
 
 - **License:** GPL-3.0-or-later (`LICENSE`), for code and pixel art. The embedded Cubic 11 font stays OFL-1.1.
 - **Ship target:** `games/jieyun-jumble/index.html` (one self-contained file, vanilla Canvas 2D, no CDN). Unlisted on the homepage.
-- **Branch:** `feat/jieyun-jumble`. Caleb asked for **regular pushes to this branch** so he can follow along from his laptop, and authorized frequent `deploy.sh` deploys (FTP mirror to calebjay.com) once the headless smoke test passes: https://www.calebjay.com/games/jieyun-jumble/ . Do not merge to master without asking.
+- **Branch:** built on `feat/jieyun-jumble`, fast-forward merged into `master` on 2026-10-26 at Caleb's request (branch kept). Do new work on a new feature branch, push it regularly so Caleb can follow along, and deploy often once the headless smoke test passes (`deploy.sh`, FTP mirror to calebjay.com): https://www.calebjay.com/games/jieyun-jumble/ . Merge to master only when asked. Listed on https://www.calebjay.com/games/ (`games/index.html`).
 - **Dev workspace:** this folder (`dev/` is excluded from deploy). Sister games: `dev/taiwan-treats-trip/`, `dev/taiwan-battle-bugs/` (same pipeline; copy patterns from them).
 - **Token budget matters.** Art and text go to opencode with OpenAI models via paseo; Claude writes the code. Update this file after every milestone.
 
